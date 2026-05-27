@@ -1244,36 +1244,21 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const required = form.querySelectorAll('[required]');
-      let valid = true;
-      required.forEach(field => {
-        if (!field.value.trim()) {
-          field.style.borderColor = 'rgba(255,80,80,0.6)';
-          valid = false;
-        } else {
-          field.style.borderColor = '';
-        }
-      });
-
-      if (!valid) return;
-
       submitBtn.textContent = 'Sending...';
       submitBtn.disabled = true;
 
-      try {
-        await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            firstName:    document.getElementById('fname').value.trim(),
-            businessName: document.getElementById('bname').value.trim(),
-            businessType: document.getElementById('btype').value,
-            phone:        document.getElementById('phone').value.trim(),
-            email:        document.getElementById('email').value.trim(),
-            problem:      document.getElementById('problem').value.trim()
-          })
-        });
-      } catch (err) {}
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName:    document.getElementById('fname').value.trim(),
+          businessName: document.getElementById('bname').value.trim(),
+          businessType: document.getElementById('btype').value,
+          phone:        document.getElementById('phone').value.trim(),
+          email:        document.getElementById('email').value.trim(),
+          problem:      document.getElementById('problem').value.trim()
+        })
+      }).catch(function() {});
 
       form.style.display = 'none';
       formSuccess.style.display = 'block';
