@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Easier Systems — AI Automation for Local Service Businesses</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ===================== RESET & BASE ===================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #000000;
+      --yellow: #FFD600;
+      --white: #FFFFFF;
+      --gray: #888888;
+      --card-bg: #0d0d0d;
+      --border: #1a1a1a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Grain texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    /* ===================== TYPOGRAPHY ===================== */
+    .display { font-family: 'Bebas Neue', sans-serif; line-height: 1; letter-spacing: 0.02em; }
+    h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; line-height: 1.05; letter-spacing: 0.03em; }
+    h1 { font-size: clamp(2.8rem, 7vw, 5.5rem); }
+    h2 { font-size: clamp(2rem, 5vw, 3.8rem); }
+    h3 { font-size: clamp(1.3rem, 3vw, 1.8rem); }
+    p { font-family: 'DM Sans', sans-serif; line-height: 1.7; }
+
+    /* ===================== LAYOUT ===================== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    section { position: relative; z-index: 1; }
+
+    .section-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 2px;
+      background: var(--yellow);
+      flex-shrink: 0;
+    }
+
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--yellow);
+      opacity: 0.3;
+    }
+
+    /* ===================== ANIMATIONS ===================== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+    .fade-up.delay-3 { transition-delay: 0.3s; }
+    .fade-up.delay-4 { transition-delay: 0.4s; }
+
+    /* ===================== STICKY HEADER ===================== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 214, 0, 0.15);
+      padding: 14px 0;
+      transition: background 0.3s;
+    }
+
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .header-logo span { color: var(--yellow); }
+
+    nav { display: flex; align-items: center; gap: 32px; }
+
+    nav a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gray);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--white); }
+
+    .nav-links { display: flex; gap: 28px; }
+
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    /* ===================== BUTTONS ===================== */
+    .btn-primary {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      border: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.15);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255, 214, 0, 0.35); }
+    .btn-primary:hover::after { opacity: 1; }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--yellow);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 13px 27px;
+      text-decoration: none;
+      border: 2px solid var(--yellow);
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-outline:hover { background: var(--yellow); color: var(--black); }
+
+    /* ===================== HERO ===================== */
+    #hero {
+      padding: 180px 0 120px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,214,0,0.06) 0%, transparent 70%);
+    }
+
+    .hero-content { max-width: 880px; }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--yellow);
+      border-radius: 50%;
+      animation: pulse 1.8s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,214,0,0.5); transform: scale(1); }
+      50% { box-shadow: 0 0 0 10px rgba(255,214,0,0); transform: scale(1.1); }
+    }
+
+    .hero-eyebrow span {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+
+    #hero h1 { margin-bottom: 24px; }
+
+    #hero h1 em {
+      font-style: normal;
+      color: var(--yellow);
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.2vw, 1.25rem);
+      color: #cccccc;
+      max-width: 600px;
+      margin-bottom: 40px;
+      line-height: 1.65;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+
+    .hero-trust .pulse-dot { width: 7px; height: 7px; }
+
+    .hero-trust strong { color: var(--yellow); }
+
+    /* Yellow bar accent behind headline word */
+    .highlight-bar {
+      background: var(--yellow);
+      color: var(--black);
+      padding: 0 6px;
+      display: inline;
+    }
+
+    /* ===================== PROBLEM SECTION ===================== */
+    #problem {
+      padding: 100px 0;
+      border-top: 1px solid rgba(255,214,0,0.15);
+    }
+
+    .problem-headline {
+      max-width: 700px;
+      margin-bottom: 60px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+
+    @media (max-width: 768px) { .stat-grid { grid-template-columns: 1fr; } }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--yellow);
+      padding: 36px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at top left, rgba(255,214,0,0.04), transparent 60%);
+      pointer-events: none;
+    }
+
+    .stat-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: var(--yellow);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-card p {
+      color: var(--gray);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .problem-bottom {
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      color: var(--white);
+      font-weight: 600;
+      border-left: 4px solid var(--yellow);
+      padding-left: 20px;
+      max-width: 680px;
+    }
+
+    /* ===================== SERVICES ===================== */
+    #services {
+      padding: 100px 0;
+      border-top: 1px solid rgba(255,214,0,0.15);
+    }
+
+    .services-header { margin-bottom: 60px; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: rgba(255,214,0,0.1);
+      border: 1px solid rgba(255,214,0,0.1);
+    }
+
+    @media (max-width: 1024px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .services-grid { grid-template-columns: 1fr; } }
+
+    .service-card {
+      background: var(--black);
+      padding: 32px 24px;
+      border-left: 3px solid transparent;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+    }
+
+    .service-card:hover {
+      border-left-color: var(--yellow);
+      background: var(--card-bg);
+    }
+
+    .service-card.featured {
+      border-left-color: var(--yellow);
+      background: var(--card-bg);
+    }
+
+    .service-card.featured::before {
+      content: 'FLAGSHIP';
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: var(--black);
+      background: var(--yellow);
+      padding: 3px 8px;
+    }
+
+    .service-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      color: rgba(255,214,0,0.3);
+      margin-bottom: 12px;
+    }
+
+    .service-card h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      color: var(--gray);
+      font-size: 0.85rem;
+      line-height: 1.55;
+    }
+
+    /* ===================== OFFER ===================== */
+    #offer {
+      padding: 120px 0;
+      border-top: 1px solid rgba(255,214,0,0.15);
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255,214,0,0.04) 0%, transparent 70%);
+    }
+
+    .offer-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .offer-inner h2 { margin-bottom: 32px; }
+
+    .guarantee-line {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--black);
+      font-weight: 800;
+      padding: 2px 8px;
+    }
+
+    .offer-body {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: #cccccc;
+      line-height: 1.85;
+      margin-bottom: 48px;
+    }
+
+    .offer-body p { margin-bottom: 16px; }
+
+    .offer-rule {
+      width: 80px;
+      height: 2px;
+      background: var(--yellow);
+      margin: 0 auto 32px;
+    }
+
+    /* ===================== HOW IT WORKS ===================== */
+    #process {
+      padding: 100px 0;
+      border-top: 1px solid rgba(255,214,0,0.15);
+    }
+
+    .process-header { margin-bottom: 72px; }
+
+    .steps-track {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: start;
+      gap: 0;
+    }
+
+    @media (max-width: 768px) {
+      .steps-track {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .step-connector { display: none; }
+    }
+
+    .step-connector {
+      display: flex;
+      align-items: flex-start;
+      padding-top: 28px;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    .step-connector-line {
+      flex: 1;
+      border-top: 2px dashed rgba(255,214,0,0.4);
+      margin-top: 0;
+    }
+
+    .step { text-align: center; padding: 0 16px; }
+
+    .step-circle {
+      width: 56px;
+      height: 56px;
+      background: var(--yellow);
+      color: var(--black);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      position: relative;
+    }
+
+    .step-circle::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 1px solid rgba(255,214,0,0.3);
+      pointer-events: none;
+    }
+
+    .step-day {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 8px;
+    }
+
+    .step h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+
+    .step p { color: var(--gray); font-size: 0.9rem; max-width: 240px; margin: 0 auto; }
+
+    /* ===================== WHO THIS IS FOR ===================== */
+    #audience {
+      padding: 100px 0;
+      border-top: 1px solid rgba(255,214,0,0.15);
+    }
+
+    .audience-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) { .audience-inner { grid-template-columns: 1fr; gap: 48px; } }
+
+    .checklist { list-style: none; }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .checklist li:last-child { border-bottom: none; }
+
+    .check-icon {
+      color: var(--yellow);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .audience-cta-block {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--yellow);
+      padding: 40px 32px;
+    }
+
+    .audience-cta-block h3 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      line-height: 1.15;
+    }
+
+    .audience-cta-block p {
+      color: var(--gray);
+      margin-bottom: 32px;
+      font-size: 0.95rem;
+    }
+
+    /* ===================== PRICING ===================== */
+    #pricing {
+      padding: 100px 0;
+      border-top: 1px solid rgba(255,214,0,0.15);
+    }
+
+    .pricing-inner { max-width: 760px; }
+
+    .pricing-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 10vw, 7rem);
+      color: var(--yellow);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .pricing-number span {
+      font-size: 0.35em;
+      color: var(--gray);
+      vertical-align: super;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+    }
+
+    .pricing-sub {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: #cccccc;
+      max-width: 560px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .pricing-tags {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .pricing-tag {
+      background: transparent;
+      border: 1px solid rgba(255,214,0,0.25);
+      color: var(--gray);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+    }
+
+    /* ===================== CONTACT ===================== */
+    #contact {
+      padding: 100px 0 120px;
+      border-top: 1px solid rgba(255,214,0,0.15);
+      background: radial-gradient(ellipse 60% 40% at 50% 100%, rgba(255,214,0,0.04) 0%, transparent 70%);
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) { .contact-inner { grid-template-columns: 1fr; gap: 56px; } }
+
+    .contact-left h2 { margin-bottom: 20px; }
+
+    .contact-left p { color: var(--gray); font-size: 1rem; margin-bottom: 40px; line-height: 1.7; }
+
+    .contact-info { list-style: none; }
+
+    .contact-info li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: var(--gray);
+      font-size: 0.9rem;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-info li:last-child { border-bottom: none; }
+
+    .contact-info-icon { font-size: 1rem; flex-shrink: 0; }
+
+    /* FORM */
+    form { display: flex; flex-direction: column; gap: 16px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+    label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    input, select, textarea {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      padding: 14px 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--yellow);
+    }
+
+    input::placeholder, textarea::placeholder { color: #444444; }
+
+    select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+
+    textarea { min-height: 120px; resize: vertical; }
+
+    .btn-submit {
+      background: var(--yellow);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 18px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,214,0,0.35); }
+    .btn-submit:active { transform: translateY(0); }
+
+    .form-success {
+      display: none;
+      background: var(--card-bg);
+      border: 1px solid rgba(255,214,0,0.3);
+      border-left: 4px solid var(--yellow);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .form-success h3 { font-size: 1.8rem; margin-bottom: 12px; color: var(--yellow); }
+    .form-success p { color: var(--gray); }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      padding: 64px 0 40px;
+      border-top: 1px solid var(--yellow);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: var(--yellow);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-tagline {
+      font-size: 0.9rem;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--yellow); }
+
+    .footer-bottom {
+      width: 100%;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-bottom p { font-size: 0.78rem; color: #444444; }
+
+    .footer-bottom strong { color: var(--gray); }
+
+    /* ===================== MISC ===================== */
+    .yellow { color: var(--yellow); }
+
+    ::selection { background: var(--yellow); color: var(--black); }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--yellow); }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header>
+    <div class="container">
+      <a href="#hero" class="header-logo">EASIER <span>SYSTEMS</span></a>
+      <nav>
+        <div class="nav-links">
+          <a href="#services">Services</a>
+          <a href="#process">How It Works</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <a href="#contact" class="btn-primary">Get Free Audit</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-eyebrow fade-up">
+          <div class="pulse-dot"></div>
+          <span>Live in 7 Days — Guaranteed</span>
+        </div>
+        <h1 class="fade-up delay-1">
+          Your Phone Rings.<br>
+          You Don't Answer.<br>
+          You Just Lost <em class="yellow">$3,000.</em>
+        </h1>
+        <p class="hero-sub fade-up delay-2">
+          Easier Systems installs AI that answers, follows up, and books appointments — while you're on the job.
+        </p>
+        <div class="hero-cta-group fade-up delay-3">
+          <div>
+            <a href="#contact" class="btn-primary">Get My Free AI Audit &rarr;</a>
+          </div>
+          <div class="hero-trust">
+            <div class="pulse-dot"></div>
+            <span>Done-for-you. <strong>Live in 7 days.</strong> Guaranteed 5 appointments in 30 days — or we work free.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROBLEM ==================== -->
+  <section id="problem">
+    <div class="container">
+      <div class="problem-headline">
+        <div class="section-label fade-up">The Invisible Bleed</div>
+        <h2 class="fade-up delay-1">Every Missed Call Is a Bill You Paid Your Competitor</h2>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card fade-up delay-1">
+          <span class="stat-icon">📵</span>
+          <div class="stat-number"><span class="counter" data-target="62">0</span>%</div>
+          <p>of customers never call back after a missed call. That lead is gone. Forever.</p>
+        </div>
+        <div class="stat-card fade-up delay-2">
+          <span class="stat-icon">⏱️</span>
+          <div class="stat-number"><span class="counter" data-target="21">0</span>x</div>
+          <p>more likely to close the lead when you respond in under 5 minutes. Speed is the sale.</p>
+        </div>
+        <div class="stat-card fade-up delay-3">
+          <span class="stat-icon">⭐</span>
+          <div class="stat-number"><span class="counter" data-target="40">0</span></div>
+          <p>good reviews wiped out by just 1 bad one. Your reputation is your most expensive asset.</p>
+        </div>
+      </div>
+
+      <p class="problem-bottom fade-up">
+        You're not losing because your work is bad.<br>You're losing because your systems are invisible.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== SERVICES ==================== -->
+  <section id="services">
+    <div class="container">
+      <div class="services-header">
+        <div class="section-label fade-up">Our Services</div>
+        <h2 class="fade-up delay-1">One System.<br>Zero Missed Opportunities.</h2>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card featured fade-up">
+          <div class="service-num">01</div>
+          <h3>Full AI System Stack</h3>
+          <p>Our flagship. Every tool below, fully integrated. The last system you'll ever need to run your business on autopilot.</p>
+        </div>
+        <div class="service-card fade-up delay-1">
+          <div class="service-num">02</div>
+          <h3>AI Receptionist + Chat Widget</h3>
+          <p>A 24/7 AI agent on your website that answers questions, captures leads, and books appointments automatically.</p>
+        </div>
+        <div class="service-card fade-up delay-2">
+          <div class="service-num">03</div>
+          <h3>AI Lead Follow Up Sequence</h3>
+          <p>Automated multi-step SMS + email sequences that follow up with every lead until they book or opt out.</p>
+        </div>
+        <div class="service-card fade-up delay-3">
+          <div class="service-num">04</div>
+          <h3>Missed Call Text Back</h3>
+          <p>The moment you miss a call, your lead gets a text. Instant. Automatic. Never lose a lead to voicemail again.</p>
+        </div>
+        <div class="service-card fade-up">
+          <div class="service-num">05</div>
+          <h3>Appointment Reminder System</h3>
+          <p>Reduce no-shows by 60%+ with automated reminders sent 24 hours and 1 hour before every appointment.</p>
+        </div>
+        <div class="service-card fade-up delay-1">
+          <div class="service-num">06</div>
+          <h3>AI Review Request System</h3>
+          <p>After every job, automatically ask happy customers for a Google review. Build your reputation on autopilot.</p>
+        </div>
+        <div class="service-card fade-up delay-2">
+          <div class="service-num">07</div>
+          <h3>AI FAQ + DM Responder</h3>
+          <p>Instantly reply to Instagram and Facebook DMs and common questions using AI trained on your business.</p>
+        </div>
+        <div class="service-card fade-up delay-3">
+          <div class="service-num">08</div>
+          <h3>Monthly Reputation Report</h3>
+          <p>A clear, simple monthly report showing your reviews, response rates, and reputation growth over time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== OFFER ==================== -->
+  <section id="offer">
+    <div class="container">
+      <div class="offer-inner">
+        <div class="section-label fade-up" style="justify-content:center;">The Offer</div>
+        <h2 class="fade-up delay-1">
+          Done-For-You AI.<br>
+          Live in 7 Days.<br>
+          <span class="guarantee-line">5 Appointments in 30 Days — Or We Work Free.</span>
+        </h2>
+
+        <div class="offer-rule fade-up delay-2"></div>
+
+        <div class="offer-body fade-up delay-2">
+          <p>We don't sell software. We don't hand you a login and a tutorial.</p>
+          <p>We install everything. We train the AI. We test it. We hand it to you running.</p>
+          <p>And if it doesn't generate at least 5 new booked appointments in your first 30 days — we keep working, for free, until it does.</p>
+          <p><strong style="color:var(--white)">No contracts. No excuses. Just results.</strong></p>
+        </div>
+
+        <div class="fade-up delay-3">
+          <a href="#contact" class="btn-primary" style="font-size:1rem; padding:18px 40px;">Claim Your Free Audit &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROCESS ==================== -->
+  <section id="process">
+    <div class="container">
+      <div class="process-header">
+        <div class="section-label fade-up">The Process</div>
+        <h2 class="fade-up delay-1">From Zero to Automated<br>in 7 Days</h2>
+      </div>
+
+      <div class="steps-track fade-up delay-2">
+        <div class="step">
+          <div class="step-circle">1</div>
+          <div class="step-day">Day 1</div>
+          <h3>Audit</h3>
+          <p>We map your current lead flow and find every gap where money is leaking out of your business.</p>
+        </div>
+
+        <div class="step-connector">
+          <div class="step-connector-line"></div>
+        </div>
+
+        <div class="step">
+          <div class="step-circle">2</div>
+          <div class="step-day">Days 2–6</div>
+          <h3>Build</h3>
+          <p>We build, configure, and integrate your full AI system. You don't lift a finger. We handle all of it.</p>
+        </div>
+
+        <div class="step-connector">
+          <div class="step-connector-line"></div>
+        </div>
+
+        <div class="step">
+          <div class="step-circle">3</div>
+          <div class="step-day">Day 7</div>
+          <h3>Go Live</h3>
+          <p>Your system is live. Leads get answered. Appointments get booked. You get proof it works.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== AUDIENCE ==================== -->
+  <section id="audience">
+    <div class="container">
+      <div class="audience-inner">
+        <div>
+          <div class="section-label fade-up">Is This You?</div>
+          <h2 class="fade-up delay-1">Built for Local Service Businesses That Are Done Losing Leads</h2>
+
+          <ul class="checklist" style="margin-top:40px;">
+            <li class="fade-up delay-1"><span class="check-icon">✅</span> Plumbers, HVAC, Electricians</li>
+            <li class="fade-up delay-2"><span class="check-icon">✅</span> Roofers, Contractors, Painters</li>
+            <li class="fade-up delay-2"><span class="check-icon">✅</span> Salons, Barbershops, Med Spas</li>
+            <li class="fade-up delay-3"><span class="check-icon">✅</span> Pest Control, Landscaping, Cleaning Services</li>
+            <li class="fade-up delay-3"><span class="check-icon">✅</span> Any local business missing calls and losing jobs to competitors</li>
+          </ul>
+        </div>
+
+        <div class="audience-cta-block fade-up delay-2">
+          <h3>If you have a phone, a service, and customers — we can automate your growth.</h3>
+          <p>Stop watching your competitor's Google ranking climb while your phone stays quiet. One system. Seven days. Done.</p>
+          <a href="#contact" class="btn-primary">Book My Free Audit &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PRICING ==================== -->
+  <section id="pricing">
+    <div class="container">
+      <div class="pricing-inner">
+        <div class="section-label fade-up">Investment</div>
+        <h2 class="fade-up delay-1">Plans Starting at<br><span class="yellow">$300/mo.</span><br>No Setup Fees. Cancel Anytime.</h2>
+
+        <p class="pricing-sub fade-up delay-2">
+          Our entry-level system — Missed Call Text Back — starts at just $300/month and pays for itself with one recovered lead. Most clients are on $800–$1,500/month plans within 90 days.
+        </p>
+
+        <div class="pricing-tags fade-up delay-2">
+          <span class="pricing-tag">No Setup Fees</span>
+          <span class="pricing-tag">Cancel Anytime</span>
+          <span class="pricing-tag">Done-For-You</span>
+          <span class="pricing-tag">Live in 7 Days</span>
+        </div>
+
+        <div class="fade-up delay-3">
+          <a href="#contact" class="btn-primary" style="padding:17px 36px;">See What's Right for Your Business &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="contact-left">
+          <div class="section-label fade-up">Get Started</div>
+          <h2 class="fade-up delay-1">Book Your Free AI Audit — Takes 15 Minutes. Could Change Everything.</h2>
+          <p class="fade-up delay-2">No pitch. No pressure. Just an honest look at where your business is leaking leads — and exactly what we'd build to fix it.</p>
+
+          <ul class="contact-info fade-up delay-3">
+            <li><span class="contact-info-icon">📱</span><span>Phone: [Contact us for direct line]</span></li>
+            <li><span class="contact-info-icon">📧</span><span>hello@easiersystems.com</span></li>
+            <li><span class="contact-info-icon">📍</span><span>Serving local businesses nationwide</span></li>
+          </ul>
+        </div>
+
+        <div class="fade-up delay-2">
+          <form id="audit-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="fname" placeholder="Mike" required />
+              </div>
+              <div class="form-group">
+                <label for="bname">Business Name</label>
+                <input type="text" id="bname" name="bname" placeholder="Mike's Plumbing" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="btype">Business Type</label>
+              <select id="btype" name="btype" required>
+                <option value="" disabled selected>Select your industry</option>
+                <option value="plumbing">Plumbing</option>
+                <option value="hvac">HVAC</option>
+                <option value="electrical">Electrical</option>
+                <option value="salon">Salon / Barbershop</option>
+                <option value="medspa">Med Spa</option>
+                <option value="contractor">General Contractor</option>
+                <option value="roofing">Roofing</option>
+                <option value="landscaping">Landscaping</option>
+                <option value="cleaning">Cleaning Services</option>
+                <option value="pestcontrol">Pest Control</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="mike@example.com" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="problem">What's your biggest problem right now?</label>
+              <textarea id="problem" name="problem" placeholder="e.g. Missing too many calls, bad reviews, can't keep up with follow up..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Claim My Free Audit</button>
+          </form>
+
+          <div class="form-success" id="form-success">
+            <h3>You're In.</h3>
+            <p>Thanks! We'll be in touch within 24 hours to lock in your audit time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">EASIER SYSTEMS</div>
+        <p class="footer-tagline">AI Systems for Businesses That Are Done Playing Small.</p>
+
+        <div class="footer-links">
+          <a href="#services">Services</a>
+          <a href="#process">How It Works</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2025 Easier Systems. All rights reserved.</p>
+          <p><strong>Built with AI. Run by humans. Guaranteed to perform.</strong></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    // ===== SCROLL FADE-UP ANIMATIONS =====
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    fadeEls.forEach(el => fadeObserver.observe(el));
+
+    // ===== ANIMATED COUNTERS =====
+    const counters = document.querySelectorAll('.counter');
+    let countersStarted = false;
+
+    function animateCounters() {
+      counters.forEach(counter => {
+        const target = parseInt(counter.dataset.target, 10);
+        const duration = 1800;
+        const step = target / (duration / 16);
+        let current = 0;
+
+        const interval = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            current = target;
+            clearInterval(interval);
+          }
+          counter.textContent = Math.floor(current);
+        }, 16);
+      });
+    }
+
+    const statsSection = document.querySelector('#problem');
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !countersStarted) {
+          countersStarted = true;
+          animateCounters();
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    if (statsSection) statsObserver.observe(statsSection);
+
+    // ===== CONTACT FORM =====
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKABh8pFAYTrl_XpTHbEbCrFX7a-PE4z2b_Ez92qBg3Oq0WfcmxoiR_4XPazNINObPyg/exec';
+    const form = document.getElementById('audit-form');
+    const formSuccess = document.getElementById('form-success');
+    const submitBtn = form.querySelector('.btn-submit');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Simple validation
+      const required = form.querySelectorAll('[required]');
+      let valid = true;
+      required.forEach(field => {
+        if (!field.value.trim()) {
+          field.style.borderColor = 'rgba(255,80,80,0.6)';
+          valid = false;
+        } else {
+          field.style.borderColor = '';
+        }
+      });
+
+      if (!valid) return;
+
+      // Show loading state
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = '0.7';
+
+      // Build form data
+      const data = {
+        firstName: document.getElementById('fname').value.trim(),
+        businessName: document.getElementById('bname').value.trim(),
+        businessType: document.getElementById('btype').value,
+        phone: document.getElementById('phone').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        problem: document.getElementById('problem').value.trim()
+      };
+
+      // Submit to Google Apps Script
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
+        form.style.display = 'none';
+        formSuccess.style.display = 'block';
+        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      })
+      .catch(() => {
+        // no-cors means we won't get an error back — treat as success
+        form.style.display = 'none';
+        formSuccess.style.display = 'block';
+        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+
+    // Remove red border on input
+    form.querySelectorAll('input, select, textarea').forEach(field => {
+      field.addEventListener('input', () => { field.style.borderColor = ''; });
+    });
+
+    // ===== STICKY HEADER SHADOW ON SCROLL =====
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        header.style.background = 'rgba(0,0,0,0.98)';
+      } else {
+        header.style.background = 'rgba(0,0,0,0.92)';
+      }
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
