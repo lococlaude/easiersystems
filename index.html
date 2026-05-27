@@ -1264,19 +1264,17 @@
       formSuccess.style.display = 'block';
       formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-      // Send data via Web3Forms
-      fetch('https://api.web3forms.com/submit', {
+      // Submit to Google Forms (pure Google, no third party)
+      fetch('https://docs.google.com/forms/d/e/1FAIpQLSdQDdL61NIPPg9R4T7EYK0JYyMRmfJy8B6wODqa1H52Gvce2A/formResponse', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key:   '7302b2c4-8b31-43da-9166-b01ed3676631',
-          subject:      'New Audit Request — Easier Systems',
-          firstName:    document.getElementById('fname').value.trim(),
-          businessName: document.getElementById('bname').value.trim(),
-          businessType: document.getElementById('btype').value,
-          phone:        document.getElementById('phone').value.trim(),
-          email:        document.getElementById('email').value.trim(),
-          problem:      document.getElementById('problem').value.trim()
+        mode: 'no-cors',
+        body: new URLSearchParams({
+          'entry.928550780':  document.getElementById('fname').value.trim(),
+          'entry.926121778':  document.getElementById('bname').value.trim(),
+          'entry.1893798141': document.getElementById('btype').value,
+          'entry.325907016':  document.getElementById('phone').value.trim(),
+          'entry.93570007':   document.getElementById('email').value.trim(),
+          'entry.1923022989': document.getElementById('problem').value.trim()
         })
       }).catch(function() {});
     });
