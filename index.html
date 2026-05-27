@@ -1237,15 +1237,13 @@
     if (statsSection) statsObserver.observe(statsSection);
 
     // ===== CONTACT FORM =====
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzsu_7-3WMt7nlB3B1xevJCubeVpyvxh5nibnzMg8tBEjUy4Nk4ua_5EuZbDr8XgJ-2hA/exec';
     const form = document.getElementById('audit-form');
     const formSuccess = document.getElementById('form-success');
     const submitBtn = form.querySelector('.btn-submit');
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Simple validation
       const required = form.querySelectorAll('[required]');
       let valid = true;
       required.forEach(field => {
@@ -1259,24 +1257,27 @@
 
       if (!valid) return;
 
-      // Show success right away — no waiting
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+
+      try {
+        await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            firstName:    document.getElementById('fname').value.trim(),
+            businessName: document.getElementById('bname').value.trim(),
+            businessType: document.getElementById('btype').value,
+            phone:        document.getElementById('phone').value.trim(),
+            email:        document.getElementById('email').value.trim(),
+            problem:      document.getElementById('problem').value.trim()
+          })
+        });
+      } catch (err) {}
+
       form.style.display = 'none';
       formSuccess.style.display = 'block';
       formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-      // Submit to Google Forms (pure Google, no third party)
-      fetch('https://docs.google.com/forms/d/e/1FAIpQLSdQDdL61NIPPg9R4T7EYK0JYyMRmfJy8B6wODqa1H52Gvce2A/formResponse', {
-        method: 'POST',
-        mode: 'no-cors',
-        body: new URLSearchParams({
-          'entry.928550780':  document.getElementById('fname').value.trim(),
-          'entry.926121778':  document.getElementById('bname').value.trim(),
-          'entry.1893798141': document.getElementById('btype').value,
-          'entry.325907016':  document.getElementById('phone').value.trim(),
-          'entry.93570007':   document.getElementById('email').value.trim(),
-          'entry.1923022989': document.getElementById('problem').value.trim()
-        })
-      }).catch(function() {});
     });
 
     // Remove red border on input
