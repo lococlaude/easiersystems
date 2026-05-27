@@ -1258,57 +1258,10 @@
 
       if (!valid) return;
 
-      // Show loading state
-      submitBtn.textContent = 'Sending...';
-      submitBtn.disabled = true;
-      submitBtn.style.opacity = '0.7';
-
-      // Build form data
-      const data = {
-        firstName: document.getElementById('fname').value.trim(),
-        businessName: document.getElementById('bname').value.trim(),
-        businessType: document.getElementById('btype').value,
-        phone: document.getElementById('phone').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        problem: document.getElementById('problem').value.trim()
-      };
-
-      // Show success immediately — don't make user wait
+      // Show success right away — no waiting
       form.style.display = 'none';
       formSuccess.style.display = 'block';
       formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-      // Send data in background via hidden iframe
-      try {
-        let iframe = document.getElementById('submission_iframe');
-        if (!iframe) {
-          iframe = document.createElement('iframe');
-          iframe.id = 'submission_iframe';
-          iframe.name = 'submission_iframe';
-          iframe.style.display = 'none';
-          document.body.appendChild(iframe);
-        }
-
-        const hiddenForm = document.createElement('form');
-        hiddenForm.method = 'POST';
-        hiddenForm.action = SCRIPT_URL;
-        hiddenForm.target = 'submission_iframe';
-        hiddenForm.style.display = 'none';
-
-        Object.entries(data).forEach(([key, value]) => {
-          const input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = key;
-          input.value = value;
-          hiddenForm.appendChild(input);
-        });
-
-        document.body.appendChild(hiddenForm);
-        hiddenForm.submit();
-        document.body.removeChild(hiddenForm);
-      } catch(err) {
-        // silent — success already shown
-      }
     });
 
     // Remove red border on input
