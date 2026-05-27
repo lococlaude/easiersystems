@@ -1273,41 +1273,42 @@
         problem: document.getElementById('problem').value.trim()
       };
 
-      // Submit via hidden iframe — bypasses CORS entirely
-      const showSuccess = () => {
-        form.style.display = 'none';
-        formSuccess.style.display = 'block';
-        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      };
+      // Show success immediately — don't make user wait
+      form.style.display = 'none';
+      formSuccess.style.display = 'block';
+      formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-      let iframe = document.getElementById('submission_iframe');
-      if (!iframe) {
-        iframe = document.createElement('iframe');
-        iframe.id = 'submission_iframe';
-        iframe.name = 'submission_iframe';
-        iframe.style.display = 'none';
-        document.body.appendChild(iframe);
+      // Send data in background via hidden iframe
+      try {
+        let iframe = document.getElementById('submission_iframe');
+        if (!iframe) {
+          iframe = document.createElement('iframe');
+          iframe.id = 'submission_iframe';
+          iframe.name = 'submission_iframe';
+          iframe.style.display = 'none';
+          document.body.appendChild(iframe);
+        }
+
+        const hiddenForm = document.createElement('form');
+        hiddenForm.method = 'POST';
+        hiddenForm.action = SCRIPT_URL;
+        hiddenForm.target = 'submission_iframe';
+        hiddenForm.style.display = 'none';
+
+        Object.entries(data).forEach(([key, value]) => {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = key;
+          input.value = value;
+          hiddenForm.appendChild(input);
+        });
+
+        document.body.appendChild(hiddenForm);
+        hiddenForm.submit();
+        document.body.removeChild(hiddenForm);
+      } catch(err) {
+        // silent — success already shown
       }
-
-      const hiddenForm = document.createElement('form');
-      hiddenForm.method = 'POST';
-      hiddenForm.action = SCRIPT_URL;
-      hiddenForm.target = 'submission_iframe';
-      hiddenForm.style.display = 'none';
-
-      Object.entries(data).forEach(([key, value]) => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = value;
-        hiddenForm.appendChild(input);
-      });
-
-      document.body.appendChild(hiddenForm);
-      hiddenForm.submit();
-      document.body.removeChild(hiddenForm);
-
-      setTimeout(showSuccess, 1500);
     });
 
     // Remove red border on input
