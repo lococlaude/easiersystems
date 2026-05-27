@@ -1149,8 +1149,8 @@
             </div>
 
             <div class="form-group">
-              <label for="problem">What's your biggest problem right now?</label>
-              <textarea id="problem" name="problem" placeholder="e.g. Missing too many calls, bad reviews, can't keep up with follow up..." required></textarea>
+              <label for="user-problem">What's your biggest problem right now?</label>
+              <textarea id="user-problem" name="problem" placeholder="e.g. Missing too many calls, bad reviews, can't keep up with follow up..."></textarea>
             </div>
 
             <button type="submit" class="btn-submit">Claim My Free Audit</button>
@@ -1256,7 +1256,7 @@
           businessType: document.getElementById('btype').value,
           phone:        document.getElementById('phone').value.trim(),
           email:        document.getElementById('email').value.trim(),
-          problem:      document.getElementById('problem').value.trim()
+          problem:      document.getElementById('user-problem').value.trim()
         })
       }).catch(function() {});
 
