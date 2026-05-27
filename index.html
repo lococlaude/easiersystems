@@ -1262,6 +1262,19 @@
       form.style.display = 'none';
       formSuccess.style.display = 'block';
       formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      // Send data to Google Apps Script in background
+      try {
+        const params = new URLSearchParams({
+          firstName:    document.getElementById('fname').value.trim(),
+          businessName: document.getElementById('bname').value.trim(),
+          businessType: document.getElementById('btype').value,
+          phone:        document.getElementById('phone').value.trim(),
+          email:        document.getElementById('email').value.trim(),
+          problem:      document.getElementById('problem').value.trim()
+        });
+        fetch(SCRIPT_URL + '?' + params.toString(), { mode: 'no-cors' });
+      } catch(err) { /* silent */ }
     });
 
     // Remove red border on input
