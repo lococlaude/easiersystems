@@ -840,6 +840,7 @@
   </style>
 </head>
 <body>
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
   <!-- ==================== HEADER ==================== -->
   <header>
@@ -1263,18 +1264,30 @@
       formSuccess.style.display = 'block';
       formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-      // Send data to Google Apps Script
-      try {
-        const params = new URLSearchParams({
-          firstName:    document.getElementById('fname').value.trim(),
-          businessName: document.getElementById('bname').value.trim(),
-          businessType: document.getElementById('btype').value,
-          phone:        document.getElementById('phone').value.trim(),
-          email:        document.getElementById('email').value.trim(),
-          problem:      document.getElementById('problem').value.trim()
-        });
-        fetch('https://script.google.com/macros/s/AKfycbzsu_7-3WMt7nlB3B1xevJCubeVpyvxh5nibnzMg8tBEjUy4Nk4ua_5EuZbDr8XgJ-2hA/exec?' + params.toString(), { mode: 'no-cors' });
-      } catch(err) {}
+      // Send data to Google Apps Script via hidden iframe (bypasses CORS)
+      var iframe = document.getElementById('hidden_iframe');
+      var tempForm = document.createElement('form');
+      tempForm.method = 'GET';
+      tempForm.action = 'https://script.google.com/macros/s/AKfycbzsu_7-3WMt7nlB3B1xevJCubeVpyvxh5nibnzMg8tBEjUy4Nk4ua_5EuZbDr8XgJ-2hA/exec';
+      tempForm.target = 'hidden_iframe';
+      var fields = {
+        firstName:    document.getElementById('fname').value.trim(),
+        businessName: document.getElementById('bname').value.trim(),
+        businessType: document.getElementById('btype').value,
+        phone:        document.getElementById('phone').value.trim(),
+        email:        document.getElementById('email').value.trim(),
+        problem:      document.getElementById('problem').value.trim()
+      };
+      Object.keys(fields).forEach(function(key) {
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = fields[key];
+        tempForm.appendChild(input);
+      });
+      document.body.appendChild(tempForm);
+      tempForm.submit();
+      document.body.removeChild(tempForm);
     });
 
     // Remove red border on input
