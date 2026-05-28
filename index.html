@@ -828,6 +828,21 @@
 
     .footer-bottom strong { color: var(--gray); }
 
+    /* ===================== CAL.COM EMBED ===================== */
+    .cal-embed-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--yellow);
+      overflow: hidden;
+      min-height: 620px;
+      position: relative;
+    }
+
+    #cal-inline-main {
+      width: 100%;
+      min-height: 620px;
+    }
+
     /* ===================== MISC ===================== */
     .yellow { color: var(--yellow); }
 
@@ -1082,58 +1097,8 @@
         </div>
 
         <div class="fade-up delay-2">
-          <form id="audit-form" novalidate>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="fname">First Name</label>
-                <input type="text" id="fname" name="fname" placeholder="Mike" required />
-              </div>
-              <div class="form-group">
-                <label for="bname">Business Name</label>
-                <input type="text" id="bname" name="bname" placeholder="Mike's Plumbing" required />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="btype">Business Type</label>
-              <select id="btype" name="btype">
-                <option value="other" selected>Select your industry</option>
-                <option value="plumbing">Plumbing</option>
-                <option value="hvac">HVAC</option>
-                <option value="electrical">Electrical</option>
-                <option value="salon">Salon / Barbershop</option>
-                <option value="medspa">Med Spa</option>
-                <option value="contractor">General Contractor</option>
-                <option value="roofing">Roofing</option>
-                <option value="landscaping">Landscaping</option>
-                <option value="cleaning">Cleaning Services</option>
-                <option value="pestcontrol">Pest Control</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" required />
-              </div>
-              <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="mike@example.com" required />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="user-problem">What's your biggest problem right now?</label>
-              <textarea id="user-problem" name="problem" placeholder="e.g. Missing too many calls, bad reviews, can't keep up with follow up..."></textarea>
-            </div>
-
-            <button type="submit" class="btn-submit">Claim My Free Audit</button>
-          </form>
-
-          <div class="form-success" id="form-success">
-            <h3>You're In.</h3>
-            <p>Thanks! We'll be in touch within 24 hours to lock in your audit time.</p>
+          <div class="cal-embed-wrap">
+            <div id="cal-inline-main"></div>
           </div>
         </div>
       </div>
@@ -1151,6 +1116,7 @@
           <a href="#services">Services</a>
           <a href="#process">How It Works</a>
           <a href="#contact">Contact</a>
+          <a href="/book">Book a Call</a>
         </div>
 
         <div class="footer-bottom">
@@ -1211,38 +1177,30 @@
 
     if (statsSection) statsObserver.observe(statsSection);
 
-    // ===== CONTACT FORM =====
-    const form = document.getElementById('audit-form');
-    const formSuccess = document.getElementById('form-success');
-    const submitBtn = form.querySelector('.btn-submit');
+    // ===== CAL.COM INLINE EMBED =====
+    (function (C, A, L) {
+      let p = function (a, ar) { a.q.push(ar); };
+      let d = C.document;
+      C.Cal = C.Cal || function () {
+        let cal = C.Cal; let ar = arguments;
+        if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; }
+        if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, [L, namespace, ar[2]]); } else p(cal, ar); return; }
+        p(cal, ar);
+      };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    Cal("init", "audit", { origin: "https://cal.com" });
 
-      submitBtn.textContent = 'Sending...';
-      submitBtn.disabled = true;
-
-      fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          firstName:    document.getElementById('fname').value.trim(),
-          businessName: document.getElementById('bname').value.trim(),
-          businessType: document.getElementById('btype').value,
-          phone:        document.getElementById('phone').value.trim(),
-          email:        document.getElementById('email').value.trim(),
-          problem:      document.getElementById('user-problem').value.trim()
-        })
-      }).catch(function() {});
-
-      form.style.display = 'none';
-      formSuccess.style.display = 'block';
-      formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    Cal.ns.audit("inline", {
+      elementOrSelector: "#cal-inline-main",
+      config: { layout: "month_view" },
+      calLink: "easiersystems/audit",
     });
 
-    // Remove red border on input
-    form.querySelectorAll('input, select, textarea').forEach(field => {
-      field.addEventListener('input', () => { field.style.borderColor = ''; });
+    Cal.ns.audit("ui", {
+      theme: "dark",
+      hideEventTypeDetails: false,
+      layout: "month_view"
     });
 
     // ===== STICKY HEADER SHADOW ON SCROLL =====
