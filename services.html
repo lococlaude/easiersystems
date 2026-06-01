@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services & Pricing — Easier Systems</title>
+
+  <link rel="icon" type="image/png" href="/easier_systems_logo_transparent.png" />
+  <meta property="og:title" content="Services & Pricing — Easier Systems" />
+  <meta property="og:description" content="Done-for-you AI systems for local service businesses. Pick your services. Pay online. Live in 7 days." />
+  <meta property="og:image" content="https://www.easiersystems.com/logo_4_all_yellow_easier_bigger.png" />
+  <meta property="og:url" content="https://www.easiersystems.com/services" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #000000;
+      --yellow:  #FFD600;
+      --white:   #FFFFFF;
+      --gray:    #888888;
+      --card-bg: #0d0d0d;
+      --border:  #1a1a1a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; line-height: 1.05; letter-spacing: 0.03em; }
+    h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); }
+    h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    section { position: relative; z-index: 1; }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 2px;
+      background: var(--yellow);
+      flex-shrink: 0;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,214,0,0.15);
+      padding: 14px 0;
+    }
+
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .header-logo span { color: var(--yellow); }
+
+    nav { display: flex; align-items: center; gap: 28px; }
+
+    nav a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gray);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--white); }
+    nav a.active { color: var(--yellow); }
+
+    .nav-links { display: flex; gap: 24px; }
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--black);
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(255,214,0,0.35);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--yellow);
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 13px 27px;
+      text-decoration: none;
+      border: 2px solid var(--yellow);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-outline:hover { background: var(--yellow); color: var(--black); }
+
+    /* ===== PAGE HERO ===== */
+    #hero {
+      padding: 160px 0 80px;
+      border-bottom: 1px solid rgba(255,214,0,0.15);
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,214,0,0.05) 0%, transparent 70%);
+    }
+
+    .hero-inner { max-width: 760px; }
+
+    #hero h1 { margin-bottom: 20px; }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: #cccccc;
+      line-height: 1.7;
+      max-width: 600px;
+    }
+
+    /* ===== FLAGSHIP CARD ===== */
+    #flagship {
+      padding: 80px 0;
+      border-bottom: 1px solid rgba(255,214,0,0.15);
+    }
+
+    .flagship-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,214,0,0.25);
+      border-top: 4px solid var(--yellow);
+      padding: 56px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      position: relative;
+    }
+
+    @media (max-width: 768px) {
+      .flagship-card {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        padding: 36px 24px;
+      }
+    }
+
+    .flagship-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--yellow);
+      color: var(--black);
+      font-size: 0.65rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+    }
+
+    .flagship-left h2 { margin-bottom: 16px; color: var(--yellow); }
+
+    .flagship-tagline {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .flagship-desc {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .flagship-includes {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+
+    .flagship-includes li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 0.9rem;
+      color: #cccccc;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .flagship-includes li:last-child { border-bottom: none; }
+
+    .flagship-includes .check { color: var(--yellow); flex-shrink: 0; }
+
+    .flagship-right { text-align: center; }
+
+    .price-display {
+      margin-bottom: 8px;
+    }
+
+    .price-amount {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 8vw, 6rem);
+      color: var(--yellow);
+      line-height: 1;
+    }
+
+    .price-amount sup {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.3em;
+      font-weight: 700;
+      vertical-align: super;
+      color: var(--gray);
+    }
+
+    .price-period {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
+    }
+
+    .flagship-savings {
+      display: inline-block;
+      background: rgba(255,214,0,0.1);
+      border: 1px solid rgba(255,214,0,0.25);
+      color: var(--yellow);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      margin-bottom: 28px;
+    }
+
+    /* ===== A LA CARTE ===== */
+    #ala-carte {
+      padding: 80px 0 100px;
+    }
+
+    .ala-carte-header { margin-bottom: 48px; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: rgba(255,214,0,0.08);
+      border: 1px solid rgba(255,214,0,0.08);
+      margin-bottom: 60px;
+    }
+
+    @media (max-width: 960px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 580px) { .services-grid { grid-template-columns: 1fr; } }
+
+    .service-card {
+      background: var(--black);
+      padding: 32px 28px;
+      border-left: 3px solid transparent;
+      transition: border-color 0.2s, background 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card:hover {
+      border-left-color: var(--yellow);
+      background: var(--card-bg);
+    }
+
+    .service-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.95rem;
+      color: rgba(255,214,0,0.3);
+      margin-bottom: 10px;
+    }
+
+    .service-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .service-tagline {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--yellow);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .service-desc {
+      color: var(--gray);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+
+    .service-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .service-price span {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--gray);
+      vertical-align: middle;
+    }
+
+    /* ===== BOTTOM CTA ===== */
+    .bottom-cta {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--yellow);
+      padding: 56px 48px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) { .bottom-cta { padding: 40px 24px; } }
+
+    .bottom-cta h2 { margin-bottom: 16px; }
+
+    .bottom-cta p {
+      color: var(--gray);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ===== GUARANTEE STRIP ===== */
+    .guarantee-strip {
+      border-top: 1px solid rgba(255,214,0,0.15);
+      border-bottom: 1px solid rgba(255,214,0,0.15);
+      padding: 32px 0;
+      margin: 0 0 80px;
+    }
+
+    .guarantee-strip .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    .guarantee-icon { font-size: 2rem; }
+
+    .guarantee-text strong {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--yellow);
+      margin-bottom: 4px;
+    }
+
+    .guarantee-text p { font-size: 0.9rem; color: var(--gray); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 64px 0 40px;
+      border-top: 1px solid var(--yellow);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: var(--yellow);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-links a {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--yellow); }
+
+    .footer-bottom {
+      width: 100%;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+
+    .footer-bottom p { font-size: 0.78rem; color: #444; }
+
+    ::selection { background: var(--yellow); color: var(--black); }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--yellow); }
+
+    /* ===== FADE ANIMATIONS ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+    .fade-up.delay-3 { transition-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <a href="/" class="header-logo">EASIER <span>SYSTEMS</span></a>
+      <nav>
+        <div class="nav-links">
+          <a href="/#services">Services</a>
+          <a href="/#process">How It Works</a>
+          <a href="/services" class="active">Pricing</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <a href="https://coredash-production.up.railway.app/apply" class="btn-primary" target="_blank" rel="noopener">Get Started &rarr;</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="section-label fade-up">Services & Pricing</div>
+        <h1 class="fade-up delay-1">Pick Your System.<br>We Build It.<br><span style="color:var(--yellow)">You Go Live in 7 Days.</span></h1>
+        <p class="hero-sub fade-up delay-2">No contracts. No tech headaches. Done-for-you AI — installed, tested, and running in your business before you know it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLAGSHIP -->
+  <section id="flagship">
+    <div class="container">
+      <div class="section-label fade-up">Most Popular</div>
+      <div class="flagship-card fade-up delay-1">
+        <div class="flagship-badge">Flagship Package</div>
+
+        <div class="flagship-left">
+          <h2>Full AI System Stack</h2>
+          <p class="flagship-tagline">Everything. Done for you.</p>
+          <p class="flagship-desc">All 6 AI systems installed, configured, and live under one monthly rate. The complete package for businesses ready to automate every touchpoint — from the first missed call to the five-star review.</p>
+
+          <ul class="flagship-includes">
+            <li><span class="check">✓</span> AI Receptionist + Chat Widget</li>
+            <li><span class="check">✓</span> AI Lead Follow-Up Sequence</li>
+            <li><span class="check">✓</span> Missed Call Text Back</li>
+            <li><span class="check">✓</span> Appointment Reminder System</li>
+            <li><span class="check">✓</span> AI Review Request System</li>
+            <li><span class="check">✓</span> AI FAQ + DM Responder</li>
+            <li><span class="check">✓</span> Full setup + onboarding — we handle everything</li>
+          </ul>
+
+          <a href="https://coredash-production.up.railway.app/apply" target="_blank" rel="noopener" class="btn-primary">Get the Full Stack &rarr;</a>
+        </div>
+
+        <div class="flagship-right">
+          <div class="price-display">
+            <div class="price-amount"><sup>$</sup>997</div>
+          </div>
+          <p class="price-period">per month — cancel anytime</p>
+          <div class="flagship-savings">Save $734/mo vs. buying separate</div>
+          <p style="color:var(--gray); font-size:0.85rem; line-height:1.6;">Includes full installation, AI training, and ongoing support. Everything below — bundled and handled.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUARANTEE STRIP -->
+  <div class="guarantee-strip">
+    <div class="container">
+      <div class="guarantee-icon">🛡️</div>
+      <div class="guarantee-text">
+        <strong>5 Appointments in 30 Days — Or We Work Free</strong>
+        <p>Every plan is backed by our results guarantee. If it doesn't perform, we keep working until it does.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- A LA CARTE -->
+  <section id="ala-carte">
+    <div class="container">
+      <div class="ala-carte-header">
+        <div class="section-label fade-up">À La Carte</div>
+        <h2 class="fade-up delay-1">Or Pick the Systems You Need</h2>
+        <p class="fade-up delay-2" style="color:var(--gray); margin-top:12px; font-size:0.95rem; max-width:520px;">Start with one. Add more any time. Each system is fully installed and running — not a DIY tool.</p>
+      </div>
+
+      <div class="services-grid">
+
+        <div class="service-card fade-up">
+          <div class="service-num">01</div>
+          <div class="service-name">AI Receptionist & Chat Widget</div>
+          <div class="service-tagline">Never miss a chat lead again.</div>
+          <p class="service-desc">AI handles inbound chat on your website 24/7. Answers questions, captures leads, books calls — without you lifting a finger.</p>
+          <div class="service-price">$297 <span>/ mo</span></div>
+        </div>
+
+        <div class="service-card fade-up delay-1">
+          <div class="service-num">02</div>
+          <div class="service-name">AI Lead Follow-Up Sequence</div>
+          <div class="service-tagline">Follow up automatically. Close more.</div>
+          <p class="service-desc">Every new lead gets a 5-step SMS follow-up sequence. Runs on autopilot. Stops the moment they reply.</p>
+          <div class="service-price">$197 <span>/ mo</span></div>
+        </div>
+
+        <div class="service-card fade-up delay-2">
+          <div class="service-num">03</div>
+          <div class="service-name">Missed Call Text Back</div>
+          <div class="service-tagline">Every missed call gets a text in seconds.</div>
+          <p class="service-desc">When a call goes unanswered, your prospect gets an automatic text within 60 seconds. Most competitors never call back. You do.</p>
+          <div class="service-price">$147 <span>/ mo</span></div>
+        </div>
+
+        <div class="service-card fade-up">
+          <div class="service-num">04</div>
+          <div class="service-name">Appointment Reminder System</div>
+          <div class="service-tagline">Slash no-shows. Keep your schedule full.</div>
+          <p class="service-desc">Automated reminders go out 24h and 1h before every appointment. Reduces no-shows by up to 80%.</p>
+          <div class="service-price">$97 <span>/ mo</span></div>
+        </div>
+
+        <div class="service-card fade-up delay-1">
+          <div class="service-num">05</div>
+          <div class="service-name">AI Review Request System</div>
+          <div class="service-tagline">More 5-star reviews. On autopilot.</div>
+          <p class="service-desc">After every job, your customer gets a review request text at the perfect moment. More reviews, higher ranking, more calls.</p>
+          <div class="service-price">$97 <span>/ mo</span></div>
+        </div>
+
+        <div class="service-card fade-up delay-2">
+          <div class="service-num">06</div>
+          <div class="service-name">AI FAQ & DM Responder</div>
+          <div class="service-tagline">Instant replies to every DM and question.</div>
+          <p class="service-desc">AI responds to Instagram DMs and common questions instantly — with your voice, your info, your answers.</p>
+          <div class="service-price">$97 <span>/ mo</span></div>
+        </div>
+
+      </div>
+
+      <!-- BOTTOM CTA -->
+      <div class="bottom-cta fade-up">
+        <h2>Ready to Stop Losing Leads?</h2>
+        <p>Pick your services, pay online, and we handle the rest. Live in 7 days — guaranteed.</p>
+        <div class="cta-group">
+          <a href="https://coredash-production.up.railway.app/apply" target="_blank" rel="noopener" class="btn-primary">Choose My Services &rarr;</a>
+          <a href="/#contact" class="btn-outline">Get a Free Audit First</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">EASIER SYSTEMS</div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/services">Pricing</a>
+          <a href="/#process">How It Works</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Easier Systems. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+    fadeEls.forEach(el => obs.observe(el));
+
+    window.addEventListener('scroll', () => {
+      document.querySelector('header').style.background =
+        window.scrollY > 60 ? 'rgba(0,0,0,0.98)' : 'rgba(0,0,0,0.92)';
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
