@@ -983,18 +983,18 @@
       <div class="stat-grid">
         <div class="stat-card fade-up delay-1">
           <span class="stat-icon">📵</span>
-          <div class="stat-number"><span class="counter" data-target="62">0</span>%</div>
+          <div class="stat-number"><span class="counter" data-target="85">0</span>%</div>
           <p>of customers never call back after a missed call. That lead is gone. Forever.</p>
         </div>
         <div class="stat-card fade-up delay-2">
           <span class="stat-icon">⏱️</span>
-          <div class="stat-number"><span class="counter" data-target="21">0</span>x</div>
+          <div class="stat-number"><span class="counter" data-target="9">0</span>x</div>
           <p>more likely to close the lead when you respond in under 5 minutes. Speed is the sale.</p>
         </div>
         <div class="stat-card fade-up delay-3">
           <span class="stat-icon">⭐</span>
-          <div class="stat-number"><span class="counter" data-target="40">0</span></div>
-          <p>good reviews wiped out by just 1 bad one. Your reputation is your most expensive asset.</p>
+          <div class="stat-number"><span class="counter" data-target="1">0</span></div>
+          <p>bad review wipes out 9 good ones. Your reputation is your most expensive asset.</p>
         </div>
       </div>
 
@@ -1161,10 +1161,13 @@
           <p class="fade-up delay-2">No pitch. No pressure. Just an honest look at where your business is leaking leads — and exactly what we'd build to fix it.</p>
 
           <ul class="contact-info fade-up delay-3">
-            <li><span class="contact-info-icon">📱</span><span>Phone: [Contact us for direct line]</span></li>
             <li><span class="contact-info-icon">📧</span><span>info@easiersystems.com</span></li>
             <li><span class="contact-info-icon">📍</span><span>Serving local businesses nationwide</span></li>
           </ul>
+
+          <div class="fade-up delay-4" style="margin-top:28px;">
+            <a href="/book" class="btn-primary">Book Your Free 15-Minute Call &rarr;</a>
+          </div>
 
           <div class="contact-social fade-up delay-4">
             <!-- YouTube -->
@@ -1229,7 +1232,7 @@
         </div>
 
         <div class="footer-bottom">
-          <p>&copy; 2025 Easier Systems. All rights reserved.</p>
+          <p>&copy; 2026 Easier Systems. All rights reserved.</p>
           <p><strong>Built with AI. Run by humans. Guaranteed to perform.</strong></p>
         </div>
       </div>
@@ -1282,9 +1285,18 @@
           statsObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
     if (statsSection) statsObserver.observe(statsSection);
+
+    // Fire immediately if section already in view on load
+    if (statsSection) {
+      const rect = statsSection.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0 && !countersStarted) {
+        countersStarted = true;
+        animateCounters();
+      }
+    }
 
     // ===== CAL.COM INLINE EMBED =====
     (function (C, A, L) {

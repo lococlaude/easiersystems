@@ -26,6 +26,7 @@
       --gray:    #888888;
       --card-bg: #0d0d0d;
       --border:  #1a1a1a;
+      --red:     #FF4444;
     }
 
     html { scroll-behavior: smooth; }
@@ -49,12 +50,13 @@
       opacity: 0.35;
     }
 
-    h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; line-height: 1.05; letter-spacing: 0.03em; }
+    h1, h2, h3, h4 { font-family: 'Bebas Neue', sans-serif; line-height: 1.05; letter-spacing: 0.03em; }
     h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); }
     h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
+    h3 { font-size: clamp(1.4rem, 3vw, 2rem); }
 
     .container {
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 0 24px;
       position: relative;
@@ -64,7 +66,7 @@
     section { position: relative; z-index: 1; }
 
     .section-label {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -74,7 +76,6 @@
       align-items: center;
       gap: 10px;
     }
-
     .section-label::before {
       content: '';
       display: block;
@@ -94,13 +95,7 @@
       border-bottom: 1px solid rgba(255,214,0,0.15);
       padding: 14px 0;
     }
-
-    header .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
+    header .container { display: flex; align-items: center; justify-content: space-between; }
     .header-logo {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.6rem;
@@ -108,11 +103,8 @@
       color: var(--white);
       text-decoration: none;
     }
-
     .header-logo span { color: var(--yellow); }
-
     nav { display: flex; align-items: center; gap: 28px; }
-
     nav a {
       font-size: 0.85rem;
       font-weight: 600;
@@ -122,10 +114,8 @@
       text-transform: uppercase;
       transition: color 0.2s;
     }
-
     nav a:hover { color: var(--white); }
     nav a.active { color: var(--yellow); }
-
     .nav-links { display: flex; gap: 24px; }
     @media (max-width: 768px) { .nav-links { display: none; } }
 
@@ -133,8 +123,8 @@
       display: inline-block;
       background: var(--yellow);
       color: var(--black);
-      font-size: 0.9rem;
-      font-weight: 800;
+      font-size: 0.85rem;
+      font-weight: 900;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       padding: 14px 28px;
@@ -142,19 +132,16 @@
       border: none;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
+      line-height: 1;
     }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(255,214,0,0.35);
-    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,214,0,0.35); }
 
     .btn-outline {
       display: inline-block;
       background: transparent;
       color: var(--yellow);
-      font-size: 0.9rem;
-      font-weight: 800;
+      font-size: 0.85rem;
+      font-weight: 900;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       padding: 13px 27px;
@@ -162,279 +149,589 @@
       border: 2px solid var(--yellow);
       cursor: pointer;
       transition: background 0.2s, color 0.2s;
+      line-height: 1;
     }
-
     .btn-outline:hover { background: var(--yellow); color: var(--black); }
 
-    /* ===== PAGE HERO ===== */
+    .btn-ghost {
+      display: inline-block;
+      background: transparent;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 13px 22px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.4); color: var(--white); }
+
+    /* ===== HERO — INVISIBLE BLEED ===== */
     #hero {
-      padding: 160px 0 80px;
-      border-bottom: 1px solid rgba(255,214,0,0.15);
-      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,214,0,0.05) 0%, transparent 70%);
+      padding: 148px 0 80px;
+      border-bottom: 1px solid rgba(255,214,0,0.12);
+      background: radial-gradient(ellipse 100% 60% at 50% 0%, rgba(255,214,0,0.04) 0%, transparent 70%);
     }
-
-    .hero-inner { max-width: 760px; }
-
-    #hero h1 { margin-bottom: 20px; }
-
+    .hero-inner { max-width: 820px; }
+    #hero h1 { margin-bottom: 24px; }
+    .hero-bleed-stat {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .bleed-item {
+      background: rgba(255,68,68,0.06);
+      border: 1px solid rgba(255,68,68,0.2);
+      border-left: 3px solid var(--red);
+      padding: 16px 20px;
+      flex: 1;
+      min-width: 200px;
+    }
+    .bleed-item .bleed-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .bleed-item .bleed-label {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
     .hero-sub {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      color: #cccccc;
-      line-height: 1.7;
-      max-width: 600px;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: #b0b0b0;
+      line-height: 1.75;
+      max-width: 680px;
     }
+    .hero-sub strong { color: var(--white); }
 
-    /* ===== FLAGSHIP CARD ===== */
-    #flagship {
+    /* ===== ENTRY POINT — MISSED CALL ===== */
+    #entry {
       padding: 80px 0;
-      border-bottom: 1px solid rgba(255,214,0,0.15);
+      border-bottom: 1px solid rgba(255,214,0,0.12);
     }
-
-    .flagship-card {
+    .entry-card {
       background: var(--card-bg);
-      border: 1px solid rgba(255,214,0,0.25);
-      border-top: 4px solid var(--yellow);
-      padding: 56px 48px;
+      border: 1px solid rgba(255,214,0,0.2);
+      border-left: 6px solid var(--yellow);
+      padding: 48px 44px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 56px;
-      align-items: center;
-      position: relative;
+      grid-template-columns: 1fr 380px;
+      gap: 48px;
+      align-items: start;
     }
-
-    @media (max-width: 768px) {
-      .flagship-card {
-        grid-template-columns: 1fr;
-        gap: 36px;
-        padding: 36px 24px;
-      }
+    @media (max-width: 820px) {
+      .entry-card { grid-template-columns: 1fr; gap: 32px; padding: 32px 24px; }
     }
-
-    .flagship-badge {
-      position: absolute;
-      top: 20px;
-      right: 20px;
+    .entry-badge {
+      display: inline-block;
       background: var(--yellow);
       color: var(--black);
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       font-weight: 900;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       padding: 5px 12px;
+      margin-bottom: 16px;
     }
-
-    .flagship-left h2 { margin-bottom: 16px; color: var(--yellow); }
-
-    .flagship-tagline {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--white);
+    .entry-left h2 { color: var(--white); margin-bottom: 12px; }
+    .entry-tagline {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--yellow);
       margin-bottom: 20px;
+      letter-spacing: 0.02em;
     }
-
-    .flagship-desc {
-      color: var(--gray);
-      font-size: 0.95rem;
+    .math-box {
+      background: rgba(255,68,68,0.05);
+      border: 1px solid rgba(255,68,68,0.2);
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+    .math-box p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
       line-height: 1.7;
-      margin-bottom: 28px;
+      margin-bottom: 10px;
     }
-
-    .flagship-includes {
-      list-style: none;
-      margin-bottom: 32px;
+    .math-box p:last-child { margin-bottom: 0; }
+    .math-box .math-line {
+      font-size: 0.85rem;
+      color: var(--red);
+      font-weight: 700;
     }
-
-    .flagship-includes li {
+    .includes-list { list-style: none; margin: 20px 0 0; }
+    .includes-list li {
       display: flex;
       align-items: flex-start;
       gap: 10px;
       padding: 8px 0;
-      font-size: 0.9rem;
-      color: #cccccc;
+      font-size: 0.88rem;
+      color: #c8c8c8;
       border-bottom: 1px solid var(--border);
     }
+    .includes-list li:last-child { border-bottom: none; }
+    .check-y { color: var(--yellow); flex-shrink: 0; font-weight: 700; }
 
-    .flagship-includes li:last-child { border-bottom: none; }
-
-    .flagship-includes .check { color: var(--yellow); flex-shrink: 0; }
-
-    .flagship-right { text-align: center; }
-
-    .price-display {
+    .entry-right { text-align: center; }
+    .price-block { margin-bottom: 24px; }
+    .price-setup {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
       margin-bottom: 8px;
     }
-
-    .price-amount {
+    .price-big {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(4rem, 8vw, 6rem);
+      font-size: clamp(3.5rem, 7vw, 5.5rem);
       color: var(--yellow);
       line-height: 1;
     }
+    .price-big sup {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.28em;
+      font-weight: 700;
+      vertical-align: super;
+      color: var(--gray);
+    }
+    .price-sub {
+      font-size: 0.82rem;
+      color: var(--gray);
+      margin-top: 4px;
+      letter-spacing: 0.03em;
+    }
+    .price-plus {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      margin: 8px 0 20px;
+      letter-spacing: 0.05em;
+    }
 
-    .price-amount sup {
+    /* ===== SERVICE SECTIONS ===== */
+    #services { padding: 80px 0; }
+    .services-header { margin-bottom: 56px; }
+    .services-header h2 { margin-bottom: 10px; }
+    .services-header p { color: var(--gray); font-size: 0.95rem; max-width: 520px; margin-top: 12px; }
+
+    .service-block {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid rgba(255,214,0,0.3);
+      padding: 40px 36px;
+      margin-bottom: 2px;
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 40px;
+      align-items: start;
+      transition: border-left-color 0.2s;
+    }
+    .service-block:hover { border-left-color: var(--yellow); }
+    @media (max-width: 760px) {
+      .service-block { grid-template-columns: 1fr; gap: 28px; padding: 28px 20px; }
+    }
+    .svc-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255,214,0,0.3);
+      margin-bottom: 8px;
+      letter-spacing: 0.1em;
+    }
+    .svc-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      color: var(--white);
+      margin-bottom: 6px;
+      letter-spacing: 0.03em;
+    }
+    .svc-tagline {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--yellow);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .svc-desc {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .svc-math {
+      background: rgba(255,68,68,0.04);
+      border-left: 2px solid rgba(255,68,68,0.4);
+      padding: 12px 16px;
+      margin-top: 12px;
+    }
+    .svc-math p {
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.65;
+    }
+    .svc-math .math-punch {
+      font-weight: 700;
+      color: var(--white);
+      display: block;
+      margin-top: 6px;
+      font-size: 0.88rem;
+    }
+
+    .svc-pricing { text-align: center; padding-top: 8px; }
+    .svc-setup-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--gray);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .svc-setup-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .svc-setup-note {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 16px;
+      letter-spacing: 0.04em;
+    }
+    .svc-monthly-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--gray);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .svc-monthly-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--yellow);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .svc-monthly-price sup {
       font-family: 'DM Sans', sans-serif;
       font-size: 0.3em;
       font-weight: 700;
       vertical-align: super;
       color: var(--gray);
     }
-
-    .price-period {
-      font-size: 0.85rem;
+    .svc-monthly-note {
+      font-size: 0.75rem;
       color: var(--gray);
-      margin-bottom: 24px;
-      letter-spacing: 0.05em;
+      margin-bottom: 20px;
     }
 
-    .flagship-savings {
+    /* ===== FLAGSHIP ===== */
+    #flagship {
+      padding: 80px 0;
+      border-top: 1px solid rgba(255,214,0,0.12);
+      border-bottom: 1px solid rgba(255,214,0,0.12);
+    }
+
+    .flagship-wrapper {
+      background: var(--card-bg);
+      border: 2px solid rgba(255,214,0,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .flagship-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--yellow);
+    }
+
+    .flagship-top {
+      padding: 52px 48px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+      border-bottom: 1px solid var(--border);
+    }
+    @media (max-width: 820px) {
+      .flagship-top { grid-template-columns: 1fr; gap: 32px; padding: 36px 24px 28px; }
+    }
+
+    .flagship-label {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--black);
+      font-size: 0.62rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      margin-bottom: 16px;
+    }
+
+    .flagship-left h2 { color: var(--yellow); margin-bottom: 8px; }
+    .flagship-tagline {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .flagship-anchor {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .flagship-anchor strong { color: var(--white); }
+
+    .flagship-includes { list-style: none; }
+    .flagship-includes li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 0;
+      font-size: 0.88rem;
+      color: #c8c8c8;
+      border-bottom: 1px solid var(--border);
+    }
+    .flagship-includes li:last-child { border-bottom: none; }
+
+    .flagship-right { text-align: center; }
+    .flagship-price-block { margin-bottom: 20px; }
+    .flagship-setup {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--gray);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .flagship-setup-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: rgba(255,255,255,0.4);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .flagship-setup-sub {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 16px;
+      letter-spacing: 0.04em;
+    }
+    .flagship-monthly-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .flagship-monthly-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4.5rem, 9vw, 7rem);
+      color: var(--yellow);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .flagship-monthly-price sup {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.26em;
+      font-weight: 700;
+      vertical-align: super;
+      color: var(--gray);
+    }
+    .flagship-monthly-sub {
+      font-size: 0.82rem;
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+    .flagship-vs {
+      display: inline-block;
+      background: rgba(255,214,0,0.07);
+      border: 1px solid rgba(255,214,0,0.2);
+      color: rgba(255,255,255,0.5);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 7px 14px;
+      margin-bottom: 24px;
+    }
+    .flagship-vs strong { color: var(--yellow); }
+
+    /* GUARANTEE — dominant block */
+    .guarantee-block {
+      background: rgba(255,214,0,0.05);
+      border: 2px solid var(--yellow);
+      padding: 40px 48px;
+      text-align: center;
+    }
+    @media (max-width: 600px) { .guarantee-block { padding: 32px 20px; } }
+    .guarantee-block .g-label {
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 14px;
+    }
+    .guarantee-block h3 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: var(--white);
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+    .guarantee-block h3 span { color: var(--yellow); }
+    .guarantee-block p {
+      color: rgba(255,255,255,0.6);
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+    .guarantee-block p strong { color: var(--white); }
+
+    /* ===== REPUTATION REPORT ADD-ON ===== */
+    #reputation {
+      padding: 80px 0;
+      border-bottom: 1px solid rgba(255,214,0,0.12);
+    }
+    .reputation-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid rgba(255,214,0,0.4);
+      padding: 40px 44px;
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 40px;
+      align-items: center;
+    }
+    @media (max-width: 680px) {
+      .reputation-card { grid-template-columns: 1fr; gap: 24px; padding: 28px 20px; }
+    }
+    .rep-add-on-badge {
       display: inline-block;
       background: rgba(255,214,0,0.1);
       border: 1px solid rgba(255,214,0,0.25);
       color: var(--yellow);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
+      font-size: 0.62rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      padding: 6px 14px;
-      margin-bottom: 28px;
+      padding: 4px 10px;
+      margin-bottom: 14px;
     }
-
-    /* ===== A LA CARTE ===== */
-    #ala-carte {
-      padding: 80px 0 100px;
-    }
-
-    .ala-carte-header { margin-bottom: 48px; }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      background: rgba(255,214,0,0.08);
-      border: 1px solid rgba(255,214,0,0.08);
-      margin-bottom: 60px;
-    }
-
-    @media (max-width: 960px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 580px) { .services-grid { grid-template-columns: 1fr; } }
-
-    .service-card {
-      background: var(--black);
-      padding: 32px 28px;
-      border-left: 3px solid transparent;
-      transition: border-color 0.2s, background 0.2s;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .service-card:hover {
-      border-left-color: var(--yellow);
-      background: var(--card-bg);
-    }
-
-    .service-num {
+    .rep-name {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.95rem;
-      color: rgba(255,214,0,0.3);
-      margin-bottom: 10px;
-    }
-
-    .service-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.25rem;
-      letter-spacing: 0.04em;
+      font-size: 1.8rem;
       color: var(--white);
       margin-bottom: 8px;
     }
-
-    .service-tagline {
-      font-size: 0.8rem;
+    .rep-desc { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.7; margin-bottom: 16px; }
+    .rep-bullets { list-style: none; }
+    .rep-bullets li {
+      display: flex;
+      gap: 10px;
+      font-size: 0.86rem;
+      color: #c0c0c0;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .rep-bullets li:last-child { border-bottom: none; }
+    .rep-pricing { text-align: center; }
+    .rep-no-setup {
+      font-size: 0.7rem;
       font-weight: 700;
-      color: var(--yellow);
-      letter-spacing: 0.05em;
+      color: rgba(255,214,0,0.6);
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 6px;
     }
-
-    .service-desc {
-      color: var(--gray);
-      font-size: 0.875rem;
-      line-height: 1.6;
-      flex: 1;
-      margin-bottom: 20px;
-    }
-
-    .service-price {
+    .rep-price {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem;
-      color: var(--white);
+      font-size: 3.5rem;
+      color: var(--yellow);
       line-height: 1;
     }
-
-    .service-price span {
+    .rep-price sup {
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 600;
+      font-size: 0.28em;
+      font-weight: 700;
+      vertical-align: super;
       color: var(--gray);
-      vertical-align: middle;
     }
+    .rep-period { font-size: 0.78rem; color: var(--gray); margin-bottom: 20px; }
 
-    /* ===== BOTTOM CTA ===== */
-    .bottom-cta {
+    /* ===== TRUST CLOSER ===== */
+    #trust {
+      padding: 80px 0 100px;
+    }
+    .trust-header { text-align: center; margin-bottom: 56px; }
+    .trust-header h2 { margin-bottom: 12px; }
+    .trust-header p { color: var(--gray); font-size: 1rem; max-width: 480px; margin: 0 auto; line-height: 1.7; }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: rgba(255,214,0,0.06);
+      margin-bottom: 56px;
+    }
+    @media (max-width: 860px) { .steps-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .steps-grid { grid-template-columns: 1fr; } }
+
+    .step {
+      background: var(--black);
+      padding: 36px 28px;
+      text-align: center;
+    }
+    .step-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: rgba(255,214,0,0.15);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .step-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+    .step-desc { font-size: 0.84rem; color: var(--gray); line-height: 1.6; }
+
+    .trust-closer {
       background: var(--card-bg);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(255,214,0,0.2);
       border-top: 4px solid var(--yellow);
-      padding: 56px 48px;
+      padding: 52px 48px;
       text-align: center;
     }
-
-    @media (max-width: 600px) { .bottom-cta { padding: 40px 24px; } }
-
-    .bottom-cta h2 { margin-bottom: 16px; }
-
-    .bottom-cta p {
-      color: var(--gray);
-      font-size: 1rem;
-      max-width: 520px;
-      margin: 0 auto 36px;
-      line-height: 1.7;
+    @media (max-width: 600px) { .trust-closer { padding: 36px 20px; } }
+    .trust-conditions {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+      line-height: 1.8;
     }
-
-    .cta-group {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* ===== GUARANTEE STRIP ===== */
-    .guarantee-strip {
-      border-top: 1px solid rgba(255,214,0,0.15);
-      border-bottom: 1px solid rgba(255,214,0,0.15);
-      padding: 32px 0;
-      margin: 0 0 80px;
-    }
-
-    .guarantee-strip .container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      text-align: center;
-    }
-
-    .guarantee-icon { font-size: 2rem; }
-
-    .guarantee-text strong {
-      display: block;
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: var(--yellow);
-      margin-bottom: 4px;
-    }
-
-    .guarantee-text p { font-size: 0.9rem; color: var(--gray); }
+    .trust-conditions span { color: var(--white); }
+    .trust-closer h2 { margin-bottom: 14px; }
+    .trust-closer p { color: var(--gray); font-size: 0.95rem; max-width: 480px; margin: 0 auto 32px; line-height: 1.7; }
+    .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
     /* ===== FOOTER ===== */
     footer {
@@ -443,29 +740,9 @@
       position: relative;
       z-index: 1;
     }
-
-    .footer-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 24px;
-    }
-
-    .footer-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.8rem;
-      color: var(--yellow);
-      letter-spacing: 0.05em;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 32px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
+    .footer-inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 24px; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--yellow); letter-spacing: 0.05em; }
+    .footer-links { display: flex; gap: 32px; flex-wrap: wrap; justify-content: center; }
     .footer-links a {
       font-size: 0.82rem;
       font-weight: 600;
@@ -475,33 +752,32 @@
       text-decoration: none;
       transition: color 0.2s;
     }
-
     .footer-links a:hover { color: var(--yellow); }
-
-    .footer-bottom {
-      width: 100%;
-      border-top: 1px solid var(--border);
-      padding-top: 24px;
-    }
-
+    .footer-bottom { width: 100%; border-top: 1px solid var(--border); padding-top: 24px; }
     .footer-bottom p { font-size: 0.78rem; color: #444; }
 
+    /* ===== UTILITIES ===== */
     ::selection { background: var(--yellow); color: var(--black); }
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--black); }
     ::-webkit-scrollbar-thumb { background: var(--yellow); }
 
-    /* ===== FADE ANIMATIONS ===== */
     .fade-up {
       opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(28px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
     }
-
     .fade-up.visible { opacity: 1; transform: translateY(0); }
-    .fade-up.delay-1 { transition-delay: 0.1s; }
-    .fade-up.delay-2 { transition-delay: 0.2s; }
-    .fade-up.delay-3 { transition-delay: 0.3s; }
+    .fade-up.delay-1 { transition-delay: 0.08s; }
+    .fade-up.delay-2 { transition-delay: 0.16s; }
+    .fade-up.delay-3 { transition-delay: 0.24s; }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(255,214,0,0.1);
+      margin: 0;
+    }
   </style>
 </head>
 <body>
@@ -522,133 +798,369 @@
     </div>
   </header>
 
-  <!-- HERO -->
+  <!-- 1. HERO — INVISIBLE BLEED -->
   <section id="hero">
     <div class="container">
       <div class="hero-inner">
-        <div class="section-label fade-up">Services & Pricing</div>
-        <h1 class="fade-up delay-1">Pick Your System.<br>We Build It.<br><span style="color:var(--yellow)">You Go Live in 7 Days.</span></h1>
-        <p class="hero-sub fade-up delay-2">No contracts. No tech headaches. Done-for-you AI — installed, tested, and running in your business before you know it.</p>
+        <div class="section-label fade-up">The Real Cost of Doing Nothing</div>
+        <h1 class="fade-up delay-1">Every Missed Call.<br>Every Ignored DM.<br><span style="color:var(--red)">Silent Revenue Walking Out.</span></h1>
+
+        <div class="hero-bleed-stat fade-up delay-2">
+          <div class="bleed-item">
+            <div class="bleed-number">$2,500</div>
+            <div class="bleed-label">Lost per month from 5 missed calls at $500/job</div>
+          </div>
+          <div class="bleed-item">
+            <div class="bleed-number">80%</div>
+            <div class="bleed-label">Conversion rate drop when response time exceeds 5 minutes</div>
+          </div>
+          <div class="bleed-item">
+            <div class="bleed-number">$1,200</div>
+            <div class="bleed-label">Revenue lost monthly to no-shows at a 20% no-show rate</div>
+          </div>
+        </div>
+
+        <p class="hero-sub fade-up delay-3">
+          Your competitors aren't beating you because they're better.<br>
+          They're beating you because <strong>they follow up and you don't.</strong><br>
+          Every system on this page exists to stop the bleed — automatically.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- FLAGSHIP -->
+  <!-- 2. ENTRY POINT — MISSED CALL TEXT BACK -->
+  <section id="entry">
+    <div class="container">
+      <div class="section-label fade-up">Start Here</div>
+      <div class="entry-card fade-up delay-1">
+        <div class="entry-left">
+          <div class="entry-badge">Easiest First Yes</div>
+          <h2>Missed Call Text Back</h2>
+          <p class="entry-tagline">A missed call becomes a conversation in 60 seconds.</p>
+
+          <p style="color:rgba(255,255,255,0.65); font-size:0.92rem; line-height:1.75;">
+            When a call goes unanswered, your prospect gets a text back within 60 seconds — automatically.
+            No staff. No manual follow-up. No lost jobs.
+          </p>
+
+          <div class="math-box">
+            <p>Missing 5 calls a week at a $500 average ticket = <span class="math-line">$2,500 walking out the door every month.</span></p>
+            <p>One job recovered pays for this system for <strong style="color:var(--white)">8 months straight.</strong></p>
+            <p class="math-line">This system costs $297/month.</p>
+          </div>
+
+          <ul class="includes-list">
+            <li><span class="check-y">✓</span> Instant text-back the moment a call is missed</li>
+            <li><span class="check-y">✓</span> Fully custom message in your business's voice</li>
+            <li><span class="check-y">✓</span> Works 24/7 — including weekends and after hours</li>
+            <li><span class="check-y">✓</span> Full setup and installation included — zero tech work on your end</li>
+            <li><span class="check-y">✓</span> Live within 48 hours of sign-up</li>
+          </ul>
+        </div>
+
+        <div class="entry-right">
+          <div class="price-block">
+            <p class="price-setup">One-Time Setup</p>
+            <div class="price-big"><sup>$</sup>297</div>
+            <p class="price-sub">setup — one time</p>
+            <p class="price-plus">+ &nbsp;then</p>
+            <p class="price-setup">Monthly</p>
+            <div class="price-big"><sup>$</sup>297</div>
+            <p class="price-sub">/ mo — cancel anytime</p>
+          </div>
+          <a href="/book" class="btn-primary" style="width:100%; text-align:center; display:block;">Get Started — $297 Setup + $297/Mo &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. CORE SERVICES -->
+  <section id="services">
+    <div class="container">
+      <div class="services-header">
+        <div class="section-label fade-up">À La Carte</div>
+        <h2 class="fade-up delay-1">Pick What Your Business Needs</h2>
+        <p class="fade-up delay-2">Start with one system. Add more any time. Every service is fully installed and live — not a DIY tool you have to figure out yourself.</p>
+      </div>
+
+      <!-- AI Review Request System -->
+      <div class="service-block fade-up">
+        <div class="svc-left">
+          <div class="svc-num">SERVICE 01</div>
+          <div class="svc-name">AI Review Request System</div>
+          <div class="svc-tagline">More 5-star reviews. Zero effort. On autopilot.</div>
+          <p class="svc-desc">After every completed job, your customer automatically gets a review request text at exactly the right moment — when the work is fresh and the satisfaction is high. More reviews. Higher star rating. More calls coming in.</p>
+          <div class="svc-math">
+            <p>Businesses at 4.1 stars lose jobs to competitors at 4.7 stars every single day — without the customer ever telling them why.</p>
+            <p>One extra job per month at a $400 average ticket = <strong>$4,800 per year.</strong></p>
+            <span class="math-punch">This system costs $197/month.</span>
+          </div>
+          <ul class="includes-list" style="margin-top:16px;">
+            <li><span class="check-y">✓</span> Automated post-job review request via SMS</li>
+            <li><span class="check-y">✓</span> Directs to Google, Facebook, or Yelp — your choice</li>
+            <li><span class="check-y">✓</span> Timing is optimized — not sent too soon, not too late</li>
+          </ul>
+        </div>
+        <div class="svc-pricing">
+          <p class="svc-setup-label">One-Time Setup</p>
+          <div class="svc-setup-price">$197</div>
+          <p class="svc-setup-note">setup — one time</p>
+          <p class="svc-monthly-label">Then Monthly</p>
+          <div class="svc-monthly-price"><sup>$</sup>197</div>
+          <p class="svc-monthly-note">/ mo — cancel anytime</p>
+          <a href="/book" class="btn-primary" style="display:block; text-align:center;">Add This System &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Appointment Reminder System -->
+      <div class="service-block fade-up">
+        <div class="svc-left">
+          <div class="svc-num">SERVICE 02</div>
+          <div class="svc-name">Appointment Reminder System</div>
+          <div class="svc-tagline">Slash no-shows. Keep your schedule full.</div>
+          <p class="svc-desc">Automated reminders go out 24 hours and 1 hour before every appointment. Your customers show up. Your revenue stays predictable. Your team stops waiting around for ghosts.</p>
+          <div class="svc-math">
+            <p>The average no-show rate for local service businesses is 20%. At a $300 ticket with 20 appointments a month, that's <strong>$1,200 in empty slots every month.</strong></p>
+            <span class="math-punch">This system costs $297/month. Do the math.</span>
+          </div>
+          <ul class="includes-list" style="margin-top:16px;">
+            <li><span class="check-y">✓</span> Automated SMS reminders at 24h and 1h before appointment</li>
+            <li><span class="check-y">✓</span> Customers can confirm or reschedule in one tap</li>
+            <li><span class="check-y">✓</span> Integrates with your existing booking flow</li>
+          </ul>
+        </div>
+        <div class="svc-pricing">
+          <p class="svc-setup-label">One-Time Setup</p>
+          <div class="svc-setup-price">$297</div>
+          <p class="svc-setup-note">setup — one time</p>
+          <p class="svc-monthly-label">Then Monthly</p>
+          <div class="svc-monthly-price"><sup>$</sup>297</div>
+          <p class="svc-monthly-note">/ mo — cancel anytime</p>
+          <a href="/book" class="btn-primary" style="display:block; text-align:center;">Add This System &rarr;</a>
+        </div>
+      </div>
+
+      <!-- AI FAQ & DM Responder -->
+      <div class="service-block fade-up">
+        <div class="svc-left">
+          <div class="svc-num">SERVICE 03</div>
+          <div class="svc-name">AI FAQ & DM Responder</div>
+          <div class="svc-tagline">Every DM gets a reply. Instantly.</div>
+          <p class="svc-desc">An unanswered DM is a lead that moved on. This system replies to Instagram DMs and common customer questions instantly — in your voice, with your information, around the clock.</p>
+          <div class="svc-math">
+            <p>Response time over 5 minutes drops conversion by 80%. That means 4 out of every 5 people who message you after hours are already gone by morning.</p>
+            <span class="math-punch">This system costs $197/month. One closed job covers it.</span>
+          </div>
+          <ul class="includes-list" style="margin-top:16px;">
+            <li><span class="check-y">✓</span> Instant AI replies to Instagram DMs and FAQ inquiries</li>
+            <li><span class="check-y">✓</span> Trained on your services, pricing, and hours</li>
+            <li><span class="check-y">✓</span> Escalates to you when the question needs a human</li>
+          </ul>
+        </div>
+        <div class="svc-pricing">
+          <p class="svc-setup-label">One-Time Setup</p>
+          <div class="svc-setup-price">$197</div>
+          <p class="svc-setup-note">setup — one time</p>
+          <p class="svc-monthly-label">Then Monthly</p>
+          <div class="svc-monthly-price"><sup>$</sup>197</div>
+          <p class="svc-monthly-note">/ mo — cancel anytime</p>
+          <a href="/book" class="btn-primary" style="display:block; text-align:center;">Add This System &rarr;</a>
+        </div>
+      </div>
+
+      <!-- AI Lead Follow-Up Sequence -->
+      <div class="service-block fade-up">
+        <div class="svc-left">
+          <div class="svc-num">SERVICE 04</div>
+          <div class="svc-name">AI Lead Follow-Up Sequence</div>
+          <div class="svc-tagline">Follow up automatically. Close more jobs.</div>
+          <p class="svc-desc">Every new lead gets a multi-step SMS follow-up sequence that runs on autopilot. Keeps your business top of mind. Stops the moment they reply. Works while you're on the job.</p>
+          <div class="svc-math">
+            <p>80% of sales happen between follow-up 5 and 12. Nobody on your team is doing that. This system does it automatically for every single lead — forever.</p>
+            <span class="math-punch">This system costs $497/month. One closed job covers 3–6 months.</span>
+          </div>
+          <ul class="includes-list" style="margin-top:16px;">
+            <li><span class="check-y">✓</span> Multi-step SMS sequence triggered the moment a lead comes in</li>
+            <li><span class="check-y">✓</span> Stops automatically when they respond</li>
+            <li><span class="check-y">✓</span> Personalized to your services and offer</li>
+          </ul>
+        </div>
+        <div class="svc-pricing">
+          <p class="svc-setup-label">One-Time Setup</p>
+          <div class="svc-setup-price">$497</div>
+          <p class="svc-setup-note">setup — one time</p>
+          <p class="svc-monthly-label">Then Monthly</p>
+          <div class="svc-monthly-price"><sup>$</sup>497</div>
+          <p class="svc-monthly-note">/ mo — cancel anytime</p>
+          <a href="/book" class="btn-primary" style="display:block; text-align:center;">Add This System &rarr;</a>
+        </div>
+      </div>
+
+      <!-- AI Receptionist & Chat Widget -->
+      <div class="service-block fade-up">
+        <div class="svc-left">
+          <div class="svc-num">SERVICE 05</div>
+          <div class="svc-name">AI Receptionist & Chat Widget</div>
+          <div class="svc-tagline">A 24/7 receptionist. No salary. No sick days.</div>
+          <p class="svc-desc">AI handles all inbound chat on your website around the clock. Answers questions, qualifies leads, captures contact info, and books calls — while you're on the job, asleep, or off on the weekend.</p>
+          <div class="svc-math">
+            <p>A part-time receptionist costs $2,000–$3,000/month. Works business hours only. Handles one conversation at a time. Takes sick days. Quits.</p>
+            <span class="math-punch">This system costs $597/month and works 24/7 without stopping.</span>
+          </div>
+          <ul class="includes-list" style="margin-top:16px;">
+            <li><span class="check-y">✓</span> Live chat widget installed on your website</li>
+            <li><span class="check-y">✓</span> AI trained on your services, pricing, and FAQs</li>
+            <li><span class="check-y">✓</span> Captures leads and routes them directly to your CRM</li>
+            <li><span class="check-y">✓</span> Books calls and appointments automatically</li>
+          </ul>
+        </div>
+        <div class="svc-pricing">
+          <p class="svc-setup-label">One-Time Setup</p>
+          <div class="svc-setup-price">$797</div>
+          <p class="svc-setup-note">setup — one time</p>
+          <p class="svc-monthly-label">Then Monthly</p>
+          <div class="svc-monthly-price"><sup>$</sup>597</div>
+          <p class="svc-monthly-note">/ mo — cancel anytime</p>
+          <a href="/book" class="btn-primary" style="display:block; text-align:center;">Add This System &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 4. FULL AI SYSTEM STACK — FLAGSHIP -->
   <section id="flagship">
     <div class="container">
-      <div class="section-label fade-up">Most Popular</div>
-      <div class="flagship-card fade-up delay-1">
-        <div class="flagship-badge">Flagship Package</div>
+      <div class="section-label fade-up">Top Tier</div>
+      <div class="flagship-wrapper fade-up delay-1">
 
-        <div class="flagship-left">
-          <h2>Full AI System Stack</h2>
-          <p class="flagship-tagline">Everything. Done for you.</p>
-          <p class="flagship-desc">All 6 AI systems installed, configured, and live under one monthly rate. The complete package for businesses ready to automate every touchpoint — from the first missed call to the five-star review.</p>
+        <div class="flagship-top">
+          <div class="flagship-left">
+            <div class="flagship-label">Full AI System Stack</div>
+            <h2>Everything. Running Together. Installed in 7 Days.</h2>
+            <p class="flagship-tagline">The complete automation engine for your business.</p>
+            <p class="flagship-anchor">
+              A full-time employee costs <strong>$3,000–$5,000/month.</strong> Works 40 hours a week.
+              Takes holidays. Needs managing. Calls in sick.<br><br>
+              This stack runs every system listed on this page — simultaneously, 24/7 —
+              for <strong>$1,497/month.</strong> No HR. No training. No turnover.
+            </p>
 
-          <ul class="flagship-includes">
-            <li><span class="check">✓</span> AI Receptionist + Chat Widget</li>
-            <li><span class="check">✓</span> AI Lead Follow-Up Sequence</li>
-            <li><span class="check">✓</span> Missed Call Text Back</li>
-            <li><span class="check">✓</span> Appointment Reminder System</li>
-            <li><span class="check">✓</span> AI Review Request System</li>
-            <li><span class="check">✓</span> AI FAQ + DM Responder</li>
-            <li><span class="check">✓</span> Full setup + onboarding — we handle everything</li>
-          </ul>
+            <ul class="flagship-includes">
+              <li><span class="check-y">✓</span> AI Receptionist + Chat Widget</li>
+              <li><span class="check-y">✓</span> AI Lead Follow-Up Sequence</li>
+              <li><span class="check-y">✓</span> Missed Call Text Back</li>
+              <li><span class="check-y">✓</span> Appointment Reminder System</li>
+              <li><span class="check-y">✓</span> AI Review Request System</li>
+              <li><span class="check-y">✓</span> AI FAQ + DM Responder</li>
+              <li><span class="check-y">✓</span> Full installation and onboarding — we handle everything</li>
+              <li><span class="check-y">✓</span> Dedicated setup support — live in 7 days or less</li>
+            </ul>
+          </div>
 
-          <a href="https://coredash-production.up.railway.app/apply" target="_blank" rel="noopener" class="btn-primary">Get the Full Stack &rarr;</a>
+          <div class="flagship-right">
+            <div class="flagship-price-block">
+              <p class="flagship-setup">One-Time Setup</p>
+              <div class="flagship-setup-price">$2,500</div>
+              <p class="flagship-setup-sub">paid once — fully installed</p>
+              <p class="flagship-monthly-label">Then Monthly</p>
+              <div class="flagship-monthly-price"><sup>$</sup>1,497</div>
+              <p class="flagship-monthly-sub">per month — cancel anytime</p>
+              <div class="flagship-vs">vs. <strong>$3,000–$5,000/mo</strong> for one employee</div>
+              <div style="display:inline-block; background:rgba(255,214,0,0.1); border:1px solid rgba(255,214,0,0.25); color:var(--yellow); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:6px 14px; margin-bottom:8px;">Save $388/mo vs. buying separate</div>
+            </div>
+            <a href="/book" class="btn-primary" style="display:block; text-align:center; width:100%;">Book a Call — Limited Spots &rarr;</a>
+            <p style="font-size:0.75rem; color:rgba(255,255,255,0.3); margin-top:12px; text-align:center;">No contracts. Cancel any month.</p>
+          </div>
         </div>
 
-        <div class="flagship-right">
-          <div class="price-display">
-            <div class="price-amount"><sup>$</sup>997</div>
-          </div>
-          <p class="price-period">per month — cancel anytime</p>
-          <div class="flagship-savings">Save $734/mo vs. buying separate</div>
-          <p style="color:var(--gray); font-size:0.85rem; line-height:1.6;">Includes full installation, AI training, and ongoing support. Everything below — bundled and handled.</p>
+        <!-- GUARANTEE — DOMINANT -->
+        <div class="guarantee-block">
+          <p class="g-label">Our Guarantee</p>
+          <h3>5 New Appointments in 30 Days<br><span>Or We Work Free Until You Do.</span></h3>
+          <p>
+            Sign up for the Full AI System Stack. If you don't have <strong>5 booked appointments
+            in your first 30 days</strong> as a direct result of these systems, we keep working —
+            at no charge — until you hit that number. No asterisks. No loopholes.
+          </p>
+          <a href="/book" class="btn-primary">Claim the Guarantee — Book Your Call &rarr;</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. MONTHLY REPUTATION REPORT -->
+  <section id="reputation">
+    <div class="container">
+      <div class="section-label fade-up">Add-On</div>
+      <div class="reputation-card fade-up delay-1">
+        <div class="rep-left">
+          <div class="rep-add-on-badge">No Setup Fee</div>
+          <div class="rep-name">Monthly Reputation Report</div>
+          <p class="rep-desc">
+            Every month you get a clear report showing your review count, star rating movement, response rates, and how you stack up against local competitors. Data you can actually act on.
+          </p>
+          <ul class="rep-bullets">
+            <li><span class="check-y">✓</span> Monthly review count and star rating movement</li>
+            <li><span class="check-y">✓</span> Competitor activity breakdown — who's gaining and why</li>
+            <li><span class="check-y">✓</span> Specific recommendations to improve ranking this month</li>
+            <li><span class="check-y">✓</span> Shows you the ROI of every system you have running</li>
+          </ul>
+        </div>
+        <div class="rep-pricing">
+          <p class="rep-no-setup">No Setup Fee</p>
+          <div class="rep-price"><sup>$</sup>97</div>
+          <p class="rep-period">per month — cancel anytime</p>
+          <a href="/book" class="btn-outline" style="display:block; text-align:center;">Add This Report &rarr;</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- GUARANTEE STRIP -->
-  <div class="guarantee-strip">
+  <!-- 6. TRUST CLOSER -->
+  <section id="trust">
     <div class="container">
-      <div class="guarantee-icon">🛡️</div>
-      <div class="guarantee-text">
-        <strong>5 Appointments in 30 Days — Or We Work Free</strong>
-        <p>Every plan is backed by our results guarantee. If it doesn't perform, we keep working until it does.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- A LA CARTE -->
-  <section id="ala-carte">
-    <div class="container">
-      <div class="ala-carte-header">
-        <div class="section-label fade-up">À La Carte</div>
-        <h2 class="fade-up delay-1">Or Pick the Systems You Need</h2>
-        <p class="fade-up delay-2" style="color:var(--gray); margin-top:12px; font-size:0.95rem; max-width:520px;">Start with one. Add more any time. Each system is fully installed and running — not a DIY tool.</p>
+      <div class="trust-header fade-up">
+        <div class="section-label" style="justify-content:center;">How It Works</div>
+        <h2>Simple. Fast. Done for You.</h2>
+        <p>You run your business. We build the system that keeps it full.</p>
       </div>
 
-      <div class="services-grid">
-
-        <div class="service-card fade-up">
-          <div class="service-num">01</div>
-          <div class="service-name">AI Receptionist & Chat Widget</div>
-          <div class="service-tagline">Never miss a chat lead again.</div>
-          <p class="service-desc">AI handles inbound chat on your website 24/7. Answers questions, captures leads, books calls — without you lifting a finger.</p>
-          <div class="service-price">$297 <span>/ mo</span></div>
+      <div class="steps-grid fade-up delay-1">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-title">Book a Free 15-Minute Call</div>
+          <p class="step-desc">Tell us what you do, how many jobs a month, and what's leaking revenue right now.</p>
         </div>
-
-        <div class="service-card fade-up delay-1">
-          <div class="service-num">02</div>
-          <div class="service-name">AI Lead Follow-Up Sequence</div>
-          <div class="service-tagline">Follow up automatically. Close more.</div>
-          <p class="service-desc">Every new lead gets a 5-step SMS follow-up sequence. Runs on autopilot. Stops the moment they reply.</p>
-          <div class="service-price">$197 <span>/ mo</span></div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-title">We Identify the Right System</div>
+          <p class="step-desc">Not every business needs everything. We tell you exactly which system will move the needle first.</p>
         </div>
-
-        <div class="service-card fade-up delay-2">
-          <div class="service-num">03</div>
-          <div class="service-name">Missed Call Text Back</div>
-          <div class="service-tagline">Every missed call gets a text in seconds.</div>
-          <p class="service-desc">When a call goes unanswered, your prospect gets an automatic text within 60 seconds. Most competitors never call back. You do.</p>
-          <div class="service-price">$147 <span>/ mo</span></div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-title">We Install It in 24–48 Hours</div>
+          <p class="step-desc">You don't touch a single line of code. We set it up, test it, and confirm it's live before we call it done.</p>
         </div>
-
-        <div class="service-card fade-up">
-          <div class="service-num">04</div>
-          <div class="service-name">Appointment Reminder System</div>
-          <div class="service-tagline">Slash no-shows. Keep your schedule full.</div>
-          <p class="service-desc">Automated reminders go out 24h and 1h before every appointment. Reduces no-shows by up to 80%.</p>
-          <div class="service-price">$97 <span>/ mo</span></div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-title">You Watch It Work</div>
+          <p class="step-desc">Leads get followed up. Calls get answered. Reviews come in. You just show up to the appointments.</p>
         </div>
-
-        <div class="service-card fade-up delay-1">
-          <div class="service-num">05</div>
-          <div class="service-name">AI Review Request System</div>
-          <div class="service-tagline">More 5-star reviews. On autopilot.</div>
-          <p class="service-desc">After every job, your customer gets a review request text at the perfect moment. More reviews, higher ranking, more calls.</p>
-          <div class="service-price">$97 <span>/ mo</span></div>
-        </div>
-
-        <div class="service-card fade-up delay-2">
-          <div class="service-num">06</div>
-          <div class="service-name">AI FAQ & DM Responder</div>
-          <div class="service-tagline">Instant replies to every DM and question.</div>
-          <p class="service-desc">AI responds to Instagram DMs and common questions instantly — with your voice, your info, your answers.</p>
-          <div class="service-price">$97 <span>/ mo</span></div>
-        </div>
-
       </div>
 
-      <!-- BOTTOM CTA -->
-      <div class="bottom-cta fade-up">
-        <h2>Ready to Stop Losing Leads?</h2>
-        <p>Pick your services, pay online, and we handle the rest. Live in 7 days — guaranteed.</p>
+      <div class="trust-closer fade-up delay-2">
+        <p class="trust-conditions">
+          <span>No contracts.</span> &nbsp;·&nbsp; <span>No tech headaches.</span> &nbsp;·&nbsp; <span>No guesswork.</span>
+          <br>We handle everything. You just show up to the appointments.
+        </p>
+        <h2>Ready to Stop the Bleed?</h2>
+        <p>Pick a system. Book a call. We take it from there.</p>
         <div class="cta-group">
-          <a href="https://coredash-production.up.railway.app/apply" target="_blank" rel="noopener" class="btn-primary">Choose My Services &rarr;</a>
-          <a href="/#contact" class="btn-outline">Get a Free Audit First</a>
+          <a href="/book" class="btn-primary">Book Your Free Call Now &rarr;</a>
+          <a href="/#contact" class="btn-ghost">Get a Free Audit First</a>
         </div>
       </div>
     </div>
@@ -666,7 +1178,7 @@
           <a href="/#contact">Contact</a>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2025 Easier Systems. All rights reserved.</p>
+          <p>&copy; 2026 Easier Systems. All rights reserved.</p>
         </div>
       </div>
     </div>
@@ -678,7 +1190,7 @@
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
     fadeEls.forEach(el => obs.observe(el));
 
     window.addEventListener('scroll', () => {
