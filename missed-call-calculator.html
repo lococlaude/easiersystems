@@ -979,23 +979,40 @@
               </div>
             </div>
 
-            <div class="after-result" id="afterResult">
-              That is real money leaving your business every year through a hole you can plug in 7 days. <strong>DM the word AGENT on Instagram</strong> or click below to see your AI Receptionist in action — free, no obligation, 10 minutes.
-            </div>
-
             <div class="scarcity-note">
               This guarantee — 5 booked appointments in 30 days or we work free — is only available to the next 3 businesses we onboard this month.
             </div>
 
-            <div class="cta-block">
-              <h3>Plug The Leak In 7 Days</h3>
-              <p>An AI Receptionist that answers every call, 24/7. Qualifies the lead. Books the appointment. Costs less than a part-time hire. Installed in 7 days.</p>
-              <div class="cta-buttons">
-                <a href="/book.html" class="btn-primary">Book a Free 10-Min Demo →</a>
-                <a href="https://www.instagram.com/easiersystems" target="_blank" class="btn-secondary">DM "AGENT" on Instagram</a>
+            <div class="audio-demo" style="margin-bottom: 28px;">
+              <span class="audio-label">Hear exactly what your customers will hear — every call, every time, 24/7.</span>
+              <div class="audio-player-wrap">
+                <button class="audio-play-btn" id="playBtn" onclick="toggleAudio()">
+                  <svg viewBox="0 0 16 16" fill="var(--black)" xmlns="http://www.w3.org/2000/svg" id="playIcon">
+                    <path d="M3 2.5l11 5.5-11 5.5V2.5z"/>
+                  </svg>
+                </button>
+                <div class="audio-progress-wrap">
+                  <div class="audio-title">AI Receptionist — After Hours Call Demo</div>
+                  <div class="audio-bar-track" id="audioTrack" onclick="seekAudio(event)">
+                    <div class="audio-bar-fill" id="audioFill"></div>
+                  </div>
+                  <div class="audio-time" id="audioTime">0:00 / 0:00</div>
+                </div>
               </div>
-              <div class="guarantee-line">5 booked appointments in 30 days or we work free. No contracts.</div>
+              <audio id="demoAudio" src="" preload="metadata"></audio>
             </div>
+
+            <p style="font-size:0.95rem;color:#ccc;text-align:center;margin-bottom:20px;line-height:1.7;">That is your AI Receptionist. Live in 7 days. Guaranteed to book 5 appointments in your first 30 days or we work free.</p>
+
+            <p style="font-size:0.82rem;color:#666;text-align:center;margin-bottom:24px;">This offer is only available to the next 3 businesses we onboard this month.</p>
+
+            <div style="text-align:center;margin-bottom:24px;">
+              <a href="https://www.easiersystems.com/book.html" class="btn-large">Book Your Free 10-Min Demo →</a>
+            </div>
+
+            <p style="font-size:0.8rem;color:#666;text-align:center;margin-bottom:8px;">We set up in 7 days. Your first call is answered by AI before the end of next week.</p>
+
+            <p style="font-size:0.8rem;color:#666;text-align:center;">5 booked appointments in 30 days or we work free. No contracts.</p>
 
           </div><!-- /results -->
 
@@ -1096,34 +1113,6 @@
     <div class="container">
       <h2>Stop The Bleed.<br />Start This Week.</h2>
       <p>You ran your numbers. You know what it is costing you. There is only one question left: are you going to fix it or keep paying for it?</p>
-      <div class="audio-demo" style="max-width:540px;margin:0 auto 28px;">
-        <span class="audio-label">Hear It In Action — Real AI Receptionist Call</span>
-        <div class="audio-player-wrap">
-          <button class="audio-play-btn" id="playBtn" onclick="toggleAudio()">
-            <svg viewBox="0 0 16 16" fill="var(--black)" xmlns="http://www.w3.org/2000/svg" id="playIcon">
-              <path d="M3 2.5l11 5.5-11 5.5V2.5z"/>
-            </svg>
-          </button>
-          <div class="audio-progress-wrap">
-            <div class="audio-title">AI Receptionist — After Hours Call Demo</div>
-            <div class="audio-bar-track" id="audioTrack" onclick="seekAudio(event)">
-              <div class="audio-bar-fill" id="audioFill"></div>
-            </div>
-            <div class="audio-time" id="audioTime">0:00 / 0:00</div>
-          </div>
-        </div>
-        <!-- REPLACE WITH: path to AI receptionist demo call recording -->
-        <audio id="demoAudio" src="" preload="metadata"></audio>
-        <p class="audio-sub">This is what your customers hear when they call after hours.</p>
-      </div>
-
-      <a href="/book.html" class="btn-large">Book Your Free 10-Min Demo</a>
-      <p style="font-size:0.8rem;color:#666;margin-top:12px;text-align:center;">We set up in 7 days. Your first call is answered by AI before the end of next week.</p>
-      <br />
-      <div class="guarantee-badge">
-        <span class="dot">●</span>
-        5 booked appointments in 30 days — or we work free until you have them
-      </div>
     </div>
   </section>
 
