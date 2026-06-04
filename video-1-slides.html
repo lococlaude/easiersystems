@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Easier Systems — Video 1 Slides</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black:  #000000;
+    --card:   #0d0d0d;
+    --yellow: #FFD600;
+    --white:  #FFFFFF;
+    --gray:   #888888;
+    --border: #1a1a1a;
+    --red:    #FF3B3B;
+    --green:  #00D084;
+    --hd: 'Bebas Neue', Impact, sans-serif;
+    --bd: 'DM Sans', system-ui, sans-serif;
+  }
+  html, body { background:#111; height:100%; overflow:hidden; font-family:var(--bd); }
+  .deck { width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; }
+  .stage { width:1920px; height:1080px; transform-origin:center center; position:relative; }
+  .slide { display:none; width:1920px; height:1080px; background:var(--black); position:relative; overflow:hidden; flex-direction:column; }
+  .slide.active { display:flex; }
+  .slide::before {
+    content:''; position:absolute; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity:0.3; pointer-events:none; z-index:0;
+  }
+  .top-bar { position:absolute; top:0; left:0; right:0; height:6px; background:var(--yellow); z-index:10; }
+  .bot { position:absolute; bottom:0; left:0; right:0; height:64px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; padding:0 64px; z-index:10; }
+  .bot .brand { font-family:var(--hd); font-size:22px; letter-spacing:.08em; color:var(--yellow); }
+  .bot .url   { font-family:var(--bd); font-size:18px; color:var(--gray); }
+  .bot .num   { font-family:var(--bd); font-size:18px; color:var(--gray); }
+  .content { position:absolute; top:6px; bottom:64px; left:0; right:0; display:flex; flex-direction:column; justify-content:center; padding:80px 120px; z-index:1; }
+  .content.center { align-items:center; text-align:center; }
+  .label { font-family:var(--hd); font-size:28px; letter-spacing:.12em; color:var(--yellow); margin-bottom:24px; opacity:.8; }
+  .hd { font-family:var(--hd); line-height:1; letter-spacing:.02em; }
+  .rule { height:4px; background:var(--yellow); margin:32px 0; flex-shrink:0; }
+  .body { font-family:var(--bd); font-size:36px; font-weight:400; line-height:1.55; color:var(--white); }
+  .body b { color:var(--yellow); font-weight:700; }
+  .cols { display:grid; grid-template-columns:1fr 1px 1fr; gap:0 80px; align-items:start; width:100%; }
+  .col-div { background:var(--border); align-self:stretch; }
+  .col { padding:0 40px; }
+  .col-lbl { font-family:var(--hd); font-size:32px; letter-spacing:.1em; margin-bottom:28px; }
+  .col-item { font-family:var(--bd); font-size:34px; line-height:1.5; color:var(--white); padding:20px 0; border-bottom:1px solid var(--border); }
+  .col-item:last-child { border-bottom:none; }
+  .num-list { list-style:none; width:100%; }
+  .num-item { display:flex; align-items:flex-start; gap:48px; padding:28px 0; border-bottom:1px solid var(--border); }
+  .num-item:last-child { border-bottom:none; }
+  .num-n { font-family:var(--hd); font-size:72px; color:var(--yellow); line-height:1; min-width:80px; }
+  .num-t { font-family:var(--bd); font-size:36px; color:var(--white); line-height:1.4; padding-top:8px; }
+  .math-block { width:100%; background:var(--card); border:1px solid var(--border); border-left:4px solid var(--yellow); padding:48px 64px; display:flex; flex-direction:column; gap:12px; }
+  .math-line { font-family:var(--bd); font-size:32px; color:var(--white); display:flex; align-items:center; gap:24px; }
+  .math-line .op  { color:var(--gray); min-width:32px; }
+  .math-line .val { color:var(--yellow); font-weight:700; }
+  .math-line.total { border-top:1px solid var(--border); padding-top:16px; margin-top:8px; }
+  .rec-box { border:3px dashed var(--yellow); padding:80px 120px; display:flex; flex-direction:column; align-items:center; gap:32px; opacity:.75; }
+  .nav { position:fixed; bottom:24px; right:32px; display:flex; gap:12px; z-index:100; }
+  .nav button { background:var(--yellow); color:var(--black); border:none; font-family:var(--hd); font-size:18px; letter-spacing:.08em; padding:10px 28px; cursor:pointer; }
+  .counter { position:fixed; bottom:30px; left:32px; font-family:var(--bd); font-size:14px; color:var(--gray); z-index:100; }
+  .tip { position:fixed; top:16px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,.85); border:1px solid var(--border); color:var(--gray); font-family:var(--bd); font-size:13px; padding:8px 20px; z-index:100; white-space:nowrap; }
+</style>
+</head>
+<body>
+<div class="deck">
+ <div class="stage" id="stage">
+
+  <!-- SLIDE 1 — TITLE -->
+  <div class="slide active">
+   <div class="top-bar"></div>
+   <div class="content center">
+    <div class="label">EASIER SYSTEMS</div>
+    <div class="hd" style="font-size:96px;color:var(--white);line-height:1.05;max-width:1400px;">
+     ONE MISSED CALL COSTS<br>PLUMBERS <span style="color:var(--yellow);">$350</span><br>TEN TIMES A WEEK
+    </div>
+    <div class="rule" style="width:120px;margin:36px auto;"></div>
+    <div class="body" style="font-size:28px;color:var(--gray);">The missed call revenue leak — how much it costs and why it keeps happening</div>
+   </div>
+   <div class="bot"><span class="brand">EASIER SYSTEMS</span><span class="url">easiersystems.com</span><span class="num">01 / 09</span></div>
+  </div>
+
+  <!-- SLIDE 2 — BINARY FRAME -->
+  <div class="slide">
+   <div class="top-bar"></div>
+   <div class="content">
+    <div class="hd" style="font-size:56px;color:var(--white);margin-bottom:4px;">YOUR BUSINESS IS IN</div>
+    <div class="hd" style="font-size:100px;color:var(--yellow);margin-bottom:40px;">ONE OF TWO PLACES</div>
+    <div class="rule full" style="width:100%;"></div>
+    <div class="cols" style="margin-top:40px;">
+     <div class="col">
+      <div class="col-lbl" style="color:var(--red);">RIGHT NOW</div>
+      <div class="col-item">Missing calls during every job</div>
+      <div class="col-item">Calling back hours later — lead already booked someone else</div>
+      <div class="col-item"><b>$1,400 a week</b> walking out the door silently</div>
+     </div>
+     <div class="col-div"></div>
+     <div class="col">
+      <div class="col-lbl" style="color:var(--green);">WHERE YOU WANT TO BE</div>
+      <div class="col-item">Every missed call gets a text back in <b>90 seconds</b></div>
+      <div class="col-item">Leads book appointments while you're still on the job</div>
+      <div class="col-item">Calendar fills without touching your phone</div>
+     </div>
+    </div>
+   </div>
+   <div class="bot"><span class="brand">EASIER SYSTEMS</span><span class="url">easiersystems.com</span><span class="num">02 / 09</span></div>
+  </div>
+
+  <!-- SLIDE 3 — PROMISE & NUMBER -->
+  <div class="slide">
+   <div class="top-bar"></div>
+   <div class="content">
+    <div class="label">IN THIS VIDEO</div>
+    <div class="hd" style="font-size:80px;color:var(--white);margin-bottom:48px;">
+     3 GAPS COSTING YOU <span style="color:var(--yellow);">$70,000</span>/YEAR
+    </div>
+    <ul class="num-list">
+     <li class="num-item"><span class="num-n">1</span><span class="num-t">The Silent Drain — why missed calls cost more than you think</span></li>
+     <li class="num-item"><span class="num-n">2</span><span class="num-t">The 128-Hour Gap — the window your leads are shopping in</span></li>
+     <li class="num-item"><span class="num-n">3</span><span class="num-t">The 90-Second Fix — what closes the leak automatically</span></li>
+    </ul>
+   </div>
+   <div class="bot"><span class="brand">EASIER SYSTEMS</span><span class="url">easiersystems.com</span><span class="num">03 / 09</span></div>
+  </div>
+
+  <!-- SLIDE 4 — THE SILENT DRAIN -->
+  <div class="slide">
+   <div class="top-bar"></div>
+   <div class="content">
+    <div class="label">POINT 01</div>
+    <div class="hd" style="font-size:130px;color:var(--yellow);margin-bottom:16px;">THE SILENT DRAIN</div>
+    <div class="rule" style="width:120px;"></div>
+    <div class="math-block" style="margin-top:28px;">
+     <div class="math-line"><span class="op"></span><span>10 missed calls a week</span></div>
+     <div class="math-line"><span class="op">×</span><span>$350 average plumbing job</span></div>
+     <div class="math-line"><span class="op">×</span><span>40% would have booked</span></div>
+     <div class="math-line total"><span class="op">=</span><span class="val">$1,400 / week</span></div>
+     <div class="math-line"><span class="op">×</span><span>50 weeks</span></div>
+     <div class="math-line total"><span class="op">=</span><span class="val" style="font-size:52px;">$70,000 / year gone</span></div>
+    </div>
+   </div>
+   <div class="bot"><span class="brand">EASIER SYSTEMS</span><span class="url">easiersystems.com</span><span class="num">04 / 09</span></div>
+  </div>
+
+  <!-- SLIDE 5 — THE 128-HOUR GAP -->
+  <div class="slide">
+   <div class="top-bar"></div>
+   <div class="content">
+    <div class="label">POINT 02</div>
+    <div class="hd" style="font-size:130px;color:var(--yellow);margin-bottom:16px;">THE 128-HOUR GAP</div>
+    <div class="rule" style="width:120px;"></div>
+    <div style="display:flex;align-items:flex-start;gap:80px;margin-top:32px;">
+     <div>
+      <div class="hd" style="font-size:160px;color:var(--yellow);line-height:1;">128</div>
+      <div class="body" style="font-size:24px;color:var(--gray);margin-top:8px;">avg hours before callback</div>
+     </div>
+     <div style="flex:1;">
+      <div class="body" style="margin-bottom:24px;">Calling back within <b>5 minutes</b> makes you <b>100× more likely</b> to reach the lead.</div>
+      <div class="body">Most plumbers call back the next day.<br>By then the job is already booked — with someone else.</div>
+     </div>
+    </div>
+   </div>
+   <div class="bot"><span class="brand">EASIER SYSTEMS</span><span class="url">easiersystems.com</span><span class="num">05 / 09</span></div>
+  </div>
+
+  <!-- SLIDE 6 — MID-VIDEO CTA -->
+  <div class="slide">
+   <div class="top-bar"></div>
+   <div class="content center">
+    <div class="body" style="color:var(--gray);letter-spacing:.1em;font-size:26px;margin-bottom:16px;">QUICK PAUSE</div>
+    <div class="hd" style="font-size:60px;color:var(--white);margin-bottom:8px;">DM ME THE WORD</div>
+    <div class="hd" style="font-size:220px;color:var(--yellow);line-height:.9;">MATH</div>
+    <div class="hd" style="font-size:48px;color:var(--white);margin-top:8px;margin-bottom:32px;">ON INSTAGRAM</div>
+    <div class="rule" style="width:80px;margin:0 auto 32px;"></div>
+    <div class="body" style="font-size:28px;color:var(--gray);max-width:900px;line-height:1.6;">I'll walk you through the exact numbers for your business.<br>No pitch. No form. Just a real conversation.</div>
+   </div>
+   <div class="bot"><span class="brand">EASIER SYSTEMS</span><span class="url">easiersystems.com</span><span class="num">06 / 09</span></div>
+  </div>
+
+  <!-- SLIDE 7 — SCREEN RECORDING -->
+  <div class="slide">
+   <div class="top-bar"></div>
+   <div class="content center">
+    <div class="label" style="margin-bottom:48px;">POINT 03 — THE 90-SECOND FIX</div>
+    <div class="rec-box">
+     <div class="hd" style="font-size:52px;color:var(--yellow);letter-spacing:.15em;">[ SCREEN RECORDING ]</div>
+     <div class="body" style="font-size:28px;color:var(--gray);text-align:center;line-height:1.8;">
+      Incoming call → missed → automated text fires in 90 seconds<br>→ lead replies → appointment booked on calendar
+     </div>
+    </div>
+    <div class="body" style="font-size:24px;color:var(--gray);margin-top:40px;">Replace this slide with your screen recording in CapCut</div>
+   </div>
+   <div class="bot"><span class="brand">EASIER SYSTEMS</span><span class="url">easiersystems.com</span><span class="num">07 / 09</span></div>
+  </div>
+
+  <!-- SLIDE 8 — THE GUARANTEE -->
+  <div class="slide">
+   <div class="top-bar"></div>
+   <div class="content center">
+    <div class="label" style="margin-bottom:32px;">THE GUARANTEE</div>
+    <div class="hd" style="font-size:108px;color:var(--white);line-height:1.05;">5 NEW APPOINTMENTS</div>
+    <div class="hd" style="font-size:72px;color:var(--white);margin:8px 0;">IN 30 DAYS</div>
+    <div class="rule" style="width:100%;margin:32px 0;"></div>
+    <div class="hd" style="font-size:56px;color:var(--white);margin-bottom:8px;">OR I WORK FREE UNTIL IT HAPPENS</div>
+    <div class="hd" style="font-size:88px;color:var(--yellow);margin-top:24px;">NO ASTERISK.</div>
+   </div>
+   <div class="bot"><span class="brand">EASIER SYSTEMS</span><span class="url">easiersystems.com</span><span class="num">08 / 09</span></div>
+  </div>
+
+  <!-- SLIDE 9 — THE CTA -->
+  <div class="slide">
+   <div class="top-bar"></div>
+   <div class="content center">
+    <div class="body" style="color:var(--gray);letter-spacing:.12em;font-size:26px;margin-bottom:20px;">IF YOU'RE A PLUMBER MISSING CALLS RIGHT NOW</div>
+    <div class="hd" style="font-size:60px;color:var(--white);margin-bottom:8px;">DM ME</div>
+    <div class="hd" style="font-size:220px;color:var(--yellow);line-height:.9;">MATH</div>
+    <div class="hd" style="font-size:44px;color:var(--white);margin-top:8px;">ON INSTAGRAM</div>
+    <div class="rule" style="width:80px;margin:32px auto;"></div>
+    <div class="body" style="font-size:30px;color:var(--white);max-width:1000px;line-height:1.6;margin-bottom:16px;">I'll show you exactly what this looks like for your business before you spend a dollar.</div>
+    <div class="hd" style="font-size:40px;color:var(--yellow);margin-top:16px;">EASIERSYSTEMS.COM</div>
+   </div>
+   <div class="bot"><span class="brand">EASIER SYSTEMS</span><span class="url">easiersystems.com</span><span class="num">09 / 09</span></div>
+  </div>
+
+ </div><!-- /stage -->
+</div>
+
+<div class="counter" id="counter">Slide 1 of 9</div>
+<div class="nav">
+ <button onclick="prev()">← PREV</button>
+ <button onclick="next()">NEXT →</button>
+</div>
+<div class="tip">← → arrow keys to navigate &nbsp;|&nbsp; Video 1: One Missed Call Costs Plumbers $350</div>
+
+<script>
+ const slides = document.querySelectorAll('.slide');
+ const counter = document.getElementById('counter');
+ let cur = 0;
+ function scale() {
+  const s = Math.min(window.innerWidth/1920, window.innerHeight/1080) * 0.95;
+  document.getElementById('stage').style.transform = `scale(${s})`;
+ }
+ function show(n) {
+  slides.forEach(s => s.classList.remove('active'));
+  slides[n].classList.add('active');
+  counter.textContent = `Slide ${n+1} of ${slides.length}`;
+ }
+ function next() { if(cur < slides.length-1){ cur++; show(cur); } }
+ function prev() { if(cur > 0){ cur--; show(cur); } }
+ document.addEventListener('keydown', e => {
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') next();
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') prev();
+ });
+ window.addEventListener('resize', scale);
+ scale();
+</script>
+</body>
+</html>

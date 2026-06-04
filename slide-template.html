@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Easier Systems — Slide Template</title>
+<!-- Fonts load from Google when online; fall back to system fonts offline -->
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" /></noscript>
+<style>
+
+  /* ── RESET ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ── BRAND TOKENS ── */
+  :root {
+    --black:   #000000;
+    --card:    #0d0d0d;
+    --yellow:  #FFD600;
+    --white:   #FFFFFF;
+    --gray:    #888888;
+    --border:  #1a1a1a;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body:    'DM Sans', sans-serif;
+  }
+
+  /* ── PRESENTATION SHELL ── */
+  html, body {
+    background: #111;
+    color: var(--white);
+    font-family: var(--font-body);
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .deck {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* ── SLIDE SCALER ── */
+  /* Native size: 1920×1080. Scaled to fit viewport. */
+  .stage {
+    width: 1920px;
+    height: 1080px;
+    transform-origin: center center;
+    position: relative;
+  }
+
+  /* ── BASE SLIDE ── */
+  .slide {
+    display: none;
+    width: 1920px;
+    height: 1080px;
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+    flex-direction: column;
+  }
+  .slide.active { display: flex; }
+
+  /* Grain overlay — matches website */
+  .slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── TOP BAR ── */
+  .top-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: var(--yellow);
+    z-index: 10;
+  }
+
+  /* ── BOTTOM BAR ── */
+  .bottom-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 64px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 64px;
+    z-index: 10;
+  }
+  .bottom-bar .brand {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 0.08em;
+    color: var(--yellow);
+  }
+  .bottom-bar .url {
+    font-family: var(--font-body);
+    font-size: 18px;
+    color: var(--gray);
+    letter-spacing: 0.04em;
+  }
+  .bottom-bar .slide-num {
+    font-family: var(--font-body);
+    font-size: 18px;
+    color: var(--gray);
+  }
+
+  /* ── CONTENT AREA ── */
+  .content {
+    position: absolute;
+    top: 6px; bottom: 64px;
+    left: 0; right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 120px;
+    z-index: 1;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .label {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 0.12em;
+    color: var(--yellow);
+    margin-bottom: 24px;
+    opacity: 0.8;
+  }
+
+  .headline {
+    font-family: var(--font-display);
+    font-size: 120px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: var(--yellow);
+  }
+  .headline.white { color: var(--white); }
+  .headline.sm    { font-size: 80px; }
+  .headline.lg    { font-size: 160px; }
+  .headline.xl    { font-size: 200px; }
+
+  .rule {
+    width: 120px;
+    height: 4px;
+    background: var(--yellow);
+    margin: 32px 0;
+    flex-shrink: 0;
+  }
+  .rule.full { width: 100%; }
+
+  .body-text {
+    font-family: var(--font-body);
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--white);
+  }
+  .body-text.sm  { font-size: 28px; }
+  .body-text.lg  { font-size: 44px; }
+  .body-text b   { color: var(--yellow); font-weight: 700; }
+
+  .stat {
+    font-family: var(--font-display);
+    font-size: 160px;
+    color: var(--yellow);
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+  .stat.white { color: var(--white); }
+  .stat.red   { color: #FF3B3B; }
+
+  /* ── TWO COLUMN ── */
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0 80px;
+    align-items: start;
+    width: 100%;
+  }
+  .col-divider { background: var(--border); align-self: stretch; }
+  .col { padding: 0 40px; }
+  .col-label {
+    font-family: var(--font-display);
+    font-size: 32px;
+    letter-spacing: 0.1em;
+    margin-bottom: 32px;
+  }
+  .col-label.pain   { color: #FF3B3B; }
+  .col-label.result { color: #00D084; }
+
+  .col-item {
+    font-family: var(--font-body);
+    font-size: 34px;
+    line-height: 1.5;
+    color: var(--white);
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .col-item:last-child { border-bottom: none; }
+
+  /* ── NUMBERED LIST ── */
+  .num-list { list-style: none; width: 100%; }
+  .num-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 48px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .num-item:last-child { border-bottom: none; }
+  .num {
+    font-family: var(--font-display);
+    font-size: 72px;
+    color: var(--yellow);
+    line-height: 1;
+    min-width: 80px;
+  }
+  .num-text {
+    font-family: var(--font-body);
+    font-size: 36px;
+    color: var(--white);
+    line-height: 1.4;
+    padding-top: 8px;
+  }
+
+  /* ── MATH BLOCK ── */
+  .math-block {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--yellow);
+    padding: 48px 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .math-line {
+    font-family: var(--font-body);
+    font-size: 32px;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .math-line .op    { color: var(--gray); min-width: 32px; }
+  .math-line .val   { color: var(--yellow); font-weight: 700; }
+  .math-line.total  { border-top: 1px solid var(--border); padding-top: 16px; margin-top: 8px; }
+  .math-line.total .val { font-size: 48px; }
+
+  /* ── CTA SLIDE (centered) ── */
+  .content.center {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* ── SCREEN RECORDING PLACEHOLDER ── */
+  .recording-box {
+    border: 3px dashed var(--yellow);
+    padding: 80px 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    opacity: 0.7;
+  }
+
+  /* ── GUARANTEE ── */
+  .guarantee-block {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* ── NAV CONTROLS ── */
+  .nav {
+    position: fixed;
+    bottom: 24px;
+    right: 32px;
+    display: flex;
+    gap: 12px;
+    z-index: 100;
+  }
+  .nav button {
+    background: var(--yellow);
+    color: var(--black);
+    border: none;
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    padding: 10px 28px;
+    cursor: pointer;
+  }
+  .nav button:hover { opacity: 0.85; }
+
+  .counter {
+    position: fixed;
+    bottom: 30px;
+    left: 32px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--gray);
+    z-index: 100;
+  }
+
+  /* ── INSTRUCTIONS OVERLAY ── */
+  .instructions {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.85);
+    border: 1px solid var(--border);
+    color: var(--gray);
+    font-family: var(--font-body);
+    font-size: 13px;
+    padding: 8px 20px;
+    z-index: 100;
+    white-space: nowrap;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="deck">
+  <div class="stage" id="stage">
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 1 — TITLE
+    ════════════════════════════════════════ -->
+    <div class="slide active" id="slide-1">
+      <div class="top-bar"></div>
+      <div class="content">
+        <div class="label">EASIER SYSTEMS</div>
+        <div class="headline white" style="font-size:100px; line-height:1.05;">
+          <!-- VIDEO TITLE — paste title here, split across lines with <br> -->
+          ONE MISSED CALL<br>COSTS PLUMBERS $350<br>TEN TIMES A WEEK
+        </div>
+        <div class="rule"></div>
+        <div class="body-text sm" style="color:#888;">
+          <!-- SUBTITLE / TOPIC ONE LINE -->
+          The missed call revenue leak — how much it costs and why it keeps happening
+        </div>
+      </div>
+      <div class="bottom-bar">
+        <div class="brand">EASIER SYSTEMS</div>
+        <div class="url">easiersystems.com</div>
+        <div class="slide-num">01 / 09</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 2 — BINARY FRAME
+    ════════════════════════════════════════ -->
+    <div class="slide" id="slide-2">
+      <div class="top-bar"></div>
+      <div class="content">
+        <div class="headline sm" style="color:var(--white); margin-bottom:12px;">
+          YOUR BUSINESS IS IN
+        </div>
+        <div class="headline" style="margin-bottom:40px;">
+          ONE OF TWO PLACES
+        </div>
+        <div class="rule full"></div>
+        <div class="cols" style="margin-top:40px;">
+          <div class="col">
+            <div class="col-label pain">RIGHT NOW</div>
+            <!-- BUCKET A — pain state, 2–3 bullet points -->
+            <div class="col-item">Missing calls during every job</div>
+            <div class="col-item">Calling back hours later — lead already booked someone else</div>
+            <div class="col-item">$1,400 a week walking out the door silently</div>
+          </div>
+          <div class="col-divider"></div>
+          <div class="col">
+            <div class="col-label result">WHERE YOU WANT TO BE</div>
+            <!-- BUCKET B — result state, 2–3 bullet points -->
+            <div class="col-item">Every missed call gets a text back in 90 seconds</div>
+            <div class="col-item">Leads book appointments while you're still on the job</div>
+            <div class="col-item">Calendar fills without touching your phone</div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-bar">
+        <div class="brand">EASIER SYSTEMS</div>
+        <div class="url">easiersystems.com</div>
+        <div class="slide-num">02 / 09</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 3 — PROMISE & NUMBER
+    ════════════════════════════════════════ -->
+    <div class="slide" id="slide-3">
+      <div class="top-bar"></div>
+      <div class="content">
+        <div class="label">IN THIS VIDEO</div>
+        <div class="headline white" style="font-size:72px; margin-bottom:40px;">
+          <!-- PROMISE HEADLINE — e.g. "3 GAPS COSTING YOU $70,000/YEAR" -->
+          3 GAPS COSTING YOU <span style="color:var(--yellow);">$70,000</span> A YEAR
+        </div>
+        <ul class="num-list">
+          <!-- THREE NUMBERED POINTS — principle names -->
+          <li class="num-item">
+            <span class="num">1</span>
+            <span class="num-text">The Silent Drain — why missed calls cost more than you think</span>
+          </li>
+          <li class="num-item">
+            <span class="num">2</span>
+            <span class="num-text">The 128-Hour Gap — the window your leads are shopping in</span>
+          </li>
+          <li class="num-item">
+            <span class="num">3</span>
+            <span class="num-text">The 90-Second Fix — what closes the leak automatically</span>
+          </li>
+        </ul>
+      </div>
+      <div class="bottom-bar">
+        <div class="brand">EASIER SYSTEMS</div>
+        <div class="url">easiersystems.com</div>
+        <div class="slide-num">03 / 09</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 4 — POINT ONE
+    ════════════════════════════════════════ -->
+    <div class="slide" id="slide-4">
+      <div class="top-bar"></div>
+      <div class="content">
+        <div class="label">POINT 01</div>
+        <!-- PRINCIPLE NAME -->
+        <div class="headline" style="font-size:140px; margin-bottom:16px;">THE SILENT DRAIN</div>
+        <div class="rule"></div>
+        <div class="math-block" style="margin-top:32px;">
+          <div class="math-line"><span class="op"></span><span>10 missed calls a week</span></div>
+          <div class="math-line"><span class="op">×</span><span>$350 average plumbing job</span></div>
+          <div class="math-line"><span class="op">×</span><span>40% would have booked</span></div>
+          <div class="math-line total"><span class="op">=</span><span class="val">$1,400 / week</span></div>
+          <div class="math-line"><span class="op">×</span><span>50 weeks</span></div>
+          <div class="math-line total"><span class="op">=</span><span class="val" style="font-size:56px;">$70,000 / year</span></div>
+        </div>
+      </div>
+      <div class="bottom-bar">
+        <div class="brand">EASIER SYSTEMS</div>
+        <div class="url">easiersystems.com</div>
+        <div class="slide-num">04 / 09</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 5 — POINT TWO
+    ════════════════════════════════════════ -->
+    <div class="slide" id="slide-5">
+      <div class="top-bar"></div>
+      <div class="content">
+        <div class="label">POINT 02</div>
+        <!-- PRINCIPLE NAME -->
+        <div class="headline" style="font-size:140px; margin-bottom:16px;">THE 128-HOUR GAP</div>
+        <div class="rule"></div>
+        <div style="margin-top:32px; display:flex; align-items:flex-start; gap:80px;">
+          <div>
+            <!-- KEY STAT — large -->
+            <div class="stat" style="font-size:180px; line-height:1;">128</div>
+            <div class="body-text sm" style="color:var(--gray); margin-top:8px;">average hours before callback</div>
+          </div>
+          <div style="flex:1;">
+            <!-- MECHANISM / EXPLANATION -->
+            <div class="body-text" style="margin-bottom:24px;">
+              The average solo plumber waits <b>3+ days</b> to return a missed call.
+            </div>
+            <div class="body-text">
+              In that window, the lead has already <b>called 3 other plumbers</b> and booked one of them.
+            </div>
+            <div class="body-text" style="margin-top:24px;">
+              Calling back within <b>5 minutes</b> makes you <b>100× more likely</b> to reach the lead.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-bar">
+        <div class="brand">EASIER SYSTEMS</div>
+        <div class="url">easiersystems.com</div>
+        <div class="slide-num">05 / 09</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 6 — MID-VIDEO CTA
+    ════════════════════════════════════════ -->
+    <div class="slide" id="slide-6">
+      <div class="top-bar"></div>
+      <div class="content center">
+        <div class="body-text" style="color:var(--gray); margin-bottom:16px; letter-spacing:0.1em; font-size:28px;">
+          QUICK PAUSE
+        </div>
+        <div class="headline white" style="font-size:64px; margin-bottom:8px;">DM ME THE WORD</div>
+        <!-- TRIGGER WORD — change per video -->
+        <div class="stat" style="font-size:220px; line-height:0.9;">MATH</div>
+        <div class="headline white" style="font-size:48px; margin-top:8px; margin-bottom:32px;">ON INSTAGRAM</div>
+        <div class="rule" style="width:80px; margin:0 auto 32px;"></div>
+        <div class="body-text sm" style="color:var(--gray); max-width:900px; text-align:center; line-height:1.6;">
+          I'll walk you through the exact numbers for your business personally.<br>No pitch. No form. Just a real conversation.
+        </div>
+      </div>
+      <div class="bottom-bar">
+        <div class="brand">EASIER SYSTEMS</div>
+        <div class="url">easiersystems.com</div>
+        <div class="slide-num">06 / 09</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 7 — SCREEN RECORDING
+    ════════════════════════════════════════ -->
+    <div class="slide" id="slide-7">
+      <div class="top-bar"></div>
+      <div class="content center">
+        <div class="label" style="margin-bottom:48px;">POINT 03 — THE 90-SECOND FIX</div>
+        <div class="recording-box">
+          <div class="headline white" style="font-size:56px; letter-spacing:0.15em;">[ SCREEN RECORDING ]</div>
+          <div class="body-text sm" style="color:var(--gray); text-align:center; line-height:1.8;">
+            Show: Incoming call → missed → automated text fires in 90 seconds<br>
+            → lead replies → appointment booked on calendar
+          </div>
+        </div>
+        <div class="body-text sm" style="color:var(--gray); margin-top:40px; text-align:center;">
+          Replace this slide with your screen recording in CapCut
+        </div>
+      </div>
+      <div class="bottom-bar">
+        <div class="brand">EASIER SYSTEMS</div>
+        <div class="url">easiersystems.com</div>
+        <div class="slide-num">07 / 09</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 8 — THE GUARANTEE
+    ════════════════════════════════════════ -->
+    <div class="slide" id="slide-8">
+      <div class="top-bar"></div>
+      <div class="content center">
+        <div class="label" style="margin-bottom:32px;">THE GUARANTEE</div>
+        <div class="guarantee-block">
+          <div class="headline" style="font-size:110px; color:var(--white); line-height:1.05;">
+            5 NEW APPOINTMENTS
+          </div>
+          <div class="headline white" style="font-size:72px; margin:8px 0;">
+            IN 30 DAYS
+          </div>
+          <div class="rule full" style="margin:32px 0;"></div>
+          <div class="headline white" style="font-size:60px; margin-bottom:8px;">
+            OR I WORK FREE UNTIL IT HAPPENS
+          </div>
+          <div class="headline" style="font-size:80px; margin-top:24px;">
+            NO ASTERISK.
+          </div>
+        </div>
+      </div>
+      <div class="bottom-bar">
+        <div class="brand">EASIER SYSTEMS</div>
+        <div class="url">easiersystems.com</div>
+        <div class="slide-num">08 / 09</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SLIDE 9 — THE CTA CLOSE
+    ════════════════════════════════════════ -->
+    <div class="slide" id="slide-9">
+      <div class="top-bar"></div>
+      <div class="content center">
+        <div class="body-text" style="color:var(--gray); letter-spacing:0.12em; font-size:28px; margin-bottom:24px;">
+          IF YOU'RE A PLUMBER MISSING CALLS RIGHT NOW
+        </div>
+        <div class="headline white" style="font-size:60px; margin-bottom:8px;">DM ME</div>
+        <!-- TRIGGER WORD -->
+        <div class="stat" style="font-size:220px; line-height:0.9;">MATH</div>
+        <div class="headline white" style="font-size:44px; margin-top:8px;">ON INSTAGRAM</div>
+        <div class="rule" style="width:80px; margin:32px auto;"></div>
+        <div class="body-text sm" style="color:var(--white); max-width:1000px; text-align:center; line-height:1.6; margin-bottom:16px;">
+          I'll show you exactly what this looks like for your business before you spend a dollar.
+        </div>
+        <div class="headline" style="font-size:40px; margin-top:16px;">EASIERSYSTEMS.COM</div>
+      </div>
+      <div class="bottom-bar">
+        <div class="brand">EASIER SYSTEMS</div>
+        <div class="url">easiersystems.com</div>
+        <div class="slide-num">09 / 09</div>
+      </div>
+    </div>
+
+  </div><!-- /stage -->
+</div><!-- /deck -->
+
+<!-- ── CONTROLS ── -->
+<div class="counter" id="counter">Slide 1 of 9</div>
+<div class="nav">
+  <button onclick="prev()">← PREV</button>
+  <button onclick="next()">NEXT →</button>
+</div>
+<div class="instructions">← → arrow keys to navigate &nbsp;|&nbsp; This template is for Video 1. Generate a video-specific file for each video.</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  let current = 0;
+
+  function scale() {
+    const stage = document.getElementById('stage');
+    const scaleX = window.innerWidth / 1920;
+    const scaleY = window.innerHeight / 1080;
+    const s = Math.min(scaleX, scaleY) * 0.95;
+    stage.style.transform = `scale(${s})`;
+  }
+
+  function show(n) {
+    slides.forEach(s => s.classList.remove('active'));
+    slides[n].classList.add('active');
+    counter.textContent = `Slide ${n + 1} of ${slides.length}`;
+  }
+
+  function next() { if (current < slides.length - 1) { current++; show(current); } }
+  function prev() { if (current > 0) { current--; show(current); } }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prev();
+  });
+
+  window.addEventListener('resize', scale);
+  scale();
+</script>
+</body>
+</html>

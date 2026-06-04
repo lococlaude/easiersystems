@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Missed Call Calculator — Find Out How Much Revenue You Lost This Year</title>
+
+  <link rel="icon" type="image/png" href="/easier_systems_logo_transparent.png" />
+
+  <!-- No index — private page -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #000000;
+      --yellow: #FFD600;
+      --white: #FFFFFF;
+      --gray: #888888;
+      --card-bg: #0d0d0d;
+      --border: #1a1a1a;
+      --red: #FF3B30;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    h1, h2, h3, .display { font-family: 'Bebas Neue', sans-serif; line-height: 1.05; letter-spacing: 0.03em; }
+    h1 { font-size: clamp(2.5rem, 7vw, 5rem); }
+    h2 { font-size: clamp(1.8rem, 4.5vw, 3.2rem); }
+    h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    section { position: relative; z-index: 1; }
+
+    /* ===================== NAV ===================== */
+    nav {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 10;
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img { height: 32px; width: auto; }
+
+    .logo-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--yellow);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      padding: 72px 0 56px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+
+    .hero h1 span { color: var(--yellow); }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: #aaa;
+      max-width: 580px;
+      margin: 0 auto 16px;
+      line-height: 1.65;
+    }
+
+    .hero-stat {
+      display: inline-block;
+      background: #111;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 20px;
+      font-size: 0.85rem;
+      color: #777;
+      margin-top: 12px;
+    }
+
+    .hero-stat strong { color: var(--yellow); }
+
+    /* ===================== PRE-CALC STATEMENT ===================== */
+    .pre-calc {
+      background: #0d0d0d;
+      border: 1px solid #222;
+      border-left: 3px solid var(--yellow);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin: 0 0 40px;
+      font-size: 0.95rem;
+      color: #bbb;
+      line-height: 1.7;
+    }
+
+    .pre-calc strong { color: var(--white); }
+
+    /* ===================== CALCULATOR ===================== */
+    .calc-section { padding: 0 0 64px; }
+
+    .calc-card {
+      background: #0a0a0a;
+      border: 1px solid #222;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .calc-header {
+      background: var(--yellow);
+      padding: 20px 32px;
+    }
+
+    .calc-header h2 {
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      color: var(--black);
+      margin-bottom: 4px;
+    }
+
+    .calc-header p {
+      font-size: 0.85rem;
+      color: #333;
+    }
+
+    .calc-body { padding: 32px; }
+
+    .input-group {
+      margin-bottom: 28px;
+    }
+
+    .input-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 8px;
+    }
+
+    .input-label-main {
+      display: block;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .input-prompt {
+      font-size: 0.82rem;
+      color: #666;
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+
+    .input-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .input-row input[type="range"] {
+      flex: 1;
+      -webkit-appearance: none;
+      height: 4px;
+      background: #222;
+      border-radius: 4px;
+      outline: none;
+    }
+
+    .input-row input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--yellow);
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(255,214,0,0.4);
+    }
+
+    .input-number {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      width: 90px;
+      padding: 8px 12px;
+      text-align: center;
+    }
+
+    .input-number:focus { outline: none; border-color: var(--yellow); }
+
+    .fixed-badge {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 0.82rem;
+      color: var(--yellow);
+    }
+
+    .divider {
+      height: 1px;
+      background: #1a1a1a;
+      margin: 32px 0;
+    }
+
+    /* ===================== DURING MESSAGE ===================== */
+    .during-msg {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      font-size: 0.88rem;
+      color: #aaa;
+      text-align: center;
+    }
+
+    .during-msg strong { color: var(--yellow); }
+
+    /* ===================== RESULTS ===================== */
+    .results { display: none; }
+    .results.visible { display: block; }
+
+    .result-headline {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .result-headline p {
+      font-size: 0.85rem;
+      color: #666;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .result-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 10vw, 6rem);
+      color: var(--red);
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+
+    .result-label {
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: 6px;
+    }
+
+    .result-statement {
+      background: #0d0d0d;
+      border: 1px solid #222;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      font-size: 1rem;
+      color: #ccc;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .result-statement strong { color: var(--white); font-size: 1.05rem; }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 560px) {
+      .results-grid { grid-template-columns: 1fr; }
+    }
+
+    .result-tile {
+      background: #0d0d0d;
+      border: 1px solid #1e1e1e;
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .result-tile .tile-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #555;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .result-tile .tile-amount {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.03em;
+    }
+
+    .result-tile.danger .tile-amount { color: var(--red); }
+    .result-tile.warn .tile-amount { color: #FF9500; }
+    .result-tile.severe .tile-amount { color: #FF3B30; }
+
+    .result-breakdown {
+      background: #080808;
+      border: 1px solid #1a1a1a;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+    }
+
+    .result-breakdown h3 {
+      font-size: 0.8rem;
+      color: #555;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #111;
+      font-size: 0.9rem;
+    }
+
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-row .bl { color: #777; }
+    .breakdown-row .br { color: var(--white); font-weight: 600; font-size: 1rem; }
+
+    .after-result {
+      background: #050505;
+      border: 1px solid #222;
+      border-left: 3px solid var(--red);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      font-size: 0.95rem;
+      color: #aaa;
+      line-height: 1.7;
+    }
+
+    .after-result strong { color: var(--white); }
+
+    /* ===================== CTA ===================== */
+    .cta-block {
+      background: var(--yellow);
+      border-radius: 10px;
+      padding: 32px;
+      text-align: center;
+      margin-bottom: 0;
+    }
+
+    .cta-block h3 {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+
+    .cta-block p {
+      font-size: 0.92rem;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--black);
+      color: var(--yellow);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      padding: 14px 28px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 14px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: 2px solid var(--black);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-secondary:hover { background: rgba(0,0,0,0.08); }
+
+    .guarantee-line {
+      font-size: 0.78rem;
+      color: #444;
+      margin-top: 12px;
+    }
+
+    /* ===================== REPORT SECTIONS ===================== */
+    .report { padding: 0 0 80px; }
+
+    .report-section {
+      margin-bottom: 48px;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 10px;
+    }
+
+    .report-section h2 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      margin-bottom: 16px;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .stat-box {
+      background: #0d0d0d;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .stat-box .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: var(--yellow);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-box .stat-desc {
+      font-size: 0.83rem;
+      color: #888;
+      line-height: 1.5;
+    }
+
+    .body-text {
+      font-size: 0.95rem;
+      color: #aaa;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    .body-text strong { color: var(--white); }
+
+    .option-card {
+      background: #0a0a0a;
+      border: 1px solid #1e1e1e;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 12px;
+    }
+
+    .option-card h3 {
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+    }
+
+    .option-card .option-cost {
+      font-size: 0.8rem;
+      color: var(--yellow);
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .option-card p {
+      font-size: 0.85rem;
+      color: #777;
+      line-height: 1.6;
+    }
+
+    .option-card.bad { border-color: #2a1a1a; }
+    .option-card.bad .option-cost { color: var(--red); }
+
+    /* ===================== FINAL CTA ===================== */
+    .final-cta {
+      padding: 64px 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .final-cta h2 { margin-bottom: 12px; }
+
+    .final-cta p {
+      font-size: 0.95rem;
+      color: #888;
+      max-width: 500px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+
+    .btn-large {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--black);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      padding: 18px 40px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-large:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255,214,0,0.25);
+    }
+
+    .guarantee-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      font-size: 0.82rem;
+      color: #666;
+      padding: 8px 16px;
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      border-radius: 20px;
+    }
+
+    .guarantee-badge .dot { color: var(--yellow); font-size: 1.2rem; }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.78rem;
+      color: #444;
+    }
+
+    footer a { color: #666; text-decoration: none; }
+    footer a:hover { color: var(--yellow); }
+
+    /* ===================== ANIMATE ===================== */
+    @keyframes pulse-red {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .pulsing { animation: pulse-red 2s ease-in-out infinite; }
+
+    @keyframes count-up {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .count-in { animation: count-up 0.5s ease-out forwards; }
+
+    /* ===================== EMAIL GATE ===================== */
+    .email-gate {
+      display: none;
+      background: #0a0a0a;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      padding: 32px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .email-gate.visible { display: block; }
+
+    .email-gate h3 {
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .email-gate p {
+      font-size: 0.88rem;
+      color: #777;
+      margin-bottom: 24px;
+    }
+
+    .gate-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 360px;
+      margin: 0 auto 16px;
+    }
+
+    .gate-input {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      padding: 12px 16px;
+      width: 100%;
+    }
+
+    .gate-input::placeholder { color: #555; }
+    .gate-input:focus { outline: none; border-color: var(--yellow); }
+
+    .gate-submit {
+      background: var(--yellow);
+      color: var(--black);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      padding: 14px 28px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      transition: opacity 0.15s;
+    }
+
+    .gate-submit:hover { opacity: 0.9; }
+
+    .gate-privacy {
+      font-size: 0.75rem;
+      color: #444;
+      margin-top: 10px;
+    }
+
+    /* ===================== SCARCITY NOTE ===================== */
+    .scarcity-note {
+      background: #0a0a00;
+      border: 1px solid #2a2200;
+      border-left: 3px solid var(--yellow);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 20px;
+      margin-bottom: 28px;
+      font-size: 0.85rem;
+      color: #999;
+      line-height: 1.6;
+    }
+
+    /* ===================== AUDIO PLAYER ===================== */
+    .audio-demo {
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .audio-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .audio-player-wrap {
+      background: #0d0d0d;
+      border: 1px solid #222;
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .audio-play-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--yellow);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: opacity 0.15s;
+    }
+
+    .audio-play-btn:hover { opacity: 0.85; }
+
+    .audio-play-btn svg { width: 16px; height: 16px; margin-left: 2px; }
+
+    .audio-progress-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .audio-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .audio-bar-track {
+      width: 100%;
+      height: 3px;
+      background: #2a2a2a;
+      border-radius: 3px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .audio-bar-fill {
+      height: 100%;
+      background: var(--yellow);
+      border-radius: 3px;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    .audio-time {
+      font-size: 0.72rem;
+      color: #555;
+    }
+
+    .audio-sub {
+      font-size: 0.8rem;
+      color: #555;
+      margin-top: 8px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="container">
+      <a href="/" class="logo">
+        <img src="/easier_systems_logo_transparent.png" alt="Easier Systems" onerror="this.style.display='none'" />
+        EASIER SYSTEMS
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow">Free Tool — Takes 60 Seconds</span>
+      <h1>The Missed Call<br /><span>Calculator</span></h1>
+      <p class="hero-sub">Find out exactly how much revenue you lost this year from missed calls. Your numbers. Your math. No guessing.</p>
+      <div class="hero-stat">
+        <strong>62%</strong> of callers who don't reach you on the first try never call back.
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section class="calc-section">
+    <div class="container">
+
+      <div class="pre-calc">
+        Before you fill this in — most HVAC and plumbing owners who run these numbers find out they are losing between <strong>$80,000 and $140,000 a year</strong> in missed calls alone. Run your numbers below. Then decide what you want to do about it.
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-header">
+          <h2>Run Your Numbers</h2>
+          <p>Input A, B, and C below — the calculator does the rest.</p>
+        </div>
+
+        <div class="calc-body">
+
+          <!-- INPUT A -->
+          <div class="input-group">
+            <span class="input-label">Input A</span>
+            <span class="input-label-main">How many calls do you miss per week?</span>
+            <p class="input-prompt">Be honest. Include after hours, lunch, and when you're on a job.</p>
+            <div class="input-row">
+              <input type="range" id="missedCallsSlider" min="1" max="30" value="5" oninput="syncInput('missedCalls', this.value)" />
+              <input type="number" id="missedCalls" class="input-number" value="5" min="1" max="999" oninput="syncSlider('missedCalls', this.value)" />
+            </div>
+          </div>
+
+          <!-- INPUT B -->
+          <div class="input-group">
+            <span class="input-label">Input B</span>
+            <span class="input-label-main">What is your average job value?</span>
+            <p class="input-prompt">Think about what the average customer spends with you. HVAC average: $800. Plumbing average: $600.</p>
+            <div class="input-row">
+              <input type="range" id="jobValueSlider" min="100" max="5000" step="50" value="800" oninput="syncInput('jobValue', this.value)" />
+              <div style="display:flex;align-items:center;gap:4px;">
+                <span style="color:#666;font-size:1rem;">$</span>
+                <input type="number" id="jobValue" class="input-number" value="800" min="1" max="99999" oninput="syncSlider('jobValue', this.value)" />
+              </div>
+            </div>
+          </div>
+
+          <!-- INPUT C -->
+          <div class="input-group">
+            <span class="input-label">Input C</span>
+            <span class="input-label-main">What % of callers book with a competitor if you don't answer?</span>
+            <p class="input-prompt">Industry data: 62% of callers never call back. Pre-filled based on real research.</p>
+            <div class="input-row">
+              <span class="fixed-badge">62% — Industry Average (Pre-Filled)</span>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- DURING MESSAGE -->
+          <div class="during-msg">
+            You are about to see your number. <strong>Whatever it is — it is fixable.</strong> And we can fix it in 7 days.
+          </div>
+
+          <!-- CALCULATE BUTTON -->
+          <div id="calcButtonWrap" style="text-align:center;margin-bottom:24px;">
+            <button onclick="showGate()" class="btn-large" style="font-size:1.1rem;padding:16px 36px;">
+              Calculate My Loss →
+            </button>
+          </div>
+
+          <!-- EMAIL GATE -->
+          <div class="email-gate" id="emailGate">
+            <h3>Your number is ready.</h3>
+            <p>Enter your details below to see exactly how much you're losing.</p>
+            <div class="gate-fields">
+              <input type="text" id="gateName" class="gate-input" placeholder="First name" autocomplete="given-name" />
+              <input type="email" id="gateEmail" class="gate-input" placeholder="Work email" autocomplete="email" />
+              <button class="gate-submit" onclick="submitGate()">Show Me My Number →</button>
+            </div>
+            <p class="gate-privacy">Private. We don't spam. Ever.</p>
+          </div>
+
+          <!-- RESULTS -->
+          <div class="results" id="results">
+
+            <div class="result-headline">
+              <p>Your Annual Revenue Bleed</p>
+              <div class="result-number pulsing" id="annualLoss">$0</div>
+              <div class="result-label">leaving your business every year through missed calls</div>
+            </div>
+
+            <div class="result-statement" id="resultStatement">
+              Based on your numbers, you are leaving <strong id="stmtAnnual">$0</strong> on the table every year. That is not a guess. <strong>That is your math.</strong>
+            </div>
+
+            <div class="results-grid">
+              <div class="result-tile danger">
+                <div class="tile-label">Per Week</div>
+                <div class="tile-amount" id="weeklyLoss">$0</div>
+              </div>
+              <div class="result-tile warn">
+                <div class="tile-label">Per Month</div>
+                <div class="tile-amount" id="monthlyLoss">$0</div>
+              </div>
+              <div class="result-tile severe">
+                <div class="tile-label">Per Year</div>
+                <div class="tile-amount" id="yearlyLoss2">$0</div>
+              </div>
+            </div>
+
+            <div class="result-breakdown">
+              <h3>Your Breakdown</h3>
+              <div class="breakdown-row">
+                <span class="bl">Missed calls per week</span>
+                <span class="br" id="bdCalls">—</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="bl">Callers who never call back (62%)</span>
+                <span class="br" id="bdLost">—</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="bl">Revenue lost per call</span>
+                <span class="br" id="bdPerCall">—</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="bl">Weekly revenue lost</span>
+                <span class="br" id="bdWeekly">—</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="bl">3-year compounded bleed</span>
+                <span class="br" id="bdThreeYear">—</span>
+              </div>
+            </div>
+
+            <div class="after-result" id="afterResult">
+              That is real money leaving your business every year through a hole you can plug in 7 days. <strong>DM the word AGENT on Instagram</strong> or click below to see your AI Receptionist in action — free, no obligation, 10 minutes.
+            </div>
+
+            <div class="scarcity-note">
+              This guarantee — 5 booked appointments in 30 days or we work free — is only available to the next 3 businesses we onboard this month.
+            </div>
+
+            <div class="cta-block">
+              <h3>Plug The Leak In 7 Days</h3>
+              <p>An AI Receptionist that answers every call, 24/7. Qualifies the lead. Books the appointment. Costs less than a part-time hire. Installed in 7 days.</p>
+              <div class="cta-buttons">
+                <a href="/book.html" class="btn-primary">Book a Free 10-Min Demo →</a>
+                <a href="https://www.instagram.com/easiersystems" target="_blank" class="btn-secondary">DM "AGENT" on Instagram</a>
+              </div>
+              <div class="guarantee-line">5 booked appointments in 30 days or we work free. No contracts.</div>
+            </div>
+
+          </div><!-- /results -->
+
+        </div><!-- /calc-body -->
+      </div><!-- /calc-card -->
+
+    </div>
+  </section>
+
+  <!-- REPORT SECTION -->
+  <section class="report">
+    <div class="container">
+
+      <!-- WHY IT'S HAPPENING -->
+      <div class="report-section">
+        <div class="section-label">Section A</div>
+        <h2>Why This Is Happening</h2>
+
+        <div class="stat-row">
+          <div class="stat-box">
+            <div class="stat-num">62%</div>
+            <div class="stat-desc">of callers who don't reach a business on the first try never call back</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">78%</div>
+            <div class="stat-desc">of customers give their business to the first company that responds</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">3×</div>
+            <div class="stat-desc">A missed call during peak hours is worth 3x more than off-hours</div>
+          </div>
+        </div>
+
+        <p class="body-text">The average HVAC or plumbing call comes in between <strong>7am–9am and 4pm–7pm</strong> — exactly when you are on a job and cannot answer. Your phone rings. You are under a unit. Nobody picks up. That caller waits four seconds, hangs up, and calls the next name on Google.</p>
+        <p class="body-text">That competitor answered. They booked the job. They got the review. You never knew the call came in.</p>
+        <p class="body-text">This is not a work ethic problem. This is a <strong>coverage problem</strong>. And it has a fix.</p>
+      </div>
+
+      <!-- WHAT IT COSTS OVER TIME -->
+      <div class="report-section">
+        <div class="section-label">Section B</div>
+        <h2>What This Costs Over Time</h2>
+        <p class="body-text">Run the calculator above to fill in your specific numbers. But here is what it looks like for a typical HVAC owner missing 5 calls per week at an $800 average job value:</p>
+
+        <div class="stat-row">
+          <div class="stat-box">
+            <div class="stat-num" style="color:#FF9500;">Yr 1</div>
+            <div class="stat-desc" style="color:#ccc;font-size:1rem;font-weight:700;">$127,968 lost</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num" style="color:#FF6B00;">Yr 3</div>
+            <div class="stat-desc" style="color:#ccc;font-size:1rem;font-weight:700;">$383,904 lost</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num" style="color:#FF3B30;">Yr 5</div>
+            <div class="stat-desc" style="color:#ccc;font-size:1rem;font-weight:700;">$639,840 lost</div>
+          </div>
+        </div>
+
+        <p class="body-text" style="font-style:italic;color:#666;">This does not include the referrals you never got from the customers you never served.</p>
+      </div>
+
+      <!-- WHAT MOST OWNERS DO -->
+      <div class="report-section">
+        <div class="section-label">Section C</div>
+        <h2>What Most Owners Do About It</h2>
+
+        <div class="option-card bad">
+          <h3>Option 1 — Hire a receptionist</h3>
+          <div class="option-cost">Cost: $2,200–$3,400/month fully loaded</div>
+          <p>Works 9–5. Calls in sick. Quits. Doesn't work weekends. Still misses after-hours calls — which are your most urgent ones. You are paying full salary to cover half the problem.</p>
+        </div>
+
+        <div class="option-card bad">
+          <h3>Option 2 — Use voicemail</h3>
+          <div class="option-cost">Result: 80% of callers hang up before leaving a message</div>
+          <p>Of the 20% who leave a message, 50% have already booked elsewhere by the time you call back. Voicemail is not a safety net. It is a slow leak.</p>
+        </div>
+
+        <div class="option-card bad">
+          <h3>Option 3 — Do nothing</h3>
+          <div class="option-cost">Cost: See your number above. Every year. Forever.</div>
+          <p>Nothing changes. The calls keep coming in. Nobody answers. The money keeps walking out the door while you are on a job earning it back one job at a time.</p>
+        </div>
+
+        <div class="option-card" style="border-color:#2a2200;background:#0a0800;margin-top:20px;">
+          <h3 style="color:var(--yellow);">Option 4 — An AI Receptionist</h3>
+          <div class="option-cost" style="color:#aaa;">$1,997/month — live in 7 days</div>
+          <p style="color:#999;">Answers every call, 24/7. Qualifies the lead. Books the appointment. No salary. No sick days. No missed after-hours calls. Costs less than a part-time hire and works every hour you don't.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>Stop The Bleed.<br />Start This Week.</h2>
+      <p>You ran your numbers. You know what it is costing you. There is only one question left: are you going to fix it or keep paying for it?</p>
+      <div class="audio-demo" style="max-width:540px;margin:0 auto 28px;">
+        <span class="audio-label">Hear It In Action — Real AI Receptionist Call</span>
+        <div class="audio-player-wrap">
+          <button class="audio-play-btn" id="playBtn" onclick="toggleAudio()">
+            <svg viewBox="0 0 16 16" fill="var(--black)" xmlns="http://www.w3.org/2000/svg" id="playIcon">
+              <path d="M3 2.5l11 5.5-11 5.5V2.5z"/>
+            </svg>
+          </button>
+          <div class="audio-progress-wrap">
+            <div class="audio-title">AI Receptionist — After Hours Call Demo</div>
+            <div class="audio-bar-track" id="audioTrack" onclick="seekAudio(event)">
+              <div class="audio-bar-fill" id="audioFill"></div>
+            </div>
+            <div class="audio-time" id="audioTime">0:00 / 0:00</div>
+          </div>
+        </div>
+        <!-- REPLACE WITH: path to AI receptionist demo call recording -->
+        <audio id="demoAudio" src="" preload="metadata"></audio>
+        <p class="audio-sub">This is what your customers hear when they call after hours.</p>
+      </div>
+
+      <a href="/book.html" class="btn-large">Book Your Free 10-Min Demo</a>
+      <p style="font-size:0.8rem;color:#666;margin-top:12px;text-align:center;">We set up in 7 days. Your first call is answered by AI before the end of next week.</p>
+      <br />
+      <div class="guarantee-badge">
+        <span class="dot">●</span>
+        5 booked appointments in 30 days — or we work free until you have them
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2025 Easier Systems. &nbsp;|&nbsp; <a href="/">easiersystems.com</a> &nbsp;|&nbsp; Private page — not indexed.</p>
+    </div>
+  </footer>
+
+  <script>
+    function fmt(n) {
+      return '$' + Math.round(n).toLocaleString('en-US');
+    }
+
+    function syncInput(id, val) {
+      document.getElementById(id).value = val;
+      calculate();
+    }
+
+    function syncSlider(id, val) {
+      const sliderId = id + 'Slider';
+      const slider = document.getElementById(sliderId);
+      if (slider) slider.value = val;
+      calculate();
+    }
+
+    function calculate() {
+      const calls = parseFloat(document.getElementById('missedCalls').value) || 0;
+      const jobVal = parseFloat(document.getElementById('jobValue').value) || 0;
+      const rate = 0.62;
+
+      const weekly = calls * rate * jobVal;
+      const monthly = weekly * 4.3;
+      const annual = monthly * 12;
+      const threeYear = annual * 3;
+      const lostPerWeek = calls * rate;
+
+      if (document.getElementById('results').classList.contains('visible')) {
+        updateResults(calls, jobVal, rate, weekly, monthly, annual, threeYear, lostPerWeek);
+      }
+    }
+
+    // Step 1: show gate instead of results
+    function showGate() {
+      document.getElementById('calcButtonWrap').style.display = 'none';
+      document.getElementById('emailGate').classList.add('visible');
+      setTimeout(() => {
+        document.getElementById('emailGate').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 80);
+    }
+
+    // Step 2: validate, capture, then reveal results
+    function submitGate() {
+      const name = document.getElementById('gateName').value.trim();
+      const email = document.getElementById('gateEmail').value.trim();
+
+      if (!name) { document.getElementById('gateName').focus(); return; }
+      if (!email || !email.includes('@')) { document.getElementById('gateEmail').focus(); return; }
+
+      // Store lead
+      const lead = { name, email, timestamp: new Date().toISOString(),
+        missedCalls: document.getElementById('missedCalls').value,
+        jobValue: document.getElementById('jobValue').value };
+
+      // localStorage fallback (no backend required)
+      try {
+        const existing = JSON.parse(localStorage.getItem('es_leads') || '[]');
+        existing.push(lead);
+        localStorage.setItem('es_leads', JSON.stringify(existing));
+      } catch(e) {}
+
+      console.log('Lead captured:', lead);
+
+      // Try POST to /api/leads if available — silent fail if not
+      fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(lead)
+      }).catch(() => {});
+
+      // Hide gate, show results
+      document.getElementById('emailGate').classList.remove('visible');
+      revealResults();
+    }
+
+    function revealResults() {
+      const calls = parseFloat(document.getElementById('missedCalls').value) || 0;
+      const jobVal = parseFloat(document.getElementById('jobValue').value) || 0;
+      const rate = 0.62;
+
+      const weekly = calls * rate * jobVal;
+      const monthly = weekly * 4.3;
+      const annual = monthly * 12;
+      const threeYear = annual * 3;
+      const lostPerWeek = calls * rate;
+
+      updateResults(calls, jobVal, rate, weekly, monthly, annual, threeYear, lostPerWeek);
+
+      document.getElementById('results').classList.add('visible', 'count-in');
+
+      setTimeout(() => {
+        document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+
+    function updateResults(calls, jobVal, rate, weekly, monthly, annual, threeYear, lostPerWeek) {
+      document.getElementById('annualLoss').textContent = fmt(annual);
+      document.getElementById('stmtAnnual').textContent = fmt(annual);
+      document.getElementById('weeklyLoss').textContent = fmt(weekly);
+      document.getElementById('monthlyLoss').textContent = fmt(monthly);
+      document.getElementById('yearlyLoss2').textContent = fmt(annual);
+
+      document.getElementById('bdCalls').textContent = calls + ' calls/week';
+      document.getElementById('bdLost').textContent = lostPerWeek.toFixed(1) + ' callers lost/week';
+      document.getElementById('bdPerCall').textContent = fmt(jobVal);
+      document.getElementById('bdWeekly').textContent = fmt(weekly);
+      document.getElementById('bdThreeYear').textContent = fmt(threeYear);
+    }
+
+    // Live recalculate after results visible
+    document.getElementById('missedCalls').addEventListener('input', calculate);
+    document.getElementById('jobValue').addEventListener('input', calculate);
+    document.getElementById('missedCallsSlider').addEventListener('input', calculate);
+    document.getElementById('jobValueSlider').addEventListener('input', calculate);
+
+    // ===================== AUDIO PLAYER =====================
+    const audio = document.getElementById('demoAudio');
+    const playBtn = document.getElementById('playBtn');
+    const playIcon = document.getElementById('playIcon');
+    const audioFill = document.getElementById('audioFill');
+    const audioTime = document.getElementById('audioTime');
+
+    const pausePath = '<path d="M4 2h3v12H4V2zm5 0h3v12H9V2z"/>';
+    const playPath = '<path d="M3 2.5l11 5.5-11 5.5V2.5z"/>';
+
+    function fmtTime(s) {
+      if (isNaN(s)) return '0:00';
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60);
+      return m + ':' + (sec < 10 ? '0' : '') + sec;
+    }
+
+    function toggleAudio() {
+      if (!audio.src || audio.src === window.location.href) return; // no src yet
+      if (audio.paused) {
+        audio.play();
+        playIcon.innerHTML = pausePath;
+      } else {
+        audio.pause();
+        playIcon.innerHTML = playPath;
+      }
+    }
+
+    audio.addEventListener('timeupdate', () => {
+      const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+      audioFill.style.width = pct + '%';
+      audioTime.textContent = fmtTime(audio.currentTime) + ' / ' + fmtTime(audio.duration);
+    });
+
+    audio.addEventListener('ended', () => {
+      playIcon.innerHTML = playPath;
+      audioFill.style.width = '0%';
+    });
+
+    function seekAudio(e) {
+      if (!audio.duration) return;
+      const rect = document.getElementById('audioTrack').getBoundingClientRect();
+      const pct = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = pct * audio.duration;
+    }
+  </script>
+
+</body>
+</html>
