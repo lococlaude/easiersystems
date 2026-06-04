@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Missed Call Calculator — Easier Systems</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --card: #141414;
+    --border: #222;
+    --yellow: #F5C518;
+    --yellow-dim: rgba(245,197,24,0.10);
+    --yellow-glow: rgba(245,197,24,0.22);
+    --white: #F8F8F8;
+    --muted: #777;
+  }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .logo span { color: var(--yellow); }
+
+  /* PAGE — narrow, focused, nothing competing */
+  .page {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* 1. HEADLINE */
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(50px, 12vw, 80px);
+    line-height: 0.92;
+    letter-spacing: 0.5px;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  h1 em { font-style: normal; color: var(--yellow); display: block; }
+
+  /* 2. SUBHEADLINE */
+  .subhead {
+    font-size: 17px;
+    color: #aaa;
+    line-height: 1.65;
+    margin-bottom: 36px;
+    max-width: 480px;
+  }
+  .subhead strong { color: var(--white); }
+
+  /* 3. FORM CARD */
+  .form-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--yellow);
+    border-radius: 14px;
+    padding: 32px 28px;
+  }
+
+  .form-field { margin-bottom: 14px; }
+  .form-field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #888;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .form-input, .form-select {
+    width: 100%;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 9px;
+    padding: 0 15px;
+    height: 50px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.18s, box-shadow 0.18s;
+    cursor: pointer;
+    appearance: none;
+  }
+  .form-input:focus, .form-select:focus {
+    border-color: var(--yellow);
+    box-shadow: 0 0 0 3px var(--yellow-dim);
+  }
+  .form-input::placeholder { color: #444; }
+  .form-select option { background: #1a1a1a; color: var(--white); }
+
+  /* 4. SUBMIT */
+  .submit-btn {
+    width: 100%;
+    background: var(--yellow);
+    color: #000;
+    border: none;
+    border-radius: 9px;
+    padding: 17px 24px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .submit-btn:hover {
+    background: #ffd200;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px var(--yellow-glow);
+  }
+  .submit-btn:active { transform: translateY(0); }
+  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .spinner {
+    width: 18px; height: 18px;
+    border: 2px solid rgba(0,0,0,0.3);
+    border-top-color: #000;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .privacy {
+    font-size: 12px;
+    color: #444;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /* 5. CALCULATOR — the "image/content" that unlocks */
+  .calc {
+    display: none;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--yellow);
+    border-radius: 14px;
+    padding: 32px 28px;
+    animation: fadeUp 0.4s ease;
+  }
+  .calc.unlocked { display: block; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .calc-hint {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 26px;
+    font-style: italic;
+  }
+
+  .field { margin-bottom: 18px; }
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #888;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .field-note {
+    font-size: 11px;
+    color: #555;
+    margin-bottom: 7px;
+    font-style: italic;
+  }
+  .input-wrap {
+    display: flex;
+    align-items: center;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 9px;
+    overflow: hidden;
+    transition: border-color 0.18s, box-shadow 0.18s;
+  }
+  .input-wrap:focus-within {
+    border-color: var(--yellow);
+    box-shadow: 0 0 0 3px var(--yellow-dim);
+  }
+  .prefix {
+    padding: 0 13px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: var(--muted);
+    background: #141414;
+    border-right: 1px solid #2a2a2a;
+    user-select: none;
+    flex-shrink: 0;
+  }
+  input[type="number"], .field select {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 0 14px;
+    height: 50px;
+    width: 100%;
+    -moz-appearance: textfield;
+    appearance: none;
+  }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .field select { cursor: pointer; }
+  .field select option { background: #1a1a1a; }
+
+  /* RESULT BOX */
+  .result {
+    background: #0d0d0d;
+    border: 1px solid #222;
+    border-radius: 10px;
+    padding: 24px;
+    text-align: center;
+    margin: 24px 0 20px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .result.lit {
+    border-color: var(--yellow);
+    box-shadow: 0 0 32px var(--yellow-glow);
+  }
+  .result-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #444;
+    margin-bottom: 10px;
+  }
+  .result-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    line-height: 1;
+    color: #2a2a2a;
+    transition: color 0.3s;
+    letter-spacing: 1px;
+  }
+  .result-num.lit { color: var(--yellow); }
+  .result-sub { font-size: 13px; color: #444; margin-top: 8px; }
+  .result-sub.lit { color: #aaa; }
+  .result-sub strong { color: var(--white); }
+
+  /* BREAKDOWN GRID */
+  .breakdown {
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+  .breakdown.show { display: grid; }
+  .bd-item {
+    background: #0d0d0d;
+    border: 1px solid #1e1e1e;
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .bd-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--white);
+    line-height: 1;
+  }
+  .bd-key { font-size: 11px; color: #555; margin-top: 3px; }
+
+  /* CALCULATE BUTTON */
+  .calc-btn {
+    width: 100%;
+    background: #1a1a1a;
+    color: var(--yellow);
+    border: 1px solid #2e2e2e;
+    border-radius: 9px;
+    padding: 15px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .calc-btn:hover { background: #222; border-color: var(--yellow); }
+
+  /* CTA — appears after calc runs */
+  .cta-block {
+    display: none;
+    background: var(--yellow-dim);
+    border: 1px solid rgba(245,197,24,0.2);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    margin-top: 16px;
+    animation: fadeUp 0.4s ease;
+  }
+  .cta-block.show { display: block; }
+  .cta-block p {
+    font-size: 15px;
+    color: #ccc;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .cta-block strong { color: var(--white); }
+  .cta-link {
+    display: inline-block;
+    background: var(--yellow);
+    color: #000;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    padding: 15px 36px;
+    border-radius: 9px;
+    text-decoration: none;
+    transition: all 0.18s;
+  }
+  .cta-link:hover {
+    background: #ffd200;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px var(--yellow-glow);
+  }
+
+  /* 6. THREE OBJECTION BULLETS — hidden until calc runs */
+  .objections {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .objections.show { display: flex; animation: fadeUp 0.5s ease; }
+  .obj {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 18px 20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .obj-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+  .obj-title { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+  .obj-body { font-size: 13px; color: var(--muted); line-height: 1.55; }
+  .obj-body strong { color: #ccc; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 28px 24px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: #3a3a3a;
+    margin-top: 60px;
+  }
+  footer a { color: #444; text-decoration: none; }
+
+  /* MOBILE */
+  @media (max-width: 560px) {
+    .page { padding: 36px 18px 60px; }
+    .form-card, .calc { padding: 24px 18px; }
+    h1 { font-size: 50px; }
+    .result-num { font-size: 52px; }
+    .breakdown { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://www.easiersystems.com/" class="logo">EASIER <span>SYSTEMS</span></a>
+</nav>
+
+<div class="page">
+
+  <!-- 1. HEADLINE — clear outcome, stops them cold -->
+  <h1>Find Out Exactly How Much Missed Calls Cost You <em>This Year.</em></h1>
+
+  <!-- 2. SUBHEADLINE — clarifies with a specific number -->
+  <p class="subhead">
+    The average HVAC owner running these numbers finds out they lost
+    <strong>$127,000 last year</strong> from missed calls alone —
+    from a problem that takes 7 days to fix.
+  </p>
+
+  <!-- FORM -->
+  <div class="form-card" id="formCard">
+
+    <div class="form-field">
+      <label>Your name</label>
+      <input type="text" class="form-input" id="fName" placeholder="John Smith">
+    </div>
+
+    <div class="form-field">
+      <label>Business phone</label>
+      <input type="text" class="form-input" id="fPhone" placeholder="(555) 000-0000">
+    </div>
+
+    <div class="form-field">
+      <label>Business type</label>
+      <select class="form-select" id="fBiz">
+        <option value="" disabled selected>Select your business…</option>
+        <option value="HVAC">HVAC</option>
+        <option value="Plumbing">Plumbing</option>
+        <option value="Electrician">Electrician</option>
+        <option value="Roofing">Roofing</option>
+        <option value="Dental">Dental</option>
+        <option value="Med Spa">Med Spa</option>
+        <option value="Chiropractor">Chiropractor</option>
+        <option value="Salon">Salon / Barber</option>
+        <option value="Gym">Gym / Fitness</option>
+        <option value="Real Estate">Real Estate</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <!-- CTA — what they get + how. Nothing else. -->
+    <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">
+      <span id="btnText">CALCULATE MY REVENUE BLEED →</span>
+      <div class="spinner" id="spinner"></div>
+    </button>
+
+    <div class="privacy">Takes 60 seconds. Your number stays private.</div>
+  </div>
+
+  <!-- 5. CALCULATOR — the content / visual proof (unlocks after form) -->
+  <div class="calc" id="calcSection">
+    <div class="calc-hint">Be honest. Most owners undercount by half.</div>
+
+    <div class="field">
+      <label>Missed calls per week</label>
+      <div class="field-note">Include after hours, lunch, and when you're on a job.</div>
+      <div class="input-wrap">
+        <input type="number" id="missedCalls" placeholder="e.g. 5" min="0">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Average job value</label>
+      <div class="field-note">HVAC average: $800 · Plumbing average: $600</div>
+      <div class="input-wrap">
+        <div class="prefix">$</div>
+        <input type="number" id="jobValue" placeholder="e.g. 800" min="0">
+      </div>
+    </div>
+
+    <div class="result" id="resultBox">
+      <div class="result-label">Your Annual Revenue Bleed</div>
+      <div class="result-num" id="resultNum">$0</div>
+      <div class="result-sub" id="resultSub">Enter your numbers and hit calculate</div>
+    </div>
+
+    <div class="breakdown" id="breakdown">
+      <div class="bd-item">
+        <div class="bd-val" id="bWeek">—</div>
+        <div class="bd-key">Lost per week</div>
+      </div>
+      <div class="bd-item">
+        <div class="bd-val" id="bMonth">—</div>
+        <div class="bd-key">Lost per month</div>
+      </div>
+      <div class="bd-item">
+        <div class="bd-val" id="bGone">—</div>
+        <div class="bd-key">Gone-forever callers/wk</div>
+      </div>
+      <div class="bd-item">
+        <div class="bd-val" id="b3yr">—</div>
+        <div class="bd-key">3-year total bleed</div>
+      </div>
+    </div>
+
+    <button class="calc-btn" onclick="runCalc()">▶ CALCULATE MY LOSS</button>
+
+    <!-- CTA appears here after calc runs -->
+    <div class="cta-block" id="ctaBlock">
+      <p>That's <strong id="ctaNum"></strong> leaving your business every year — through a hole you can plug in <strong>7 days.</strong><br>See the AI Receptionist fix it live. Free. 10 minutes.</p>
+      <a href="https://cal.com/easiersystems/book" class="cta-link" target="_blank">BOOK MY FREE 10-MIN DEMO →</a>
+    </div>
+  </div>
+
+  <!-- 6. THREE OBJECTION BULLETS — most common to least common, only after pain is felt -->
+  <div class="objections" id="objections">
+
+    <div class="obj">
+      <div class="obj-icon">💸</div>
+      <div>
+        <div class="obj-title">"$1,997/mo is too expensive."</div>
+        <div class="obj-body">A part-time receptionist runs <strong>$2,200–$3,400/mo fully loaded</strong> — works 9–5, calls in sick, misses every after-hours call. The AI works 24/7 and costs less. It's not an expense. It's a cheaper replacement that never sleeps.</div>
+      </div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-icon">⚙️</div>
+      <div>
+        <div class="obj-title">"I don't have time to set this up."</div>
+        <div class="obj-body">You don't set it up. <strong>We do.</strong> Done-for-you in 7 days flat. One onboarding call, we handle everything else. Zero tech required.</div>
+      </div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-icon">🛡️</div>
+      <div>
+        <div class="obj-title">"What if it doesn't work?"</div>
+        <div class="obj-body">Then you don't pay. <strong>5 booked appointments in 30 days — or we work free</strong> until you have them. No contracts. No lock-in.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Easier Systems &nbsp;·&nbsp;
+  <a href="https://www.easiersystems.com">easiersystems.com</a> &nbsp;·&nbsp;
+  Private page — not indexed
+</footer>
+
+<script>
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyP4ToTNUMbCS2OjbAsmn3XeX2pxgasdGFI7vzebPBmzv56o9LaPDosXPOwDYVpqKEY1g/exec';
+  let leadData = {};
+
+  function fmt(n) {
+    if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
+    if (n >= 1000)    return '$' + Math.round(n / 1000) + 'K';
+    return '$' + Math.round(n).toLocaleString();
+  }
+
+  async function handleSubmit() {
+    const name  = document.getElementById('fName').value.trim();
+    const phone = document.getElementById('fPhone').value.trim();
+    const biz   = document.getElementById('fBiz').value;
+
+    if (!name || !phone || !biz) {
+      alert('Please fill in all three fields.');
+      return;
+    }
+
+    leadData = { name, phone, bizType: biz };
+
+    const btn     = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const spinner = document.getElementById('spinner');
+    btn.disabled          = true;
+    btnText.textContent   = 'UNLOCKING...';
+    spinner.style.display = 'block';
+
+    try {
+      fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, bizType: biz, missedCalls: '', jobValue: '', annualBleed: '' })
+      });
+    } catch(err) { console.error(err); }
+
+    setTimeout(() => {
+      document.getElementById('formCard').style.display = 'none';
+      const calc = document.getElementById('calcSection');
+      calc.classList.add('unlocked');
+      calc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 800);
+  }
+
+  function runCalc() {
+    const missed = parseFloat(document.getElementById('missedCalls').value) || 0;
+    const job    = parseFloat(document.getElementById('jobValue').value)    || 0;
+    const rate   = 0.62;
+
+    if (!missed || !job) {
+      document.getElementById('resultSub').textContent = 'Fill in your missed calls and job value first.';
+      return;
+    }
+
+    const weekly  = missed * rate * job;
+    const monthly = weekly * 52 / 12;
+    const annual  = weekly * 52;
+    const threeYr = annual * 3;
+    const gone    = Math.round(missed * rate);
+    const fmtAnnual = fmt(annual);
+
+    // Result
+    const numEl = document.getElementById('resultNum');
+    numEl.textContent = fmtAnnual;
+    numEl.classList.add('lit');
+    document.getElementById('resultBox').classList.add('lit');
+    const subEl = document.getElementById('resultSub');
+    subEl.innerHTML = 'Leaving your business every year. Not a guess — <strong>your math.</strong>';
+    subEl.classList.add('lit');
+
+    // Breakdown
+    document.getElementById('bWeek').textContent  = fmt(weekly);
+    document.getElementById('bMonth').textContent = fmt(monthly);
+    document.getElementById('bGone').textContent  = gone + ' callers';
+    document.getElementById('b3yr').textContent   = fmt(threeYr);
+    document.getElementById('breakdown').classList.add('show');
+
+    // CTA with their number injected
+    document.getElementById('ctaNum').textContent = fmtAnnual;
+    const cta = document.getElementById('ctaBlock');
+    cta.classList.add('show');
+
+    // Objections — now pain is felt, objections land
+    document.getElementById('objections').classList.add('show');
+
+    setTimeout(() => cta.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 350);
+
+    // Send calc data to sheet
+    if (leadData.name) {
+      try {
+        fetch(SHEET_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...leadData, missedCalls: missed, jobValue: job, annualBleed: fmtAnnual })
+        });
+      } catch(err) { console.error(err); }
+    }
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Enter') return;
+    if (document.getElementById('calcSection').classList.contains('unlocked')) {
+      runCalc();
+    } else {
+      handleSubmit();
+    }
+  });
+</script>
+
+</body>
+</html>
