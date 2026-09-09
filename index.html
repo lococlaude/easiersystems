@@ -6,58 +6,40 @@
   <title>Easier Systems — AI Automation for Local Service Businesses</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="/easier_systems_logo_transparent.png" />
-  <link rel="apple-touch-icon" href="/logo_4_all_yellow_easier_bigger.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <!-- OG / Social sharing -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Easier Systems" />
   <meta property="og:title" content="Easier Systems — AI Automation for Local Service Businesses" />
   <meta property="og:description" content="AI Receptionist for local service businesses. Answers every call 24/7. Books appointments while you sleep. Costs half a human receptionist. Live in 7 days. 5 appointments in 30 days or we work free." />
-  <meta property="og:image" content="https://www.easiersystems.com/logo_4_all_yellow_easier_bigger.png" />
+  <meta property="og:image" content="https://www.easiersystems.com/og-image.png" />
   <meta property="og:url" content="https://www.easiersystems.com" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Easier Systems — AI Automation for Local Service Businesses" />
   <meta name="twitter:description" content="AI Receptionist for local service businesses. Answers every call 24/7. Books appointments while you sleep. Costs half a human receptionist. Live in 7 days. 5 appointments in 30 days or we work free." />
-  <meta name="twitter:image" content="https://www.easiersystems.com/logo_4_all_yellow_easier_bigger.png" />
+  <meta name="twitter:image" content="https://www.easiersystems.com/og-image.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
   <style>
     /* ===================== RESET & BASE ===================== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --black: #000000;
-      --yellow: #FFD600;
-      --white: #FFFFFF;
-      --gray: #888888;
-      --card-bg: #0d0d0d;
-      --border: #1a1a1a;
-    }
-
     html { scroll-behavior: smooth; }
 
     body {
-      background-color: var(--black);
-      color: var(--white);
+      background-color: var(--bg);
+      color: var(--text);
       font-family: 'DM Sans', sans-serif;
       font-size: 16px;
       line-height: 1.6;
       overflow-x: hidden;
       position: relative;
-    }
-
-    /* Grain texture overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.35;
     }
 
     /* ===================== TYPOGRAPHY ===================== */
@@ -85,7 +67,7 @@
       font-weight: 700;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--yellow);
+      color: var(--brand);
       margin-bottom: 16px;
       display: flex;
       align-items: center;
@@ -97,15 +79,14 @@
       display: block;
       width: 32px;
       height: 2px;
-      background: var(--yellow);
+      background: var(--brand);
       flex-shrink: 0;
     }
 
     .section-divider {
       width: 100%;
       height: 1px;
-      background: var(--yellow);
-      opacity: 0.3;
+      background: var(--border);
     }
 
     /* ===================== ANIMATIONS ===================== */
@@ -132,11 +113,11 @@
       left: 0;
       right: 0;
       z-index: 1000;
-      background: rgba(0, 0, 0, 0.92);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 214, 0, 0.15);
+      border-bottom: 1px solid var(--border);
       padding: 14px 0;
-      transition: background 0.3s;
+      transition: background 0.3s, box-shadow 0.3s;
     }
 
     header .container {
@@ -149,11 +130,11 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.6rem;
       letter-spacing: 0.05em;
-      color: var(--white);
+      color: var(--text);
       text-decoration: none;
     }
 
-    .header-logo span { color: var(--yellow); }
+    .header-logo span { color: var(--brand); }
 
     nav { display: flex; align-items: center; gap: 32px; }
 
@@ -161,14 +142,14 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 0.85rem;
       font-weight: 600;
-      color: var(--gray);
+      color: var(--text-muted);
       text-decoration: none;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
 
-    nav a:hover { color: var(--white); }
+    nav a:hover { color: var(--brand); }
 
     .nav-links { display: flex; gap: 28px; }
 
@@ -177,8 +158,8 @@
     /* ===================== BUTTONS ===================== */
     .btn-primary {
       display: inline-block;
-      background: var(--yellow);
-      color: var(--black);
+      background: var(--brand);
+      color: var(--on-brand);
       font-family: 'DM Sans', sans-serif;
       font-size: 0.9rem;
       font-weight: 800;
@@ -186,30 +167,33 @@
       text-transform: uppercase;
       padding: 14px 28px;
       text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
+      border-radius: 8px;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
       cursor: pointer;
       border: none;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
     }
 
     .btn-primary::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.12);
       opacity: 0;
       transition: opacity 0.2s;
     }
 
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255, 214, 0, 0.35); }
+    .btn-primary:hover { background: var(--brand-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37, 99, 235, 0.28); }
     .btn-primary:hover::after { opacity: 1; }
     .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--brand-tint-strong); }
 
     .btn-outline {
       display: inline-block;
       background: transparent;
-      color: var(--yellow);
+      color: var(--brand);
       font-family: 'DM Sans', sans-serif;
       font-size: 0.9rem;
       font-weight: 800;
@@ -217,12 +201,14 @@
       text-transform: uppercase;
       padding: 13px 27px;
       text-decoration: none;
-      border: 2px solid var(--yellow);
+      border-radius: 8px;
+      border: 2px solid var(--brand);
       transition: background 0.2s, color 0.2s;
       cursor: pointer;
     }
 
-    .btn-outline:hover { background: var(--yellow); color: var(--black); }
+    .btn-outline:hover { background: var(--brand); color: var(--on-brand); }
+    .btn-outline:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--brand-tint-strong); }
 
     /* ===================== HERO ===================== */
     #hero {
@@ -230,10 +216,33 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,214,0,0.06) 0%, transparent 70%);
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, var(--brand-tint) 0%, transparent 70%);
     }
 
-    .hero-content { max-width: 880px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { order: -1; }
+    }
+
+    .hero-content { max-width: 640px; }
+
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      max-height: 520px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.14);
+      display: block;
+    }
 
     .hero-eyebrow {
       display: flex;
@@ -245,15 +254,15 @@
     .pulse-dot {
       width: 10px;
       height: 10px;
-      background: var(--yellow);
+      background: var(--brand);
       border-radius: 50%;
       animation: pulse 1.8s ease-in-out infinite;
       flex-shrink: 0;
     }
 
     @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(255,214,0,0.5); transform: scale(1); }
-      50% { box-shadow: 0 0 0 10px rgba(255,214,0,0); transform: scale(1.1); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37,99,235,0.45); transform: scale(1); }
+      50% { box-shadow: 0 0 0 10px rgba(37,99,235,0); transform: scale(1.1); }
     }
 
     .hero-eyebrow span {
@@ -262,21 +271,21 @@
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--yellow);
+      color: var(--brand);
     }
 
-    #hero h1 { margin-bottom: 24px; }
+    #hero h1 { margin-bottom: 24px; color: var(--text); }
 
     #hero h1 em {
       font-style: normal;
-      color: var(--yellow);
+      color: var(--brand);
       position: relative;
       display: inline-block;
     }
 
     .hero-sub {
       font-size: clamp(1rem, 2.2vw, 1.25rem);
-      color: #cccccc;
+      color: var(--text-muted);
       max-width: 600px;
       margin-bottom: 40px;
       line-height: 1.65;
@@ -293,25 +302,26 @@
       align-items: center;
       gap: 10px;
       font-size: 0.85rem;
-      color: var(--gray);
+      color: var(--text-muted);
     }
 
     .hero-trust .pulse-dot { width: 7px; height: 7px; }
 
-    .hero-trust strong { color: var(--yellow); }
+    .hero-trust strong { color: var(--brand); }
 
-    /* Yellow bar accent behind headline word */
+    /* Brand highlight bar behind headline word */
     .highlight-bar {
-      background: var(--yellow);
-      color: var(--black);
+      background: var(--brand);
+      color: var(--on-brand);
       padding: 0 6px;
+      border-radius: 4px;
       display: inline;
     }
 
     /* ===================== PROBLEM SECTION ===================== */
     #problem {
       padding: 100px 0;
-      border-top: 1px solid rgba(255,214,0,0.15);
+      border-top: 1px solid var(--border);
     }
 
     .problem-headline {
@@ -329,19 +339,21 @@
     @media (max-width: 768px) { .stat-grid { grid-template-columns: 1fr; } }
 
     .stat-card {
-      background: var(--card-bg);
+      background: var(--bg-alt);
       border: 1px solid var(--border);
-      border-top: 3px solid var(--yellow);
+      border-top: 3px solid var(--brand);
+      border-radius: 12px;
       padding: 36px 28px;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 1px 2px rgba(15,23,42,0.04);
     }
 
     .stat-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at top left, rgba(255,214,0,0.04), transparent 60%);
+      background: radial-gradient(circle at top left, var(--brand-tint), transparent 60%);
       pointer-events: none;
     }
 
@@ -354,22 +366,22 @@
     .stat-number {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 3.5rem;
-      color: var(--yellow);
+      color: var(--brand);
       line-height: 1;
       margin-bottom: 8px;
     }
 
     .stat-card p {
-      color: var(--gray);
+      color: var(--text-muted);
       font-size: 0.9rem;
       line-height: 1.5;
     }
 
     .problem-bottom {
       font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-      color: var(--white);
+      color: var(--text);
       font-weight: 600;
-      border-left: 4px solid var(--yellow);
+      border-left: 4px solid var(--brand);
       padding-left: 20px;
       max-width: 680px;
     }
@@ -377,7 +389,7 @@
     /* ===================== SERVICES ===================== */
     #services {
       padding: 100px 0;
-      border-top: 1px solid rgba(255,214,0,0.15);
+      border-top: 1px solid var(--border);
     }
 
     .services-header { margin-bottom: 60px; }
@@ -386,15 +398,17 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 2px;
-      background: rgba(255,214,0,0.1);
-      border: 1px solid rgba(255,214,0,0.1);
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
     }
 
     @media (max-width: 1024px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 600px) { .services-grid { grid-template-columns: 1fr; } }
 
     .service-card {
-      background: var(--black);
+      background: var(--bg);
       padding: 32px 24px;
       border-left: 3px solid transparent;
       transition: border-color 0.2s, background 0.2s;
@@ -402,13 +416,13 @@
     }
 
     .service-card:hover {
-      border-left-color: var(--yellow);
-      background: var(--card-bg);
+      border-left-color: var(--brand);
+      background: var(--bg-alt);
     }
 
     .service-card.featured {
-      border-left-color: var(--yellow);
-      background: var(--card-bg);
+      border-left-color: var(--brand);
+      background: var(--bg-alt);
     }
 
     .service-card.featured::before {
@@ -420,29 +434,29 @@
       font-size: 0.65rem;
       font-weight: 800;
       letter-spacing: 0.15em;
-      color: var(--black);
-      background: var(--yellow);
+      color: var(--on-brand);
+      background: var(--brand);
       padding: 3px 8px;
+      border-radius: 999px;
     }
 
     .service-num {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1rem;
-      color: rgba(255,214,0,0.3);
+      color: var(--brand-tint-strong);
       margin-bottom: 12px;
     }
 
     .service-card h3 {
-      font-family: 'DM Sans', sans-serif;
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.1rem;
       letter-spacing: 0.05em;
-      color: var(--white);
+      color: var(--text);
       margin-bottom: 10px;
     }
 
     .service-card p {
-      color: var(--gray);
+      color: var(--text-muted);
       font-size: 0.85rem;
       line-height: 1.55;
     }
@@ -450,8 +464,8 @@
     /* ===================== OFFER ===================== */
     #offer {
       padding: 120px 0;
-      border-top: 1px solid rgba(255,214,0,0.15);
-      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255,214,0,0.04) 0%, transparent 70%);
+      border-top: 1px solid var(--border);
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, var(--brand-tint) 0%, transparent 70%);
     }
 
     .offer-inner {
@@ -460,19 +474,20 @@
       text-align: center;
     }
 
-    .offer-inner h2 { margin-bottom: 32px; }
+    .offer-inner h2 { margin-bottom: 32px; color: var(--text); }
 
     .guarantee-line {
       display: inline-block;
-      background: var(--yellow);
-      color: var(--black);
+      background: var(--brand);
+      color: var(--on-brand);
       font-weight: 800;
       padding: 2px 8px;
+      border-radius: 4px;
     }
 
     .offer-body {
       font-size: clamp(1rem, 2vw, 1.15rem);
-      color: #cccccc;
+      color: var(--text-muted);
       line-height: 1.85;
       margin-bottom: 48px;
     }
@@ -482,14 +497,14 @@
     .offer-rule {
       width: 80px;
       height: 2px;
-      background: var(--yellow);
+      background: var(--brand);
       margin: 0 auto 32px;
     }
 
     /* ===================== HOW IT WORKS ===================== */
     #process {
       padding: 100px 0;
-      border-top: 1px solid rgba(255,214,0,0.15);
+      border-top: 1px solid var(--border);
     }
 
     .process-header { margin-bottom: 72px; }
@@ -519,7 +534,7 @@
 
     .step-connector-line {
       flex: 1;
-      border-top: 2px dashed rgba(255,214,0,0.4);
+      border-top: 2px dashed var(--border);
       margin-top: 0;
     }
 
@@ -528,22 +543,25 @@
     .step-circle {
       width: 56px;
       height: 56px;
-      background: var(--yellow);
-      color: var(--black);
+      background: var(--brand);
+      color: var(--on-brand);
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.5rem;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 20px;
       position: relative;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.25);
     }
 
     .step-circle::after {
       content: '';
       position: absolute;
       inset: -4px;
-      border: 1px solid rgba(255,214,0,0.3);
+      border: 1px solid var(--brand-tint-strong);
+      border-radius: 50%;
       pointer-events: none;
     }
 
@@ -553,22 +571,22 @@
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--yellow);
+      color: var(--brand);
       margin-bottom: 8px;
     }
 
     .step h3 {
       font-size: 1.3rem;
       margin-bottom: 12px;
-      color: var(--white);
+      color: var(--text);
     }
 
-    .step p { color: var(--gray); font-size: 0.9rem; max-width: 240px; margin: 0 auto; }
+    .step p { color: var(--text-muted); font-size: 0.9rem; max-width: 240px; margin: 0 auto; }
 
     /* ===================== WHO THIS IS FOR ===================== */
     #audience {
       padding: 100px 0;
-      border-top: 1px solid rgba(255,214,0,0.15);
+      border-top: 1px solid var(--border);
     }
 
     .audience-inner {
@@ -580,6 +598,21 @@
 
     @media (max-width: 768px) { .audience-inner { grid-template-columns: 1fr; gap: 48px; } }
 
+    .audience-visual {
+      margin-bottom: 28px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 16px 40px rgba(15,23,42,0.10);
+    }
+
+    .audience-visual img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+    }
+
     .checklist { list-style: none; }
 
     .checklist li {
@@ -590,33 +623,36 @@
       border-bottom: 1px solid var(--border);
       font-size: 1.05rem;
       font-weight: 600;
-      color: var(--white);
+      color: var(--text);
     }
 
     .checklist li:last-child { border-bottom: none; }
 
     .check-icon {
-      color: var(--yellow);
+      color: var(--brand);
       font-size: 1.1rem;
       flex-shrink: 0;
       margin-top: 2px;
     }
 
     .audience-cta-block {
-      background: var(--card-bg);
+      background: var(--bg-alt);
       border: 1px solid var(--border);
-      border-left: 4px solid var(--yellow);
+      border-left: 4px solid var(--brand);
+      border-radius: 12px;
       padding: 40px 32px;
+      box-shadow: 0 1px 2px rgba(15,23,42,0.04);
     }
 
     .audience-cta-block h3 {
       font-size: 2rem;
       margin-bottom: 20px;
       line-height: 1.15;
+      color: var(--text);
     }
 
     .audience-cta-block p {
-      color: var(--gray);
+      color: var(--text-muted);
       margin-bottom: 32px;
       font-size: 0.95rem;
     }
@@ -624,7 +660,7 @@
     /* ===================== PRICING ===================== */
     #pricing {
       padding: 100px 0;
-      border-top: 1px solid rgba(255,214,0,0.15);
+      border-top: 1px solid var(--border);
     }
 
     .pricing-inner { max-width: 760px; }
@@ -632,14 +668,14 @@
     .pricing-number {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(4rem, 10vw, 7rem);
-      color: var(--yellow);
+      color: var(--brand);
       line-height: 1;
       margin-bottom: 16px;
     }
 
     .pricing-number span {
       font-size: 0.35em;
-      color: var(--gray);
+      color: var(--text-muted);
       vertical-align: super;
       font-family: 'DM Sans', sans-serif;
       font-weight: 700;
@@ -647,7 +683,7 @@
 
     .pricing-sub {
       font-size: clamp(0.95rem, 2vw, 1.1rem);
-      color: #cccccc;
+      color: var(--text-muted);
       max-width: 560px;
       margin-bottom: 40px;
       line-height: 1.7;
@@ -662,20 +698,21 @@
 
     .pricing-tag {
       background: transparent;
-      border: 1px solid rgba(255,214,0,0.25);
-      color: var(--gray);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
       font-size: 0.78rem;
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       padding: 7px 14px;
+      border-radius: 999px;
     }
 
     /* ===================== CONTACT ===================== */
     #contact {
       padding: 100px 0 120px;
-      border-top: 1px solid rgba(255,214,0,0.15);
-      background: radial-gradient(ellipse 60% 40% at 50% 100%, rgba(255,214,0,0.04) 0%, transparent 70%);
+      border-top: 1px solid var(--border);
+      background: radial-gradient(ellipse 60% 40% at 50% 100%, var(--brand-tint) 0%, transparent 70%);
     }
 
     .contact-inner {
@@ -687,9 +724,9 @@
 
     @media (max-width: 900px) { .contact-inner { grid-template-columns: 1fr; gap: 56px; } }
 
-    .contact-left h2 { margin-bottom: 20px; }
+    .contact-left h2 { margin-bottom: 20px; color: var(--text); }
 
-    .contact-left p { color: var(--gray); font-size: 1rem; margin-bottom: 40px; line-height: 1.7; }
+    .contact-left p { color: var(--text-muted); font-size: 1rem; margin-bottom: 40px; line-height: 1.7; }
 
     .contact-info { list-style: none; }
 
@@ -697,7 +734,7 @@
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      color: var(--gray);
+      color: var(--text-muted);
       font-size: 0.9rem;
       padding: 10px 0;
       border-bottom: 1px solid var(--border);
@@ -725,36 +762,38 @@
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--gray);
+      color: var(--text-muted);
     }
 
     input, select, textarea {
-      background: var(--card-bg);
+      background: var(--bg);
       border: 1px solid var(--border);
-      color: var(--white);
+      color: var(--text);
       font-family: 'DM Sans', sans-serif;
       font-size: 0.95rem;
       padding: 14px 16px;
+      border-radius: 8px;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
       width: 100%;
       appearance: none;
       -webkit-appearance: none;
     }
 
     input:focus, select:focus, textarea:focus {
-      border-color: var(--yellow);
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px var(--brand-tint);
     }
 
-    input::placeholder, textarea::placeholder { color: #444444; }
+    input::placeholder, textarea::placeholder { color: #94A3B8; }
 
-    select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+    select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23475569' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
 
     textarea { min-height: 120px; resize: vertical; }
 
     .btn-submit {
-      background: var(--yellow);
-      color: var(--black);
+      background: var(--brand);
+      color: var(--on-brand);
       font-family: 'DM Sans', sans-serif;
       font-size: 1rem;
       font-weight: 900;
@@ -762,25 +801,28 @@
       text-transform: uppercase;
       padding: 18px;
       border: none;
+      border-radius: 8px;
       cursor: pointer;
       width: 100%;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
     }
 
-    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,214,0,0.35); }
+    .btn-submit:hover { background: var(--brand-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.28); }
     .btn-submit:active { transform: translateY(0); }
+    .btn-submit:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--brand-tint-strong); }
 
     .form-success {
       display: none;
-      background: var(--card-bg);
-      border: 1px solid rgba(255,214,0,0.3);
-      border-left: 4px solid var(--yellow);
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--brand);
+      border-radius: 12px;
       padding: 32px 24px;
       text-align: center;
     }
 
-    .form-success h3 { font-size: 1.8rem; margin-bottom: 12px; color: var(--yellow); }
-    .form-success p { color: var(--gray); }
+    .form-success h3 { font-size: 1.8rem; margin-bottom: 12px; color: var(--brand); }
+    .form-success p { color: var(--text-muted); }
 
     /* ===================== CONTACT SOCIAL ===================== */
     .contact-social {
@@ -795,16 +837,17 @@
       align-items: center;
       gap: 10px;
       text-decoration: none;
-      color: var(--gray);
+      color: var(--text-muted);
       font-size: 0.85rem;
       font-weight: 600;
       padding: 10px 16px;
       border: 1px solid var(--border);
-      background: var(--card-bg);
+      background: var(--bg-alt);
+      border-radius: 8px;
       transition: border-color 0.2s, color 0.2s;
     }
 
-    .contact-social-link:hover { border-color: rgba(255,255,255,0.2); color: var(--white); }
+    .contact-social-link:hover { border-color: var(--brand); color: var(--brand); }
     .contact-social-link svg { width: 20px; height: 20px; flex-shrink: 0; }
 
     /* ===================== SOCIAL ===================== */
@@ -821,16 +864,17 @@
       width: 42px;
       height: 42px;
       border: 1px solid var(--border);
-      color: var(--gray);
+      border-radius: 8px;
+      color: var(--text-muted);
       text-decoration: none;
       transition: color 0.2s, border-color 0.2s, background 0.2s;
       flex-shrink: 0;
     }
 
     .social-link:hover {
-      color: var(--yellow);
-      border-color: var(--yellow);
-      background: rgba(255, 214, 0, 0.06);
+      color: var(--brand);
+      border-color: var(--brand);
+      background: var(--brand-tint);
     }
 
     .social-link svg { width: 18px; height: 18px; fill: currentColor; }
@@ -838,7 +882,8 @@
     /* ===================== FOOTER ===================== */
     footer {
       padding: 64px 0 40px;
-      border-top: 1px solid var(--yellow);
+      border-top: 1px solid var(--border);
+      background: var(--bg-alt);
       position: relative;
       z-index: 1;
     }
@@ -854,13 +899,13 @@
     .footer-logo {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 2.8rem;
-      color: var(--yellow);
+      color: var(--brand);
       letter-spacing: 0.05em;
     }
 
     .footer-tagline {
       font-size: 0.9rem;
-      color: var(--gray);
+      color: var(--text-muted);
       letter-spacing: 0.05em;
     }
 
@@ -877,12 +922,12 @@
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--gray);
+      color: var(--text-muted);
       text-decoration: none;
       transition: color 0.2s;
     }
 
-    .footer-links a:hover { color: var(--yellow); }
+    .footer-links a:hover { color: var(--brand); }
 
     .footer-bottom {
       width: 100%;
@@ -894,15 +939,16 @@
       gap: 8px;
     }
 
-    .footer-bottom p { font-size: 0.78rem; color: #444444; }
+    .footer-bottom p { font-size: 0.78rem; color: var(--text-muted); }
 
-    .footer-bottom strong { color: var(--gray); }
+    .footer-bottom strong { color: var(--text-muted); }
 
     /* ===================== CAL.COM EMBED ===================== */
     .cal-embed-wrap {
-      background: var(--card-bg);
+      background: var(--bg-alt);
       border: 1px solid var(--border);
-      border-top: 3px solid var(--yellow);
+      border-top: 3px solid var(--brand);
+      border-radius: 12px;
       overflow: hidden;
       min-height: 620px;
       position: relative;
@@ -914,14 +960,14 @@
     }
 
     /* ===================== MISC ===================== */
-    .yellow { color: var(--yellow); }
+    .brand-accent { color: var(--brand); }
 
-    ::selection { background: var(--yellow); color: var(--black); }
+    ::selection { background: var(--brand); color: var(--on-brand); }
 
     /* Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--black); }
-    ::-webkit-scrollbar-thumb { background: var(--yellow); }
+    ::-webkit-scrollbar-track { background: var(--bg-alt); }
+    ::-webkit-scrollbar-thumb { background: var(--brand); }
   </style>
 </head>
 <body>
@@ -946,50 +992,55 @@
   <!-- ==================== HERO ==================== -->
   <section id="hero">
     <div class="container">
-      <div class="hero-content">
-        <div class="hero-eyebrow fade-up">
-          <div class="pulse-dot"></div>
-          <span>Live in 7 Days — Guaranteed</span>
-        </div>
-        <h1 class="fade-up delay-1">
-          Your Phone Rings.<br>
-          Nobody Answers.<br>
-          <em class="yellow">That's $300–$800 Gone. Every Single Time.</em>
-        </h1>
-        <p class="hero-sub fade-up delay-2">
-          Every missed call is a booked appointment for your competitor. Easier Systems installs an AI Receptionist that answers 24/7, books appointments automatically, and costs half a human — live in 7 days.
-        </p>
-        <p class="fade-up delay-2" style="color:var(--yellow); font-size:0.95rem; font-weight:600; max-width:620px; margin-bottom:32px; line-height:1.6;">The average HVAC or plumbing business misses 12 calls a week. At $300–$800 per job, that's up to $9,600/month walking straight to your competitor.</p>
-        <div class="hero-cta-group fade-up delay-3">
-          <div>
-            <a href="https://cal.com/easiersystems/book" class="btn-primary">See How Much You're Losing →</a>
-          </div>
-          <div class="hero-trust">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-eyebrow fade-up">
             <div class="pulse-dot"></div>
-            <span>Done-for-you. <strong>Live in 7 days.</strong> 5 new appointments in 30 days — or we work free until it does.</span>
+            <span>Live in 7 Days — Guaranteed</span>
           </div>
-          <p style="color:var(--yellow); font-size:0.82rem; font-weight:600; margin-top:8px;">⚠️ We onboard 3 new clients per month to guarantee the 7-day install. 2 of 3 onboarding spots remaining this month.</p>
+          <h1 class="fade-up delay-1">
+            Your Phone Rings.<br>
+            Nobody Answers.<br>
+            <em class="brand-accent">That's $300–$800 Gone. Every Single Time.</em>
+          </h1>
+          <p class="hero-sub fade-up delay-2">
+            Every missed call is a booked appointment for your competitor. Easier Systems installs an AI Receptionist that answers 24/7, books appointments automatically, and costs half a human — live in 7 days.
+          </p>
+          <p class="fade-up delay-2" style="color:var(--brand); font-size:0.95rem; font-weight:600; max-width:620px; margin-bottom:32px; line-height:1.6;">The average HVAC or plumbing business misses 12 calls a week. At $300–$800 per job, that's up to $9,600/month walking straight to your competitor.</p>
+          <div class="hero-cta-group fade-up delay-3">
+            <div>
+              <a href="https://cal.com/easiersystems/book" class="btn-primary">See How Much You're Losing →</a>
+            </div>
+            <div class="hero-trust">
+              <div class="pulse-dot"></div>
+              <span>Done-for-you. <strong>Live in 7 days.</strong> 5 new appointments in 30 days — or we work free until it does.</span>
+            </div>
+            <p style="color:var(--brand); font-size:0.82rem; font-weight:600; margin-top:8px;">⚠️ We onboard 3 new clients per month to guarantee the 7-day install. 2 of 3 onboarding spots remaining this month.</p>
+          </div>
+        </div>
+        <div class="hero-visual fade-up delay-2">
+          <img src="/assets/images/hvac-tech.jpg" alt="HVAC technician repairing an outdoor air conditioning unit on the job" width="900" height="600" loading="eager" />
         </div>
       </div>
     </div>
   </section>
 
   <!-- ==================== SOCIAL PROOF ==================== -->
-  <section id="results" style="padding:64px 0; border-top:1px solid rgba(255,214,0,0.15); background:#0a0a0a;">
+  <section id="results" style="padding:64px 0; border-top:1px solid var(--border); background:var(--bg-alt);">
     <div class="container">
       <div class="section-label fade-up" style="justify-content:center; margin-bottom:40px;">Results</div>
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(255,214,0,0.1);" class="results-grid">
-        <div class="fade-up" style="background:#000; padding:40px 32px; text-align:center; border-top:3px solid var(--yellow);">
-          <div style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2.8rem,6vw,4rem); color:var(--yellow); line-height:1; margin-bottom:12px;">168 hrs/week</div>
-          <p style="color:#fff; font-size:0.9rem; line-height:1.5;">Your AI Receptionist never clocks out</p>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--border); border-radius:12px; overflow:hidden;" class="results-grid">
+        <div class="fade-up" style="background:var(--bg); padding:40px 32px; text-align:center; border-top:3px solid var(--brand);">
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2.8rem,6vw,4rem); color:var(--brand); line-height:1; margin-bottom:12px;">168 hrs/week</div>
+          <p style="color:var(--text); font-size:0.9rem; line-height:1.5;">Your AI Receptionist never clocks out</p>
         </div>
-        <div class="fade-up delay-1" style="background:#000; padding:40px 32px; text-align:center; border-top:3px solid var(--yellow);">
-          <div style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2.8rem,6vw,4rem); color:var(--yellow); line-height:1; margin-bottom:12px;">7 Days</div>
-          <p style="color:#fff; font-size:0.9rem; line-height:1.5;">From zero to fully installed</p>
+        <div class="fade-up delay-1" style="background:var(--bg); padding:40px 32px; text-align:center; border-top:3px solid var(--brand);">
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2.8rem,6vw,4rem); color:var(--brand); line-height:1; margin-bottom:12px;">7 Days</div>
+          <p style="color:var(--text); font-size:0.9rem; line-height:1.5;">From zero to fully installed</p>
         </div>
-        <div class="fade-up delay-2" style="background:#000; padding:40px 32px; text-align:center; border-top:3px solid var(--yellow);">
-          <div style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2.8rem,6vw,4rem); color:var(--yellow); line-height:1; margin-bottom:12px;">5 Appointments</div>
-          <p style="color:#fff; font-size:0.9rem; line-height:1.5;">Guaranteed in 30 days or we work free</p>
+        <div class="fade-up delay-2" style="background:var(--bg); padding:40px 32px; text-align:center; border-top:3px solid var(--brand);">
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2.8rem,6vw,4rem); color:var(--brand); line-height:1; margin-bottom:12px;">5 Appointments</div>
+          <p style="color:var(--text); font-size:0.9rem; line-height:1.5;">Guaranteed in 30 days or we work free</p>
         </div>
       </div>
     </div>
@@ -1000,41 +1051,41 @@
   </style>
 
   <!-- ==================== TESTIMONIALS ==================== -->
-  <section id="testimonials" style="padding:80px 0;border-top:1px solid #1a1a1a;position:relative;z-index:1;">
+  <section id="testimonials" style="padding:80px 0;border-top:1px solid var(--border);position:relative;z-index:1;">
     <div class="container">
-      <div class="section-label fade-up" style="font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#FFD600;margin-bottom:12px;">What Clients Say</div>
-      <h2 class="fade-up" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.2rem);line-height:1.05;letter-spacing:0.03em;margin-bottom:48px;">Real Businesses.<br/>Real Results.</h2>
+      <div class="section-label fade-up" style="font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--brand);margin-bottom:12px;">What Clients Say</div>
+      <h2 class="fade-up" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.2rem);line-height:1.05;letter-spacing:0.03em;margin-bottom:48px;color:var(--text);">Real Businesses.<br/>Real Results.</h2>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;">
 
-        <div style="background:#0d0d0d;border:1px solid #1a1a1a;border-top:3px solid #FFD600;border-radius:4px;padding:28px 24px;">
-          <p style="font-size:0.95rem;color:#ccc;line-height:1.7;margin-bottom:24px;">"I was skeptical but within the first week it booked 3 jobs I would have missed. Paid for itself immediately."</p>
+        <div style="background:var(--bg-alt);border:1px solid var(--border);border-top:3px solid var(--brand);border-radius:12px;padding:28px 24px;box-shadow:0 1px 2px rgba(15,23,42,0.04);">
+          <p style="font-size:0.95rem;color:var(--text-muted);line-height:1.7;margin-bottom:24px;">"I was skeptical but within the first week it booked 3 jobs I would have missed. Paid for itself immediately."</p>
           <div style="display:flex;align-items:center;gap:12px;">
-            <div style="width:40px;height:40px;border-radius:50%;background:#1a1a1a;border:1px solid #333;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:#FFD600;">D</div>
+            <div style="width:40px;height:40px;border-radius:50%;background:var(--brand-tint);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--brand);">D</div>
             <div>
-              <div style="font-weight:700;font-size:0.88rem;color:#fff;">Dan</div>
-              <div style="font-size:0.78rem;color:#555;">Electrician — Wisconsin</div>
+              <div style="font-weight:700;font-size:0.88rem;color:var(--text);">Dan</div>
+              <div style="font-size:0.78rem;color:var(--text-muted);">Electrician — Wisconsin</div>
             </div>
           </div>
         </div>
 
-        <div style="background:#0d0d0d;border:1px solid #1a1a1a;border-top:3px solid #FFD600;border-radius:4px;padding:28px 24px;">
-          <p style="font-size:0.95rem;color:#ccc;line-height:1.7;margin-bottom:24px;">"Missed calls used to cost me jobs — now every call gets answered and I haven't lost a lead since."</p>
+        <div style="background:var(--bg-alt);border:1px solid var(--border);border-top:3px solid var(--brand);border-radius:12px;padding:28px 24px;box-shadow:0 1px 2px rgba(15,23,42,0.04);">
+          <p style="font-size:0.95rem;color:var(--text-muted);line-height:1.7;margin-bottom:24px;">"Missed calls used to cost me jobs — now every call gets answered and I haven't lost a lead since."</p>
           <div style="display:flex;align-items:center;gap:12px;">
-            <div style="width:40px;height:40px;border-radius:50%;background:#1a1a1a;border:1px solid #333;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:#FFD600;">R</div>
+            <div style="width:40px;height:40px;border-radius:50%;background:var(--brand-tint);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--brand);">R</div>
             <div>
-              <div style="font-weight:700;font-size:0.88rem;color:#fff;">Ryan</div>
-              <div style="font-size:0.78rem;color:#555;">Chiropractor — Wisconsin</div>
+              <div style="font-weight:700;font-size:0.88rem;color:var(--text);">Ryan</div>
+              <div style="font-size:0.78rem;color:var(--text-muted);">Chiropractor — Wisconsin</div>
             </div>
           </div>
         </div>
 
-        <div style="background:#0d0d0d;border:1px solid #1a1a1a;border-top:3px solid #FFD600;border-radius:4px;padding:28px 24px;">
-          <p style="font-size:0.95rem;color:#ccc;line-height:1.7;margin-bottom:24px;">"My phone used to go to voicemail after hours. Now those calls turn into appointments automatically. Wish I did this sooner."</p>
+        <div style="background:var(--bg-alt);border:1px solid var(--border);border-top:3px solid var(--brand);border-radius:12px;padding:28px 24px;box-shadow:0 1px 2px rgba(15,23,42,0.04);">
+          <p style="font-size:0.95rem;color:var(--text-muted);line-height:1.7;margin-bottom:24px;">"My phone used to go to voicemail after hours. Now those calls turn into appointments automatically. Wish I did this sooner."</p>
           <div style="display:flex;align-items:center;gap:12px;">
-            <div style="width:40px;height:40px;border-radius:50%;background:#1a1a1a;border:1px solid #333;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:#FFD600;">A</div>
+            <div style="width:40px;height:40px;border-radius:50%;background:var(--brand-tint);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--brand);">A</div>
             <div>
-              <div style="font-weight:700;font-size:0.88rem;color:#fff;">Alex</div>
-              <div style="font-size:0.78rem;color:#555;">Roofing — Texas</div>
+              <div style="font-weight:700;font-size:0.88rem;color:var(--text);">Alex</div>
+              <div style="font-size:0.78rem;color:var(--text-muted);">Roofing — Texas</div>
             </div>
           </div>
         </div>
@@ -1051,50 +1102,50 @@
         <h2 class="fade-up delay-1">Human Receptionist vs.<br>AI Receptionist</h2>
       </div>
 
-      <div class="fade-up delay-1" style="overflow-x:auto;">
+      <div class="fade-up delay-1" style="overflow-x:auto; border:1px solid var(--border); border-radius:12px;">
         <table style="width:100%; border-collapse:collapse; font-family:'DM Sans',sans-serif;">
           <thead>
             <tr>
-              <th style="text-align:left; padding:16px 20px; background:#0d0d0d; border-bottom:2px solid #1a1a1a; color:#888; font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; width:34%;"></th>
-              <th style="text-align:center; padding:16px 20px; background:#0d0d0d; border-bottom:2px solid #1a1a1a; color:#888; font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; width:33%;">Human Receptionist</th>
-              <th style="text-align:center; padding:16px 20px; background:rgba(255,214,0,0.06); border-bottom:2px solid var(--yellow); color:var(--yellow); font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; width:33%;">AI Receptionist</th>
+              <th style="text-align:left; padding:16px 20px; background:var(--bg-alt); border-bottom:2px solid var(--border); color:var(--text-muted); font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; width:34%;"></th>
+              <th style="text-align:center; padding:16px 20px; background:var(--bg-alt); border-bottom:2px solid var(--border); color:var(--text-muted); font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; width:33%;">Human Receptionist</th>
+              <th style="text-align:center; padding:16px 20px; background:var(--brand-tint); border-bottom:2px solid var(--brand); color:var(--brand); font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; width:33%;">AI Receptionist</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td style="padding:18px 20px; border-bottom:1px solid #1a1a1a; color:#ccc; font-size:0.9rem; font-weight:600;">Monthly cost</td>
-              <td style="padding:18px 20px; border-bottom:1px solid #1a1a1a; text-align:center; color:#888; font-size:0.9rem;">$3,000–$4,500/mo</td>
-              <td style="padding:18px 20px; border-bottom:1px solid rgba(255,214,0,0.15); text-align:center; background:rgba(255,214,0,0.03); color:var(--yellow); font-size:0.9rem; font-weight:700;">$1,997/mo + $1,500 setup</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); color:var(--text); font-size:0.9rem; font-weight:600;">Monthly cost</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); text-align:center; color:var(--text-muted); font-size:0.9rem;">$3,000–$4,500/mo</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); text-align:center; background:var(--brand-tint); color:var(--brand); font-size:0.9rem; font-weight:700;">$1,997/mo + $1,500 setup</td>
             </tr>
             <tr>
-              <td style="padding:18px 20px; border-bottom:1px solid #1a1a1a; color:#ccc; font-size:0.9rem; font-weight:600;">Hours available</td>
-              <td style="padding:18px 20px; border-bottom:1px solid #1a1a1a; text-align:center; color:#888; font-size:0.9rem;">40 hrs/week</td>
-              <td style="padding:18px 20px; border-bottom:1px solid rgba(255,214,0,0.15); text-align:center; background:rgba(255,214,0,0.03); color:var(--yellow); font-size:0.9rem; font-weight:700;">168 hrs/week</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); color:var(--text); font-size:0.9rem; font-weight:600;">Hours available</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); text-align:center; color:var(--text-muted); font-size:0.9rem;">40 hrs/week</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); text-align:center; background:var(--brand-tint); color:var(--brand); font-size:0.9rem; font-weight:700;">168 hrs/week</td>
             </tr>
             <tr>
-              <td style="padding:18px 20px; border-bottom:1px solid #1a1a1a; color:#ccc; font-size:0.9rem; font-weight:600;">Answers calls after hours</td>
-              <td style="padding:18px 20px; border-bottom:1px solid #1a1a1a; text-align:center; color:#ff5555; font-size:1rem;">✕</td>
-              <td style="padding:18px 20px; border-bottom:1px solid rgba(255,214,0,0.15); text-align:center; background:rgba(255,214,0,0.03); color:var(--yellow); font-size:1rem;">✓</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); color:var(--text); font-size:0.9rem; font-weight:600;">Answers calls after hours</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); text-align:center; color:var(--danger); font-size:1rem;">✕</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); text-align:center; background:var(--brand-tint); color:var(--brand); font-size:1rem;">✓</td>
             </tr>
             <tr>
-              <td style="padding:18px 20px; border-bottom:1px solid #1a1a1a; color:#ccc; font-size:0.9rem; font-weight:600;">Books appointments automatically</td>
-              <td style="padding:18px 20px; border-bottom:1px solid #1a1a1a; text-align:center; color:#888; font-size:0.9rem;">Sometimes</td>
-              <td style="padding:18px 20px; border-bottom:1px solid rgba(255,214,0,0.15); text-align:center; background:rgba(255,214,0,0.03); color:var(--yellow); font-size:1rem;">✓ Every time</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); color:var(--text); font-size:0.9rem; font-weight:600;">Books appointments automatically</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); text-align:center; color:var(--text-muted); font-size:0.9rem;">Sometimes</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); text-align:center; background:var(--brand-tint); color:var(--brand); font-size:1rem;">✓ Every time</td>
             </tr>
             <tr>
-              <td style="padding:18px 20px; border-bottom:1px solid #1a1a1a; color:#ccc; font-size:0.9rem; font-weight:600;">Calls in sick</td>
-              <td style="padding:18px 20px; border-bottom:1px solid #1a1a1a; text-align:center; color:#ff5555; font-size:0.9rem;">Yes</td>
-              <td style="padding:18px 20px; border-bottom:1px solid rgba(255,214,0,0.15); text-align:center; background:rgba(255,214,0,0.03); color:var(--yellow); font-size:1rem;">✓ Never</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); color:var(--text); font-size:0.9rem; font-weight:600;">Calls in sick</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); text-align:center; color:var(--danger); font-size:0.9rem;">Yes</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); text-align:center; background:var(--brand-tint); color:var(--brand); font-size:1rem;">✓ Never</td>
             </tr>
             <tr>
-              <td style="padding:18px 20px; border-bottom:1px solid #1a1a1a; color:#ccc; font-size:0.9rem; font-weight:600;">Needs managing</td>
-              <td style="padding:18px 20px; border-bottom:1px solid #1a1a1a; text-align:center; color:#ff5555; font-size:0.9rem;">Yes</td>
-              <td style="padding:18px 20px; border-bottom:1px solid rgba(255,214,0,0.15); text-align:center; background:rgba(255,214,0,0.03); color:var(--yellow); font-size:1rem;">✓ Never</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); color:var(--text); font-size:0.9rem; font-weight:600;">Needs managing</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); text-align:center; color:var(--danger); font-size:0.9rem;">Yes</td>
+              <td style="padding:18px 20px; border-bottom:1px solid var(--border); text-align:center; background:var(--brand-tint); color:var(--brand); font-size:1rem;">✓ Never</td>
             </tr>
             <tr>
-              <td style="padding:18px 20px; color:#ccc; font-size:0.9rem; font-weight:600;">Live in</td>
-              <td style="padding:18px 20px; text-align:center; color:#888; font-size:0.9rem;">2–4 weeks (hiring + training)</td>
-              <td style="padding:18px 20px; text-align:center; background:rgba(255,214,0,0.03); color:var(--yellow); font-size:0.9rem; font-weight:700;">7 days. Guaranteed.</td>
+              <td style="padding:18px 20px; color:var(--text); font-size:0.9rem; font-weight:600;">Live in</td>
+              <td style="padding:18px 20px; text-align:center; color:var(--text-muted); font-size:0.9rem;">2–4 weeks (hiring + training)</td>
+              <td style="padding:18px 20px; text-align:center; background:var(--brand-tint); color:var(--brand); font-size:0.9rem; font-weight:700;">7 days. Guaranteed.</td>
             </tr>
           </tbody>
         </table>
@@ -1118,31 +1169,31 @@
         <div class="service-card featured fade-up">
           <div class="service-num">01</div>
           <h3>AI Receptionist</h3>
-          <p style="color:var(--yellow); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">Never Miss Another Call</p>
+          <p style="color:var(--brand); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">Never Miss Another Call</p>
           <p>An AI voice agent that answers 100% of your inbound calls 24/7/365. Qualifies callers, answers FAQs, and books appointments directly into your calendar. Works 168 hours a week. Never calls in sick. Costs half a human receptionist.</p>
-          <p style="color:var(--yellow); font-weight:700; margin-top:16px; font-size:0.9rem;">$1,500 setup &nbsp;·&nbsp; $1,997/mo</p>
+          <p style="color:var(--brand); font-weight:700; margin-top:16px; font-size:0.9rem;">$1,500 setup &nbsp;·&nbsp; $1,997/mo</p>
         </div>
         <div class="service-card fade-up delay-1">
           <div class="service-num">02</div>
           <h3>Revenue Reactivator</h3>
-          <p style="color:var(--yellow); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">Wake Up Your Dead Leads</p>
+          <p style="color:var(--brand); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">Wake Up Your Dead Leads</p>
           <p>AI outbound calling that contacts your past clients and dormant leads, reactivates them, and books them back into your calendar. Most businesses see $5,000–$15,000 in reactivated revenue in the first 30 days.</p>
-          <p style="color:var(--yellow); font-weight:700; margin-top:16px; font-size:0.9rem;">$1,500/mo add-on</p>
+          <p style="color:var(--brand); font-weight:700; margin-top:16px; font-size:0.9rem;">$1,500/mo add-on</p>
         </div>
         <div class="service-card fade-up delay-2">
           <div class="service-num">03</div>
           <h3>Review Machine</h3>
-          <p style="color:var(--yellow); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">Own Page One of Google</p>
+          <p style="color:var(--brand); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">Own Page One of Google</p>
           <p>Automated review requests after every appointment. AI-generated review responses within 24 hours. Monthly reputation reports. Watch your Google reviews climb every single week.</p>
-          <p style="color:var(--yellow); font-weight:700; margin-top:16px; font-size:0.9rem;">$497/mo add-on</p>
+          <p style="color:var(--brand); font-weight:700; margin-top:16px; font-size:0.9rem;">$497/mo add-on</p>
         </div>
-        <div class="service-card fade-up delay-3" style="border-left-color:var(--yellow); background:var(--card-bg);">
-          <div class="service-num" style="position:absolute; top:12px; right:12px; font-size:0.65rem; font-weight:800; letter-spacing:0.15em; color:var(--black); background:var(--yellow); padding:3px 8px; font-family:'DM Sans',sans-serif;">BEST VALUE</div>
+        <div class="service-card fade-up delay-3" style="border-left-color:var(--brand); background:var(--bg-alt);">
+          <div class="service-num" style="position:absolute; top:12px; right:12px; font-size:0.65rem; font-weight:800; letter-spacing:0.15em; color:var(--on-brand); background:var(--brand); padding:3px 8px; border-radius:999px; font-family:'DM Sans',sans-serif;">BEST VALUE</div>
           <div class="service-num">04</div>
           <h3>The AI Front Office</h3>
-          <p style="color:var(--yellow); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">Everything. Installed in 7 Days.</p>
+          <p style="color:var(--brand); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;">Everything. Installed in 7 Days.</p>
           <p>AI Receptionist + Revenue Reactivator + Review Machine. The full system. One install. One check. Guaranteed 5 new booked appointments in 30 days or we work free until it does.</p>
-          <p style="color:var(--yellow); font-weight:700; margin-top:16px; font-size:0.9rem;">$3,497/mo</p>
+          <p style="color:var(--brand); font-weight:700; margin-top:16px; font-size:0.9rem;">$3,497/mo</p>
         </div>
       </div>
     </div>
@@ -1164,7 +1215,7 @@
         <div class="offer-body fade-up delay-2">
           <p>We don't sell software. We don't hand you a login and a tutorial. We install an AI Receptionist that answers every call, qualifies every lead, and books appointments into your calendar — 24 hours a day, 7 days a week.</p>
           <p>It costs half what you'd pay a human receptionist and works 4x the hours. If it doesn't generate at least 5 new booked appointments in your first 30 days — we keep working, for free, until it does.</p>
-          <p><strong style="color:var(--white)">No contracts. No excuses. Just results.</strong></p>
+          <p><strong style="color:var(--text)">No contracts. No excuses. Just results.</strong></p>
         </div>
 
         <div class="fade-up delay-3">
@@ -1220,6 +1271,9 @@
     <div class="container">
       <div class="audience-inner">
         <div>
+          <div class="audience-visual">
+            <img src="/assets/images/roofer-ladder.jpg" alt="Roofer installing shingles with a nail gun on a residential job" width="1200" height="800" loading="lazy" />
+          </div>
           <div class="section-label fade-up">Is This You?</div>
           <h2 class="fade-up delay-1">Built for Local Service Businesses That Are Done Losing Leads</h2>
 
@@ -1227,7 +1281,7 @@
             <li class="fade-up delay-1"><span class="check-icon">✅</span> Dentists, Med Spas, Chiropractors</li>
             <li class="fade-up delay-2"><span class="check-icon">✅</span> HVAC, Plumbers, Electricians, Roofers</li>
             <li class="fade-up delay-2"><span class="check-icon">✅</span> Lawyers, Real Estate Agents</li>
-            <li class="fade-up delay-3"><span class="check-icon">✅</span> Gyms, Salons, Barbershops</li>
+            <li class="fade-up delay-3"><span class="check-icon">✅</span> Gyms</li>
             <li class="fade-up delay-3"><span class="check-icon">✅</span> Any appointment-based business missing calls and losing revenue to competitors</li>
           </ul>
         </div>
@@ -1408,7 +1462,7 @@
     });
 
     Cal.ns.audit("ui", {
-      theme: "dark",
+      theme: "light",
       hideEventTypeDetails: false,
       layout: "month_view"
     });
@@ -1417,9 +1471,11 @@
     const header = document.querySelector('header');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 60) {
-        header.style.background = 'rgba(0,0,0,0.98)';
+        header.style.background = 'rgba(255,255,255,0.98)';
+        header.style.boxShadow = '0 1px 2px rgba(15,23,42,0.06)';
       } else {
-        header.style.background = 'rgba(0,0,0,0.92)';
+        header.style.background = 'rgba(255,255,255,0.92)';
+        header.style.boxShadow = 'none';
       }
     }, { passive: true });
   </script>

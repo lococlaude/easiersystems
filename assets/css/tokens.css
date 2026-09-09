@@ -1,0 +1,26 @@
+/* Easier Systems — shared design tokens (2026-09 light/blue rebrand)
+   Linked by every marketing page so color changes propagate globally
+   instead of being hardcoded per page. */
+:root {
+  --bg: #FFFFFF;
+  --bg-alt: #F8FAFC;
+  --text: #0F172A;
+  --text-muted: #475569;
+  --brand: #2563EB;
+  --brand-hover: #1D4ED8;
+  --brand-tint: rgba(37, 99, 235, 0.08);
+  --brand-tint-strong: rgba(37, 99, 235, 0.14);
+  --border: #E2E8F0;
+  --danger: #DC2626;
+  --success: #16A34A;
+  --warning: #D97706;
+  --on-brand: #FFFFFF; /* text/icon color placed on top of --brand or --brand-hover fills */
+
+  /* legacy variable names kept as aliases so any missed inline reference
+     still resolves to an on-brand color instead of breaking */
+  --black: var(--text);
+  --yellow: var(--brand);
+  --white: var(--bg);
+  --gray: var(--text-muted);
+  --card-bg: var(--bg-alt);
+}
