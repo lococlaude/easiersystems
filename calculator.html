@@ -8,23 +8,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/tokens.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --black: #0a0a0a;
-    --card: #141414;
-    --border: #222;
-    --yellow: #F5C518;
-    --yellow-dim: rgba(245,197,24,0.10);
-    --yellow-glow: rgba(245,197,24,0.22);
-    --white: #F8F8F8;
-    --muted: #777;
-  }
-
   body {
-    background: var(--black);
-    color: var(--white);
+    background: var(--bg);
+    color: var(--text);
     font-family: 'DM Sans', sans-serif;
     font-size: 16px;
     line-height: 1.6;
@@ -43,10 +33,10 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: 20px;
     letter-spacing: 3px;
-    color: var(--white);
+    color: var(--text);
     text-decoration: none;
   }
-  .logo span { color: var(--yellow); }
+  .logo span { color: var(--brand); }
 
   /* PAGE — narrow, focused, nothing competing */
   .page {
@@ -61,28 +51,29 @@
     font-size: clamp(50px, 12vw, 80px);
     line-height: 0.92;
     letter-spacing: 0.5px;
-    color: var(--white);
+    color: var(--text);
     margin-bottom: 16px;
   }
-  h1 em { font-style: normal; color: var(--yellow); display: block; }
+  h1 em { font-style: normal; color: var(--brand); display: block; }
 
   /* 2. SUBHEADLINE */
   .subhead {
     font-size: 17px;
-    color: #aaa;
+    color: var(--text-muted);
     line-height: 1.65;
     margin-bottom: 36px;
     max-width: 480px;
   }
-  .subhead strong { color: var(--white); }
+  .subhead strong { color: var(--text); }
 
   /* 3. FORM CARD */
   .form-card {
-    background: var(--card);
+    background: var(--bg-alt);
     border: 1px solid var(--border);
-    border-top: 3px solid var(--yellow);
-    border-radius: 14px;
+    border-top: 3px solid var(--brand);
+    border-radius: 12px;
     padding: 32px 28px;
+    box-shadow: 0 1px 2px rgba(15,23,42,0.04);
   }
 
   .form-field { margin-bottom: 14px; }
@@ -90,19 +81,19 @@
     display: block;
     font-size: 12px;
     font-weight: 700;
-    color: #888;
+    color: var(--text-muted);
     letter-spacing: 0.8px;
     text-transform: uppercase;
     margin-bottom: 6px;
   }
   .form-input, .form-select {
     width: 100%;
-    background: #1a1a1a;
-    border: 1px solid #2a2a2a;
-    border-radius: 9px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
     padding: 0 15px;
     height: 50px;
-    color: var(--white);
+    color: var(--text);
     font-family: 'DM Sans', sans-serif;
     font-size: 15px;
     outline: none;
@@ -111,19 +102,19 @@
     appearance: none;
   }
   .form-input:focus, .form-select:focus {
-    border-color: var(--yellow);
-    box-shadow: 0 0 0 3px var(--yellow-dim);
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px var(--brand-tint);
   }
-  .form-input::placeholder { color: #444; }
-  .form-select option { background: #1a1a1a; color: var(--white); }
+  .form-input::placeholder { color: #94A3B8; }
+  .form-select option { background: var(--bg); color: var(--text); }
 
   /* 4. SUBMIT */
   .submit-btn {
     width: 100%;
-    background: var(--yellow);
-    color: #000;
+    background: var(--brand);
+    color: var(--on-brand);
     border: none;
-    border-radius: 9px;
+    border-radius: 8px;
     padding: 17px 24px;
     font-family: 'Bebas Neue', sans-serif;
     font-size: 22px;
@@ -137,17 +128,18 @@
     gap: 10px;
   }
   .submit-btn:hover {
-    background: #ffd200;
+    background: var(--brand-hover);
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px var(--yellow-glow);
+    box-shadow: 0 6px 20px rgba(37,99,235,0.28);
   }
   .submit-btn:active { transform: translateY(0); }
   .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .submit-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--brand-tint-strong); }
 
   .spinner {
     width: 18px; height: 18px;
-    border: 2px solid rgba(0,0,0,0.3);
-    border-top-color: #000;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: var(--on-brand);
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
     display: none;
@@ -156,7 +148,7 @@
 
   .privacy {
     font-size: 12px;
-    color: #444;
+    color: var(--text-muted);
     text-align: center;
     margin-top: 10px;
   }
@@ -164,12 +156,13 @@
   /* 5. CALCULATOR — the "image/content" that unlocks */
   .calc {
     display: none;
-    background: var(--card);
+    background: var(--bg-alt);
     border: 1px solid var(--border);
-    border-top: 3px solid var(--yellow);
-    border-radius: 14px;
+    border-top: 3px solid var(--brand);
+    border-radius: 12px;
     padding: 32px 28px;
     animation: fadeUp 0.4s ease;
+    box-shadow: 0 1px 2px rgba(15,23,42,0.04);
   }
   .calc.unlocked { display: block; }
   @keyframes fadeUp {
@@ -179,7 +172,7 @@
 
   .calc-hint {
     font-size: 13px;
-    color: var(--muted);
+    color: var(--text-muted);
     margin-bottom: 26px;
     font-style: italic;
   }
@@ -189,29 +182,29 @@
     display: block;
     font-size: 12px;
     font-weight: 700;
-    color: #888;
+    color: var(--text-muted);
     letter-spacing: 0.8px;
     text-transform: uppercase;
     margin-bottom: 6px;
   }
   .field-note {
     font-size: 11px;
-    color: #555;
+    color: var(--text-muted);
     margin-bottom: 7px;
     font-style: italic;
   }
   .input-wrap {
     display: flex;
     align-items: center;
-    background: #1a1a1a;
-    border: 1px solid #2a2a2a;
-    border-radius: 9px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
     overflow: hidden;
     transition: border-color 0.18s, box-shadow 0.18s;
   }
   .input-wrap:focus-within {
-    border-color: var(--yellow);
-    box-shadow: 0 0 0 3px var(--yellow-dim);
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px var(--brand-tint);
   }
   .prefix {
     padding: 0 13px;
@@ -219,9 +212,9 @@
     display: flex;
     align-items: center;
     font-size: 15px;
-    color: var(--muted);
-    background: #141414;
-    border-right: 1px solid #2a2a2a;
+    color: var(--text-muted);
+    background: var(--bg-alt);
+    border-right: 1px solid var(--border);
     user-select: none;
     flex-shrink: 0;
   }
@@ -230,7 +223,7 @@
     background: transparent;
     border: none;
     outline: none;
-    color: var(--white);
+    color: var(--text);
     font-family: 'DM Sans', sans-serif;
     font-size: 15px;
     font-weight: 500;
@@ -243,42 +236,42 @@
   input[type="number"]::-webkit-outer-spin-button,
   input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
   .field select { cursor: pointer; }
-  .field select option { background: #1a1a1a; }
+  .field select option { background: var(--bg); }
 
   /* RESULT BOX */
   .result {
-    background: #0d0d0d;
-    border: 1px solid #222;
-    border-radius: 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
     padding: 24px;
     text-align: center;
     margin: 24px 0 20px;
     transition: border-color 0.3s, box-shadow 0.3s;
   }
   .result.lit {
-    border-color: var(--yellow);
-    box-shadow: 0 0 32px var(--yellow-glow);
+    border-color: var(--brand);
+    box-shadow: 0 0 32px var(--brand-tint-strong);
   }
   .result-label {
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #444;
+    color: var(--text-muted);
     margin-bottom: 10px;
   }
   .result-num {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 64px;
     line-height: 1;
-    color: #2a2a2a;
+    color: #CBD5E1;
     transition: color 0.3s;
     letter-spacing: 1px;
   }
-  .result-num.lit { color: var(--yellow); }
-  .result-sub { font-size: 13px; color: #444; margin-top: 8px; }
-  .result-sub.lit { color: #aaa; }
-  .result-sub strong { color: var(--white); }
+  .result-num.lit { color: var(--brand); }
+  .result-sub { font-size: 13px; color: var(--text-muted); margin-top: 8px; }
+  .result-sub.lit { color: var(--text); }
+  .result-sub strong { color: var(--text); }
 
   /* BREAKDOWN GRID */
   .breakdown {
@@ -289,26 +282,26 @@
   }
   .breakdown.show { display: grid; }
   .bd-item {
-    background: #0d0d0d;
-    border: 1px solid #1e1e1e;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
     border-radius: 8px;
     padding: 12px 14px;
   }
   .bd-val {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 22px;
-    color: var(--white);
+    color: var(--text);
     line-height: 1;
   }
-  .bd-key { font-size: 11px; color: #555; margin-top: 3px; }
+  .bd-key { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
 
   /* CALCULATE BUTTON */
   .calc-btn {
     width: 100%;
-    background: #1a1a1a;
-    color: var(--yellow);
-    border: 1px solid #2e2e2e;
-    border-radius: 9px;
+    background: var(--bg);
+    color: var(--brand);
+    border: 1px solid var(--border);
+    border-radius: 8px;
     padding: 15px;
     font-family: 'Bebas Neue', sans-serif;
     font-size: 18px;
@@ -316,13 +309,14 @@
     cursor: pointer;
     transition: all 0.18s;
   }
-  .calc-btn:hover { background: #222; border-color: var(--yellow); }
+  .calc-btn:hover { background: var(--brand-tint); border-color: var(--brand); }
+  .calc-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--brand-tint-strong); }
 
   /* CTA — appears after calc runs */
   .cta-block {
     display: none;
-    background: var(--yellow-dim);
-    border: 1px solid rgba(245,197,24,0.2);
+    background: var(--brand-tint);
+    border: 1px solid var(--brand-tint-strong);
     border-radius: 12px;
     padding: 24px;
     text-align: center;
@@ -332,28 +326,29 @@
   .cta-block.show { display: block; }
   .cta-block p {
     font-size: 15px;
-    color: #ccc;
+    color: var(--text-muted);
     margin-bottom: 16px;
     line-height: 1.6;
   }
-  .cta-block strong { color: var(--white); }
+  .cta-block strong { color: var(--text); }
   .cta-link {
     display: inline-block;
-    background: var(--yellow);
-    color: #000;
+    background: var(--brand);
+    color: var(--on-brand);
     font-family: 'Bebas Neue', sans-serif;
     font-size: 20px;
     letter-spacing: 1.5px;
     padding: 15px 36px;
-    border-radius: 9px;
+    border-radius: 8px;
     text-decoration: none;
     transition: all 0.18s;
   }
   .cta-link:hover {
-    background: #ffd200;
+    background: var(--brand-hover);
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px var(--yellow-glow);
+    box-shadow: 0 6px 20px rgba(37,99,235,0.28);
   }
+  .cta-link:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--brand-tint-strong); }
 
   /* 6. THREE OBJECTION BULLETS — hidden until calc runs */
   .objections {
@@ -368,14 +363,14 @@
     gap: 14px;
     align-items: flex-start;
     padding: 18px 20px;
-    background: var(--card);
+    background: var(--bg-alt);
     border: 1px solid var(--border);
     border-radius: 12px;
   }
   .obj-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
-  .obj-title { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
-  .obj-body { font-size: 13px; color: var(--muted); line-height: 1.55; }
-  .obj-body strong { color: #ccc; }
+  .obj-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .obj-body { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
+  .obj-body strong { color: var(--text); }
 
   /* FOOTER */
   footer {
@@ -383,10 +378,10 @@
     padding: 28px 24px;
     border-top: 1px solid var(--border);
     font-size: 12px;
-    color: #3a3a3a;
+    color: var(--text-muted);
     margin-top: 60px;
   }
-  footer a { color: #444; text-decoration: none; }
+  footer a { color: var(--text-muted); text-decoration: none; }
 
   /* MOBILE */
   @media (max-width: 560px) {

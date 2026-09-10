@@ -5,50 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Services & Pricing — Easier Systems</title>
 
-  <link rel="icon" type="image/png" href="/easier_systems_logo_transparent.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta property="og:title" content="Services & Pricing — Easier Systems" />
-  <meta name="description" content="Done-for-you AI Receptionist, Revenue Reactivator, and Review Machine for local businesses. Pick your system. Live in 7 days. Guaranteed results." />
-  <meta property="og:description" content="Done-for-you AI Receptionist, Revenue Reactivator, and Review Machine for local businesses. Pick your system. Live in 7 days. Guaranteed results." />
-  <meta property="og:image" content="https://www.easiersystems.com/logo_4_all_yellow_easier_bigger.png" />
+  <meta name="description" content="Done-for-you AI Receptionist for local businesses. Answers every call 24/7 and books appointments while you sleep. Live in 7 days. Guaranteed results." />
+  <meta property="og:description" content="Done-for-you AI Receptionist for local businesses. Answers every call 24/7 and books appointments while you sleep. Live in 7 days. Guaranteed results." />
+  <meta property="og:image" content="https://www.easiersystems.com/og-image.png" />
   <meta property="og:url" content="https://www.easiersystems.com/services" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --black:   #000000;
-      --yellow:  #FFD600;
-      --white:   #FFFFFF;
-      --gray:    #888888;
-      --card-bg: #0d0d0d;
-      --border:  #1a1a1a;
-      --red:     #FF4444;
-    }
-
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--black);
-      color: var(--white);
+      background: var(--bg);
+      color: var(--text);
       font-family: 'DM Sans', sans-serif;
       font-size: 16px;
       line-height: 1.6;
       overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.35;
     }
 
     h1, h2, h3, h4 { font-family: 'Bebas Neue', sans-serif; line-height: 1.05; letter-spacing: 0.03em; }
@@ -71,7 +54,7 @@
       font-weight: 700;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--yellow);
+      color: var(--brand);
       margin-bottom: 16px;
       display: flex;
       align-items: center;
@@ -82,7 +65,7 @@
       display: block;
       width: 32px;
       height: 2px;
-      background: var(--yellow);
+      background: var(--brand);
       flex-shrink: 0;
     }
 
@@ -91,39 +74,40 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: rgba(0,0,0,0.92);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,214,0,0.15);
+      border-bottom: 1px solid var(--border);
       padding: 14px 0;
+      transition: background 0.3s, box-shadow 0.3s;
     }
     header .container { display: flex; align-items: center; justify-content: space-between; }
     .header-logo {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.6rem;
       letter-spacing: 0.05em;
-      color: var(--white);
+      color: var(--text);
       text-decoration: none;
     }
-    .header-logo span { color: var(--yellow); }
+    .header-logo span { color: var(--brand); }
     nav { display: flex; align-items: center; gap: 28px; }
     nav a {
       font-size: 0.85rem;
       font-weight: 600;
-      color: var(--gray);
+      color: var(--text-muted);
       text-decoration: none;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
-    nav a:hover { color: var(--white); }
-    nav a.active { color: var(--yellow); }
+    nav a:hover { color: var(--brand); }
+    nav a.active { color: var(--brand); }
     .nav-links { display: flex; gap: 24px; }
     @media (max-width: 768px) { .nav-links { display: none; } }
 
     .btn-primary {
       display: inline-block;
-      background: var(--yellow);
-      color: var(--black);
+      background: var(--brand);
+      color: var(--on-brand);
       font-size: 0.85rem;
       font-weight: 900;
       letter-spacing: 0.08em;
@@ -131,53 +115,60 @@
       padding: 14px 28px;
       text-decoration: none;
       border: none;
+      border-radius: 8px;
       cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
       line-height: 1;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,214,0,0.35); }
+    .btn-primary:hover { background: var(--brand-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37, 99, 235, 0.28); }
+    .btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--brand-tint-strong); }
 
     .btn-outline {
       display: inline-block;
       background: transparent;
-      color: var(--yellow);
+      color: var(--brand);
       font-size: 0.85rem;
       font-weight: 900;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       padding: 13px 27px;
       text-decoration: none;
-      border: 2px solid var(--yellow);
+      border: 2px solid var(--brand);
+      border-radius: 8px;
       cursor: pointer;
       transition: background 0.2s, color 0.2s;
       line-height: 1;
     }
-    .btn-outline:hover { background: var(--yellow); color: var(--black); }
+    .btn-outline:hover { background: var(--brand); color: var(--on-brand); }
+    .btn-outline:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--brand-tint-strong); }
 
     .btn-ghost {
       display: inline-block;
       background: transparent;
-      color: rgba(255,255,255,0.5);
+      color: var(--text-muted);
       font-size: 0.8rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       padding: 13px 22px;
       text-decoration: none;
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid var(--border);
+      border-radius: 8px;
       cursor: pointer;
       transition: border-color 0.2s, color 0.2s;
     }
-    .btn-ghost:hover { border-color: rgba(255,255,255,0.4); color: var(--white); }
+    .btn-ghost:hover { border-color: var(--brand); color: var(--brand); }
+    .btn-ghost:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--brand-tint-strong); }
 
     /* ===== HERO — INVISIBLE BLEED ===== */
     #hero {
       padding: 148px 0 80px;
-      border-bottom: 1px solid rgba(255,214,0,0.12);
-      background: radial-gradient(ellipse 100% 60% at 50% 0%, rgba(255,214,0,0.04) 0%, transparent 70%);
+      border-bottom: 1px solid var(--border);
+      background: radial-gradient(ellipse 100% 60% at 50% 0%, var(--brand-tint) 0%, transparent 70%);
     }
     .hero-inner { max-width: 820px; }
-    #hero h1 { margin-bottom: 24px; }
+    #hero h1 { margin-bottom: 24px; color: var(--text); }
     .hero-bleed-stat {
       display: flex;
       gap: 32px;
@@ -185,9 +176,10 @@
       margin-bottom: 40px;
     }
     .bleed-item {
-      background: rgba(255,68,68,0.06);
-      border: 1px solid rgba(255,68,68,0.2);
-      border-left: 3px solid var(--red);
+      background: rgba(220,38,38,0.06);
+      border: 1px solid rgba(220,38,38,0.2);
+      border-left: 3px solid var(--danger);
+      border-radius: 12px;
       padding: 16px 20px;
       flex: 1;
       min-width: 200px;
@@ -195,77 +187,81 @@
     .bleed-item .bleed-number {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 2.2rem;
-      color: var(--red);
+      color: var(--danger);
       line-height: 1;
       margin-bottom: 4px;
     }
     .bleed-item .bleed-label {
       font-size: 0.8rem;
-      color: rgba(255,255,255,0.6);
+      color: var(--text-muted);
       font-weight: 600;
       letter-spacing: 0.03em;
     }
     .hero-sub {
       font-size: clamp(1rem, 2vw, 1.15rem);
-      color: #b0b0b0;
+      color: var(--text-muted);
       line-height: 1.75;
       max-width: 680px;
     }
-    .hero-sub strong { color: var(--white); }
+    .hero-sub strong { color: var(--text); }
 
     /* ===== ENTRY POINT — MISSED CALL ===== */
     #entry {
       padding: 80px 0;
-      border-bottom: 1px solid rgba(255,214,0,0.12);
+      border-bottom: 1px solid var(--border);
     }
     .entry-card {
-      background: var(--card-bg);
-      border: 1px solid rgba(255,214,0,0.2);
-      border-left: 6px solid var(--yellow);
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-left: 6px solid var(--brand);
+      border-radius: 12px;
       padding: 48px 44px;
       display: grid;
       grid-template-columns: 1fr 380px;
       gap: 48px;
       align-items: start;
+      box-shadow: 0 1px 2px rgba(15,23,42,0.04);
     }
     @media (max-width: 820px) {
       .entry-card { grid-template-columns: 1fr; gap: 32px; padding: 32px 24px; }
     }
     .entry-badge {
       display: inline-block;
-      background: var(--yellow);
-      color: var(--black);
+      background: var(--brand);
+      color: var(--on-brand);
       font-size: 0.62rem;
       font-weight: 900;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       padding: 5px 12px;
+      border-radius: 999px;
       margin-bottom: 16px;
     }
-    .entry-left h2 { color: var(--white); margin-bottom: 12px; }
+    .entry-left h2 { color: var(--text); margin-bottom: 12px; }
     .entry-tagline {
       font-size: 1rem;
       font-weight: 700;
-      color: var(--yellow);
+      color: var(--brand);
       margin-bottom: 20px;
       letter-spacing: 0.02em;
     }
     .math-box {
-      background: rgba(255,68,68,0.05);
-      border: 1px solid rgba(255,68,68,0.2);
+      background: rgba(220,38,38,0.05);
+      border: 1px solid rgba(220,38,38,0.2);
+      border-radius: 12px;
       padding: 20px 24px;
       margin: 20px 0;
     }
     .math-box p {
       font-size: 0.9rem;
-      color: rgba(255,255,255,0.75);
+      color: var(--text-muted);
       line-height: 1.7;
       margin-bottom: 10px;
     }
     .math-box p:last-child { margin-bottom: 0; }
     .math-box .math-line {
       font-size: 0.85rem;
-      color: var(--red);
+      color: var(--danger);
       font-weight: 700;
     }
     .includes-list { list-style: none; margin: 20px 0 0; }
@@ -275,18 +271,18 @@
       gap: 10px;
       padding: 8px 0;
       font-size: 0.88rem;
-      color: #c8c8c8;
+      color: var(--text-muted);
       border-bottom: 1px solid var(--border);
     }
     .includes-list li:last-child { border-bottom: none; }
-    .check-y { color: var(--yellow); flex-shrink: 0; font-weight: 700; }
+    .check-y { color: var(--brand); flex-shrink: 0; font-weight: 700; }
 
     .entry-right { text-align: center; }
     .price-block { margin-bottom: 24px; }
     .price-setup {
       font-size: 0.8rem;
       font-weight: 700;
-      color: var(--gray);
+      color: var(--text-muted);
       letter-spacing: 0.05em;
       text-transform: uppercase;
       margin-bottom: 8px;
@@ -294,7 +290,7 @@
     .price-big {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(3.5rem, 7vw, 5.5rem);
-      color: var(--yellow);
+      color: var(--brand);
       line-height: 1;
     }
     .price-big sup {
@@ -302,17 +298,17 @@
       font-size: 0.28em;
       font-weight: 700;
       vertical-align: super;
-      color: var(--gray);
+      color: var(--text-muted);
     }
     .price-sub {
       font-size: 0.82rem;
-      color: var(--gray);
+      color: var(--text-muted);
       margin-top: 4px;
       letter-spacing: 0.03em;
     }
     .price-plus {
       font-size: 0.75rem;
-      color: rgba(255,255,255,0.4);
+      color: var(--text-muted);
       margin: 8px 0 20px;
       letter-spacing: 0.05em;
     }
@@ -321,66 +317,82 @@
     #services { padding: 80px 0; }
     .services-header { margin-bottom: 56px; }
     .services-header h2 { margin-bottom: 10px; }
-    .services-header p { color: var(--gray); font-size: 0.95rem; max-width: 520px; margin-top: 12px; }
+    .services-header p { color: var(--text-muted); font-size: 0.95rem; max-width: 520px; margin-top: 12px; }
+
+    .service-header-visual {
+      margin-bottom: 32px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 16px 40px rgba(15,23,42,0.10);
+    }
+    .service-header-visual img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+    }
 
     .service-block {
-      background: var(--card-bg);
+      background: var(--bg-alt);
       border: 1px solid var(--border);
-      border-left: 4px solid rgba(255,214,0,0.3);
+      border-left: 4px solid var(--brand-tint-strong);
+      border-radius: 12px;
       padding: 40px 36px;
-      margin-bottom: 2px;
+      margin-bottom: 16px;
       display: grid;
       grid-template-columns: 1fr 260px;
       gap: 40px;
       align-items: start;
       transition: border-left-color 0.2s;
+      box-shadow: 0 1px 2px rgba(15,23,42,0.04);
     }
-    .service-block:hover { border-left-color: var(--yellow); }
+    .service-block:hover { border-left-color: var(--brand); }
     @media (max-width: 760px) {
       .service-block { grid-template-columns: 1fr; gap: 28px; padding: 28px 20px; }
     }
     .svc-num {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 0.85rem;
-      color: rgba(255,214,0,0.3);
+      color: var(--brand-tint-strong);
       margin-bottom: 8px;
       letter-spacing: 0.1em;
     }
     .svc-name {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.6rem;
-      color: var(--white);
+      color: var(--text);
       margin-bottom: 6px;
       letter-spacing: 0.03em;
     }
     .svc-tagline {
       font-size: 0.8rem;
       font-weight: 700;
-      color: var(--yellow);
+      color: var(--brand);
       letter-spacing: 0.08em;
       text-transform: uppercase;
       margin-bottom: 14px;
     }
     .svc-desc {
-      color: rgba(255,255,255,0.65);
+      color: var(--text-muted);
       font-size: 0.9rem;
       line-height: 1.7;
       margin-bottom: 16px;
     }
     .svc-math {
-      background: rgba(255,68,68,0.04);
-      border-left: 2px solid rgba(255,68,68,0.4);
+      background: rgba(220,38,38,0.04);
+      border-left: 2px solid rgba(220,38,38,0.4);
       padding: 12px 16px;
       margin-top: 12px;
     }
     .svc-math p {
       font-size: 0.84rem;
-      color: rgba(255,255,255,0.6);
+      color: var(--text-muted);
       line-height: 1.65;
     }
     .svc-math .math-punch {
       font-weight: 700;
-      color: var(--white);
+      color: var(--text);
       display: block;
       margin-top: 6px;
       font-size: 0.88rem;
@@ -390,7 +402,7 @@
     .svc-setup-label {
       font-size: 0.7rem;
       font-weight: 700;
-      color: var(--gray);
+      color: var(--text-muted);
       letter-spacing: 0.12em;
       text-transform: uppercase;
       margin-bottom: 4px;
@@ -398,20 +410,20 @@
     .svc-setup-price {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.6rem;
-      color: rgba(255,255,255,0.45);
+      color: var(--text-muted);
       line-height: 1;
       margin-bottom: 4px;
     }
     .svc-setup-note {
       font-size: 0.72rem;
-      color: rgba(255,255,255,0.3);
+      color: var(--text-muted);
       margin-bottom: 16px;
       letter-spacing: 0.04em;
     }
     .svc-monthly-label {
       font-size: 0.7rem;
       font-weight: 700;
-      color: var(--gray);
+      color: var(--text-muted);
       letter-spacing: 0.12em;
       text-transform: uppercase;
       margin-bottom: 4px;
@@ -419,7 +431,7 @@
     .svc-monthly-price {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 3rem;
-      color: var(--yellow);
+      color: var(--brand);
       line-height: 1;
       margin-bottom: 2px;
     }
@@ -428,33 +440,35 @@
       font-size: 0.3em;
       font-weight: 700;
       vertical-align: super;
-      color: var(--gray);
+      color: var(--text-muted);
     }
     .svc-monthly-note {
       font-size: 0.75rem;
-      color: var(--gray);
+      color: var(--text-muted);
       margin-bottom: 20px;
     }
 
     /* ===== FLAGSHIP ===== */
     #flagship {
       padding: 80px 0;
-      border-top: 1px solid rgba(255,214,0,0.12);
-      border-bottom: 1px solid rgba(255,214,0,0.12);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
     .flagship-wrapper {
-      background: var(--card-bg);
-      border: 2px solid rgba(255,214,0,0.35);
+      background: var(--bg-alt);
+      border: 2px solid var(--brand-tint-strong);
+      border-radius: 12px;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 1px 2px rgba(15,23,42,0.04);
     }
     .flagship-wrapper::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 4px;
-      background: var(--yellow);
+      background: var(--brand);
     }
 
     .flagship-top {
@@ -471,30 +485,31 @@
 
     .flagship-label {
       display: inline-block;
-      background: var(--yellow);
-      color: var(--black);
+      background: var(--brand);
+      color: var(--on-brand);
       font-size: 0.62rem;
       font-weight: 900;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       padding: 5px 12px;
+      border-radius: 999px;
       margin-bottom: 16px;
     }
 
-    .flagship-left h2 { color: var(--yellow); margin-bottom: 8px; }
+    .flagship-left h2 { color: var(--brand); margin-bottom: 8px; }
     .flagship-tagline {
       font-size: 1.05rem;
       font-weight: 600;
-      color: var(--white);
+      color: var(--text);
       margin-bottom: 16px;
     }
     .flagship-anchor {
       font-size: 0.9rem;
-      color: rgba(255,255,255,0.6);
+      color: var(--text-muted);
       line-height: 1.7;
       margin-bottom: 24px;
     }
-    .flagship-anchor strong { color: var(--white); }
+    .flagship-anchor strong { color: var(--text); }
 
     .flagship-includes { list-style: none; }
     .flagship-includes li {
@@ -503,7 +518,7 @@
       gap: 10px;
       padding: 9px 0;
       font-size: 0.88rem;
-      color: #c8c8c8;
+      color: var(--text-muted);
       border-bottom: 1px solid var(--border);
     }
     .flagship-includes li:last-child { border-bottom: none; }
@@ -513,7 +528,7 @@
     .flagship-setup {
       font-size: 0.78rem;
       font-weight: 700;
-      color: var(--gray);
+      color: var(--text-muted);
       letter-spacing: 0.08em;
       text-transform: uppercase;
       margin-bottom: 6px;
@@ -521,20 +536,20 @@
     .flagship-setup-price {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 2rem;
-      color: rgba(255,255,255,0.4);
+      color: var(--text-muted);
       line-height: 1;
       margin-bottom: 2px;
     }
     .flagship-setup-sub {
       font-size: 0.72rem;
-      color: rgba(255,255,255,0.25);
+      color: var(--text-muted);
       margin-bottom: 16px;
       letter-spacing: 0.04em;
     }
     .flagship-monthly-label {
       font-size: 0.72rem;
       font-weight: 700;
-      color: var(--gray);
+      color: var(--text-muted);
       letter-spacing: 0.1em;
       text-transform: uppercase;
       margin-bottom: 6px;
@@ -542,7 +557,7 @@
     .flagship-monthly-price {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(4.5rem, 9vw, 7rem);
-      color: var(--yellow);
+      color: var(--brand);
       line-height: 1;
       margin-bottom: 4px;
     }
@@ -551,30 +566,32 @@
       font-size: 0.26em;
       font-weight: 700;
       vertical-align: super;
-      color: var(--gray);
+      color: var(--text-muted);
     }
     .flagship-monthly-sub {
       font-size: 0.82rem;
-      color: var(--gray);
+      color: var(--text-muted);
       margin-bottom: 20px;
     }
     .flagship-vs {
       display: inline-block;
-      background: rgba(255,214,0,0.07);
-      border: 1px solid rgba(255,214,0,0.2);
-      color: rgba(255,255,255,0.5);
+      background: var(--brand-tint);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-muted);
       font-size: 0.78rem;
       font-weight: 600;
       letter-spacing: 0.05em;
       padding: 7px 14px;
       margin-bottom: 24px;
     }
-    .flagship-vs strong { color: var(--yellow); }
+    .flagship-vs strong { color: var(--brand); }
 
     /* GUARANTEE — dominant block */
     .guarantee-block {
-      background: rgba(255,214,0,0.05);
-      border: 2px solid var(--yellow);
+      background: var(--brand-tint);
+      border: 2px solid var(--brand);
+      border-radius: 12px;
       padding: 40px 48px;
       text-align: center;
     }
@@ -584,68 +601,71 @@
       font-weight: 900;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--yellow);
+      color: var(--brand);
       margin-bottom: 14px;
     }
     .guarantee-block h3 {
       font-size: clamp(1.8rem, 4vw, 3rem);
-      color: var(--white);
+      color: var(--text);
       margin-bottom: 16px;
       line-height: 1.1;
     }
-    .guarantee-block h3 span { color: var(--yellow); }
+    .guarantee-block h3 span { color: var(--brand); }
     .guarantee-block p {
-      color: rgba(255,255,255,0.6);
+      color: var(--text-muted);
       font-size: 1rem;
       max-width: 600px;
       margin: 0 auto 28px;
       line-height: 1.7;
     }
-    .guarantee-block p strong { color: var(--white); }
+    .guarantee-block p strong { color: var(--text); }
 
     /* ===== REPUTATION REPORT ADD-ON ===== */
     #reputation {
       padding: 80px 0;
-      border-bottom: 1px solid rgba(255,214,0,0.12);
+      border-bottom: 1px solid var(--border);
     }
     .reputation-card {
-      background: var(--card-bg);
+      background: var(--bg-alt);
       border: 1px solid var(--border);
-      border-left: 4px solid rgba(255,214,0,0.4);
+      border-left: 4px solid var(--brand-tint-strong);
+      border-radius: 12px;
       padding: 40px 44px;
       display: grid;
       grid-template-columns: 1fr 220px;
       gap: 40px;
       align-items: center;
+      box-shadow: 0 1px 2px rgba(15,23,42,0.04);
     }
     @media (max-width: 680px) {
       .reputation-card { grid-template-columns: 1fr; gap: 24px; padding: 28px 20px; }
     }
     .rep-add-on-badge {
       display: inline-block;
-      background: rgba(255,214,0,0.1);
-      border: 1px solid rgba(255,214,0,0.25);
-      color: var(--yellow);
+      background: var(--brand-tint);
+      border: 1px solid var(--border);
+      color: var(--brand);
       font-size: 0.62rem;
       font-weight: 900;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       padding: 4px 10px;
+      border-radius: 999px;
       margin-bottom: 14px;
     }
     .rep-name {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.8rem;
-      color: var(--white);
+      color: var(--text);
       margin-bottom: 8px;
     }
-    .rep-desc { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.7; margin-bottom: 16px; }
+    .rep-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 16px; }
     .rep-bullets { list-style: none; }
     .rep-bullets li {
       display: flex;
       gap: 10px;
       font-size: 0.86rem;
-      color: #c0c0c0;
+      color: var(--text-muted);
       padding: 6px 0;
       border-bottom: 1px solid var(--border);
     }
@@ -654,7 +674,7 @@
     .rep-no-setup {
       font-size: 0.7rem;
       font-weight: 700;
-      color: rgba(255,214,0,0.6);
+      color: var(--brand);
       letter-spacing: 0.12em;
       text-transform: uppercase;
       margin-bottom: 6px;
@@ -662,7 +682,7 @@
     .rep-price {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 3.5rem;
-      color: var(--yellow);
+      color: var(--brand);
       line-height: 1;
     }
     .rep-price sup {
@@ -670,9 +690,9 @@
       font-size: 0.28em;
       font-weight: 700;
       vertical-align: super;
-      color: var(--gray);
+      color: var(--text-muted);
     }
-    .rep-period { font-size: 0.78rem; color: var(--gray); margin-bottom: 20px; }
+    .rep-period { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 20px; }
 
     /* ===== TRUST CLOSER ===== */
     #trust {
@@ -680,88 +700,94 @@
     }
     .trust-header { text-align: center; margin-bottom: 56px; }
     .trust-header h2 { margin-bottom: 12px; }
-    .trust-header p { color: var(--gray); font-size: 1rem; max-width: 480px; margin: 0 auto; line-height: 1.7; }
+    .trust-header p { color: var(--text-muted); font-size: 1rem; max-width: 480px; margin: 0 auto; line-height: 1.7; }
 
     .steps-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 2px;
-      background: rgba(255,214,0,0.06);
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
       margin-bottom: 56px;
     }
     @media (max-width: 860px) { .steps-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 500px) { .steps-grid { grid-template-columns: 1fr; } }
 
     .step {
-      background: var(--black);
+      background: var(--bg);
       padding: 36px 28px;
       text-align: center;
     }
     .step-num {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 3rem;
-      color: rgba(255,214,0,0.15);
+      color: var(--brand-tint-strong);
       line-height: 1;
       margin-bottom: 12px;
     }
     .step-title {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.1rem;
-      color: var(--white);
+      color: var(--text);
       letter-spacing: 0.04em;
       margin-bottom: 8px;
     }
-    .step-desc { font-size: 0.84rem; color: var(--gray); line-height: 1.6; }
+    .step-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.6; }
 
     .trust-closer {
-      background: var(--card-bg);
-      border: 1px solid rgba(255,214,0,0.2);
-      border-top: 4px solid var(--yellow);
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--brand);
+      border-radius: 12px;
       padding: 52px 48px;
       text-align: center;
+      box-shadow: 0 1px 2px rgba(15,23,42,0.04);
     }
     @media (max-width: 600px) { .trust-closer { padding: 36px 20px; } }
     .trust-conditions {
       font-size: 0.9rem;
       font-weight: 700;
-      color: rgba(255,255,255,0.55);
+      color: var(--text-muted);
       letter-spacing: 0.05em;
       margin-bottom: 24px;
       line-height: 1.8;
     }
-    .trust-conditions span { color: var(--white); }
+    .trust-conditions span { color: var(--text); }
     .trust-closer h2 { margin-bottom: 14px; }
-    .trust-closer p { color: var(--gray); font-size: 0.95rem; max-width: 480px; margin: 0 auto 32px; line-height: 1.7; }
+    .trust-closer p { color: var(--text-muted); font-size: 0.95rem; max-width: 480px; margin: 0 auto 32px; line-height: 1.7; }
     .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
     /* ===== FOOTER ===== */
     footer {
       padding: 64px 0 40px;
-      border-top: 1px solid var(--yellow);
+      border-top: 1px solid var(--border);
+      background: var(--bg-alt);
       position: relative;
       z-index: 1;
     }
     .footer-inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 24px; }
-    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--yellow); letter-spacing: 0.05em; }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--brand); letter-spacing: 0.05em; }
     .footer-links { display: flex; gap: 32px; flex-wrap: wrap; justify-content: center; }
     .footer-links a {
       font-size: 0.82rem;
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--gray);
+      color: var(--text-muted);
       text-decoration: none;
       transition: color 0.2s;
     }
-    .footer-links a:hover { color: var(--yellow); }
+    .footer-links a:hover { color: var(--brand); }
     .footer-bottom { width: 100%; border-top: 1px solid var(--border); padding-top: 24px; }
-    .footer-bottom p { font-size: 0.78rem; color: #444; }
+    .footer-bottom p { font-size: 0.78rem; color: var(--text-muted); }
 
     /* ===== UTILITIES ===== */
-    ::selection { background: var(--yellow); color: var(--black); }
+    ::selection { background: var(--brand); color: var(--on-brand); }
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--black); }
-    ::-webkit-scrollbar-thumb { background: var(--yellow); }
+    ::-webkit-scrollbar-track { background: var(--bg-alt); }
+    ::-webkit-scrollbar-thumb { background: var(--brand); }
 
     .fade-up {
       opacity: 0;
@@ -776,7 +802,7 @@
     .divider {
       width: 100%;
       height: 1px;
-      background: rgba(255,214,0,0.1);
+      background: var(--border);
       margin: 0;
     }
   </style>
@@ -804,7 +830,7 @@
     <div class="container">
       <div class="hero-inner">
         <div class="section-label fade-up">Done-For-You AI Systems</div>
-        <h1 class="fade-up delay-1">Pick Your System.<br>We Install It.<br><span style="color:var(--yellow)">Live in 7 Days.</span></h1>
+        <h1 class="fade-up delay-1">Your AI Receptionist.<br>We Install It.<br><span style="color:var(--brand)">Live in 7 Days.</span></h1>
 
         <p class="hero-sub fade-up delay-3">
           No contracts. No tech headaches. Done-for-you AI — installed, tested, and answering your phone before the week is over.
@@ -817,14 +843,17 @@
   <section id="services">
     <div class="container">
       <div class="services-header">
-        <div class="section-label fade-up">À La Carte</div>
-        <h2 class="fade-up delay-1">Pick What Your Business Needs</h2>
-        <p class="fade-up delay-2">Start with one system. Add more any time. Every service is fully installed and live — not a DIY tool you have to figure out yourself.</p>
+        <div class="service-header-visual fade-up">
+          <img src="/assets/images/electrician-wiring.jpg" alt="Electrician's hand working on a breaker panel with wires" width="1200" height="600" loading="lazy" />
+        </div>
+        <div class="section-label fade-up">The Offer</div>
+        <h2 class="fade-up delay-1">One System. Every Call Answered.</h2>
+        <p class="fade-up delay-2">Fully installed and live in 7 days — not a DIY tool you have to figure out yourself.</p>
       </div>
 
       <!-- AI Receptionist -->
-      <div class="service-block fade-up" style="border-left-color:var(--yellow); position:relative;">
-        <div style="position:absolute; top:16px; right:16px; background:var(--yellow); color:var(--black); font-size:0.62rem; font-weight:900; letter-spacing:0.18em; text-transform:uppercase; padding:4px 10px;">FLAGSHIP</div>
+      <div class="service-block fade-up" style="border-left-color:var(--brand); position:relative;">
+        <div style="position:absolute; top:16px; right:16px; background:var(--brand); color:var(--on-brand); font-size:0.62rem; font-weight:900; letter-spacing:0.18em; text-transform:uppercase; padding:4px 10px; border-radius:999px;">FLAGSHIP</div>
         <div class="svc-left">
           <div class="svc-num">SERVICE 01</div>
           <div class="svc-name">AI Receptionist</div>
@@ -849,106 +878,20 @@
         </div>
       </div>
 
-      <!-- Revenue Reactivator -->
-      <div class="service-block fade-up">
-        <div class="svc-left">
-          <div class="svc-num">SERVICE 02</div>
-          <div class="svc-name">Revenue Reactivator</div>
-          <div class="svc-tagline">Wake Up Your Dead Leads</div>
-          <p class="svc-desc">AI outbound calling to your past clients and dormant leads. Pre-built reactivation scripts. Calendar integration. Campaign reports with calls made, conversations had, and appointments booked.</p>
-          <ul class="includes-list" style="margin-top:16px;">
-            <li><span class="check-y">✓</span> AI outbound calling to past clients and dormant leads</li>
-            <li><span class="check-y">✓</span> Pre-built reactivation scripts — custom to your business</li>
-            <li><span class="check-y">✓</span> Direct calendar integration — books appointments automatically</li>
-            <li><span class="check-y">✓</span> Campaign reports: calls made, conversations had, appointments booked</li>
-          </ul>
-          <p style="font-size:0.8rem; color:rgba(255,214,0,0.7); margin-top:12px; font-weight:600;">Requires active AI Receptionist</p>
-        </div>
-        <div class="svc-pricing">
-          <p class="svc-setup-label">Setup</p>
-          <div class="svc-setup-price" style="font-size:1rem; color:rgba(255,255,255,0.4);">Included with AI Receptionist</div>
-          <p class="svc-monthly-label" style="margin-top:16px;">Monthly Add-On</p>
-          <div class="svc-monthly-price"><sup>$</sup>1,500</div>
-          <p class="svc-monthly-note">/ mo — cancel anytime</p>
-          <a href="/book" class="btn-primary" style="display:block; text-align:center;">Add to My System &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Review Machine -->
-      <div class="service-block fade-up">
-        <div class="svc-left">
-          <div class="svc-num">SERVICE 03</div>
-          <div class="svc-name">Review Machine</div>
-          <div class="svc-tagline">Own Page One of Google</div>
-          <p class="svc-desc">Automated review request SMS after every appointment. AI-generated review responses within 24 hours. Monthly reputation report. Negative review alerts.</p>
-          <ul class="includes-list" style="margin-top:16px;">
-            <li><span class="check-y">✓</span> Automated review request SMS after every appointment</li>
-            <li><span class="check-y">✓</span> AI-generated review responses within 24 hours</li>
-            <li><span class="check-y">✓</span> Monthly reputation report</li>
-            <li><span class="check-y">✓</span> Negative review alerts</li>
-          </ul>
-          <p style="font-size:0.8rem; color:rgba(255,214,0,0.7); margin-top:12px; font-weight:600;">Requires active AI Receptionist</p>
-        </div>
-        <div class="svc-pricing">
-          <p class="svc-setup-label">Setup</p>
-          <div class="svc-setup-price" style="font-size:1rem; color:rgba(255,255,255,0.4);">Included with AI Receptionist</div>
-          <p class="svc-monthly-label" style="margin-top:16px;">Monthly Add-On</p>
-          <div class="svc-monthly-price"><sup>$</sup>497</div>
-          <p class="svc-monthly-note">/ mo — cancel anytime</p>
-          <a href="/book" class="btn-primary" style="display:block; text-align:center;">Add to My System &rarr;</a>
-        </div>
-      </div>
-
     </div>
   </section>
 
-  <!-- 3. FLAGSHIP — THE AI FRONT OFFICE -->
+  <!-- 3. GUARANTEE -->
   <section id="flagship">
     <div class="container">
-      <div class="section-label fade-up">Most Popular</div>
       <div class="flagship-wrapper fade-up delay-1">
-
-        <div class="flagship-top">
-          <div class="flagship-left">
-            <div class="flagship-label">Most Popular</div>
-            <h2>The AI Front Office</h2>
-            <p class="flagship-tagline">Everything. Installed in 7 Days. Guaranteed.</p>
-            <p class="flagship-anchor">
-              All 3 AI systems installed, configured, and live under one monthly rate. The complete package for businesses ready to automate every customer touchpoint — from the first missed call to the five-star review.
-            </p>
-
-            <ul class="flagship-includes">
-              <li><span class="check-y">✓</span> AI Receptionist — answers every call 24/7/365</li>
-              <li><span class="check-y">✓</span> Revenue Reactivator — reactivates past clients and dead leads</li>
-              <li><span class="check-y">✓</span> Review Machine — automates Google review requests and responses</li>
-              <li><span class="check-y">✓</span> Appointment reminders and no-show recovery</li>
-              <li><span class="check-y">✓</span> AI chat widget on your website</li>
-              <li><span class="check-y">✓</span> Weekly performance reports</li>
-              <li><span class="check-y">✓</span> Full setup + onboarding — we handle everything</li>
-            </ul>
-          </div>
-
-          <div class="flagship-right">
-            <div class="flagship-price-block">
-              <p class="flagship-setup">One-Time Setup</p>
-              <div class="flagship-setup-price">$2,500</div>
-              <p class="flagship-setup-sub">paid once — fully installed</p>
-              <p class="flagship-monthly-label">Then Monthly</p>
-              <div class="flagship-monthly-price"><sup>$</sup>3,497</div>
-              <p class="flagship-monthly-sub">per month — cancel anytime</p>
-              <div class="flagship-vs">Save <strong>$497/mo</strong> vs. buying separate</div>
-            </div>
-            <a href="/book" class="btn-primary" style="display:block; text-align:center; width:100%;">Get The AI Front Office &rarr;</a>
-            <p style="font-size:0.75rem; color:rgba(255,255,255,0.3); margin-top:12px; text-align:center;">No contracts. Cancel any month.</p>
-          </div>
-        </div>
 
         <!-- GUARANTEE — DOMINANT -->
         <div class="guarantee-block">
           <p class="g-label">🛡️ Our Guarantee</p>
           <h3>5 Appointments in 30 Days<br><span>Or We Work Free.</span></h3>
           <p>
-            Every AI Front Office client is backed by our results guarantee. If it doesn't generate <strong>5 booked appointments in your first 30 days</strong> — we keep working, at no charge, until it does. No asterisks. No loopholes.
+            Every Easier Systems client is backed by our results guarantee. If it doesn't generate <strong>5 booked appointments in your first 30 days</strong> — we keep working, at no charge, until it does. No asterisks. No loopholes.
           </p>
           <a href="/book" class="btn-primary">Claim the Guarantee &rarr;</a>
         </div>
@@ -965,7 +908,7 @@
           <span>No contracts.</span> &nbsp;·&nbsp; <span>No tech headaches.</span> &nbsp;·&nbsp; <span>Live in 7 days.</span>
         </p>
         <h2>Ready to Stop Missing Calls?</h2>
-        <p>Pick your system, book a call, and we handle the rest. Your AI Receptionist goes live in 7 days — guaranteed.</p>
+        <p>Book a call and we handle the rest. Your AI Receptionist goes live in 7 days — guaranteed.</p>
         <div class="cta-group">
           <a href="/book" class="btn-primary">Book My Free AI Audit &rarr;</a>
           <a href="/#contact" class="btn-ghost">Get a Free Audit First</a>
@@ -979,12 +922,12 @@
     <div class="container">
       <div class="footer-inner">
         <div class="footer-logo">EASIER SYSTEMS</div>
-        <p class="footer-tagline" style="font-size:0.9rem; color:var(--gray); letter-spacing:0.05em;">Built with AI. Run by humans. Guaranteed to perform.</p>
+        <p class="footer-tagline" style="font-size:0.9rem; color:var(--text-muted); letter-spacing:0.05em;">Built with AI. Run by humans. Guaranteed to perform.</p>
         <div style="display:flex; gap:12px; align-items:center;">
-          <a href="https://www.youtube.com/@EasierSystems" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; width:42px; height:42px; border:1px solid #1a1a1a; color:#888; text-decoration:none; transition:color 0.2s,border-color 0.2s;" aria-label="YouTube">
+          <a href="https://www.youtube.com/@EasierSystems" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; width:42px; height:42px; border:1px solid var(--border); border-radius:8px; color:var(--text-muted); text-decoration:none; transition:color 0.2s,border-color 0.2s;" aria-label="YouTube">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
           </a>
-          <a href="https://www.instagram.com/easiersystems" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; width:42px; height:42px; border:1px solid #1a1a1a; color:#888; text-decoration:none; transition:color 0.2s,border-color 0.2s;" aria-label="Instagram">
+          <a href="https://www.instagram.com/easiersystems" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; width:42px; height:42px; border:1px solid var(--border); border-radius:8px; color:var(--text-muted); text-decoration:none; transition:color 0.2s,border-color 0.2s;" aria-label="Instagram">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           </a>
         </div>
@@ -997,7 +940,7 @@
         </div>
         <div class="footer-bottom">
           <p>&copy; 2026 Easier Systems. All rights reserved.</p>
-          <p style="margin-top:6px;"><strong style="color:#888;">Built with AI. Run by humans. Guaranteed to perform.</strong></p>
+          <p style="margin-top:6px;"><strong style="color:var(--text-muted);">Built with AI. Run by humans. Guaranteed to perform.</strong></p>
         </div>
       </div>
     </div>
@@ -1013,8 +956,14 @@
     fadeEls.forEach(el => obs.observe(el));
 
     window.addEventListener('scroll', () => {
-      document.querySelector('header').style.background =
-        window.scrollY > 60 ? 'rgba(0,0,0,0.98)' : 'rgba(0,0,0,0.92)';
+      const header = document.querySelector('header');
+      if (window.scrollY > 60) {
+        header.style.background = 'rgba(255,255,255,0.98)';
+        header.style.boxShadow = '0 1px 2px rgba(15,23,42,0.06)';
+      } else {
+        header.style.background = 'rgba(255,255,255,0.92)';
+        header.style.boxShadow = 'none';
+      }
     }, { passive: true });
   </script>
 
